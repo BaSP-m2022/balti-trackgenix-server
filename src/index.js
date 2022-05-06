@@ -11,7 +11,7 @@ app.set('json spaces', 2);
 app.use(express.json());
 
 app.get('/', async (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello World! Whats new?');
 });
 
 app.get('/admins', (req, res) => {
@@ -24,3 +24,5 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+/* changes to test new branch */
