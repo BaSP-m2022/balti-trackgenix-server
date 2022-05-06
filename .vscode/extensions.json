@@ -3,5 +3,7 @@
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "shardulm94.trailing-spaces",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow"
   ]
 }
