@@ -1,5 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
+import { getTasks } from './resources/tasks';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -19,6 +20,8 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+app.get('/tasks', getTasks);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
