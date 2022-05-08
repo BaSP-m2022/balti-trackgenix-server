@@ -105,3 +105,19 @@ export const addTask = (req, res) => {
     res.send('Data missing');
   }
 };
+
+export const deleteTask = (req, res) => {
+  const taskId = parseInt(req.query.id, 10);
+  console.log(taskId);
+  const found = tasks.filter((element) => element.id !== taskId);
+  if (tasks.length === found.length) {
+    res.send('Task ID not found');
+  } else {
+    fs.writeFile('src/data/tasks.json', JSON.stringify(found), (err) => {
+      if (err) {
+        res.send(err);
+      }
+    });
+    res.send(`Task Id: ${taskId} deleted`);
+  }
+};
