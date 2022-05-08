@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "at velit vivamus vel",
-    "description": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
-    "status": false,
+    "name": "Camila es re genia",
+    "description": "posta es muy genia",
+    "status": "",
     "owner": "nisl",
     "pm": "Mariya Gebhardt",
     "client": "Meevee",
@@ -102,7 +102,8 @@
         "rates": 6
       }
     ]
-  }, {
+  },
+  {
     "id": 3,
     "name": "ut massa volutpat",
     "description": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
@@ -161,7 +162,8 @@
         "rates": 7
       }
     ]
-  }, {
+  },
+  {
     "id": 4,
     "name": "tempus semper",
     "description": "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
@@ -212,7 +214,8 @@
         "rates": 9
       }
     ]
-  }, {
+  },
+  {
     "id": 5,
     "name": "quam turpis adipiscing",
     "description": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
@@ -256,4 +259,4 @@
       }
     ]
   }
-  ]
+]
