@@ -1,6 +1,8 @@
 // use "import" to import libraries
 import express from 'express';
-import { getTasks, findTaskById, findTask } from './resources/tasks';
+import {
+  getTasks, findTaskById, findTask, addTask,
+} from './resources/tasks';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -21,6 +23,7 @@ app.get('/admins', (req, res) => {
   });
 });
 
+app.post('/addTask', addTask);
 app.get('/tasks', getTasks);
 app.get('/findTasks/:id', findTaskById);
 app.get('/filterTasks', findTask);

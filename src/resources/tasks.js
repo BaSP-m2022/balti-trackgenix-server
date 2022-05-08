@@ -1,3 +1,4 @@
+const fs = require('fs');
 const tasks = require('../data/tasks.json');
 
 export const getTasks = (req, res) => {
@@ -86,5 +87,21 @@ export const findTask = (req, res) => {
     } else {
       res.send(`Search parameter ${doneSearch} doesn't match any`);
     }
+  }
+};
+
+export const addTask = (req, res) => {
+  const taskData = req.body;
+  if (taskData.id && taskData.employee_id && taskData.pm_id && taskData.tittle
+    && taskData.description && taskData.date && taskData.done === false) {
+    tasks.push(taskData);
+    fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+      if (err) {
+        res.send(err);
+      }
+    });
+    res.send(`Task: ${taskData.tittle} added`);
+  } else {
+    res.send('Data missing');
   }
 };
