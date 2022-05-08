@@ -93,7 +93,7 @@ export const findTask = (req, res) => {
 export const addTask = (req, res) => {
   const taskData = req.body;
   if (taskData.id && taskData.employee_id && taskData.pm_id && taskData.tittle
-    && taskData.description && taskData.date && taskData.done === false) {
+    && taskData.description && taskData.date && taskData.done !== '') {
     tasks.push(taskData);
     fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
       if (err) {
@@ -108,7 +108,6 @@ export const addTask = (req, res) => {
 
 export const deleteTask = (req, res) => {
   const taskId = parseInt(req.query.id, 10);
-  console.log(taskId);
   const found = tasks.filter((element) => element.id !== taskId);
   if (tasks.length === found.length) {
     res.send('Task ID not found');
@@ -120,4 +119,27 @@ export const deleteTask = (req, res) => {
     });
     res.send(`Task Id: ${taskId} deleted`);
   }
+};
+
+export const editTask = (req, res) => {
+  const taskId = parseInt(req.query.id, 10);
+  const taskData = req.body;
+  tasks.forEach((task, index) => {
+    if (task.id === taskId) {
+      tasks[index].employee_id = taskData.employee_id;
+      tasks[index].pm_id = taskData.pm_id;
+      tasks[index].tittle = taskData.tittle;
+      tasks[index].description = taskData.description;
+      tasks[index].date = taskData.date;
+      tasks[index].done = taskData.done;
+      fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+        if (err) {
+          res.send(err);
+        }
+      });
+    } else {
+      // add an error here
+    }
+  });
+  res.send(`Task Id: ${taskId} edited`);
 };

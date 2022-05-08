@@ -1,7 +1,7 @@
 // use "import" to import libraries
 import express from 'express';
 import {
-  getTasks, findTaskById, findTask, addTask, deleteTask,
+  getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './resources/tasks';
 
 // use "require" to import JSON files
@@ -24,6 +24,7 @@ app.get('/admins', (req, res) => {
 });
 
 app.post('/addTask', addTask);
+app.put('/editTask', editTask);
 app.delete('/deleteTask', deleteTask);
 app.get('/tasks', getTasks);
 app.get('/findTasks/:id', findTaskById);
