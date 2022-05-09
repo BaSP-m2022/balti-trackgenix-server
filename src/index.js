@@ -27,7 +27,7 @@ app.post('/addTask', addTask);
 app.put('/editTask', editTask);
 app.delete('/deleteTask', deleteTask);
 app.get('/getAllTasks', getTasks);
-app.get('/getATask/:id', findTaskById);
+app.get('/getATask', findTaskById);
 app.get('/filterTasks', findTask);
 
 app.listen(port, () => {

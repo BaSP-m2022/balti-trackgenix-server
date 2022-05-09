@@ -3,15 +3,15 @@ const tasks = require('../data/tasks.json');
 
 export const getTasks = (req, res) => {
   res.status(200).json({
-    data: tasks,
+    Found: tasks,
   });
 };
 
 export const findTaskById = (req, res) => {
-  const taskId = parseInt(req.params.id, 10);
+  const taskId = parseInt(req.query.id, 10);
   const found = tasks.find((element) => element.id === taskId);
   if (found) {
-    res.send(found);
+    res.json({ Found: found });
   } else {
     res.send(`Id: ${taskId} doesn't exist.`);
   }
@@ -25,35 +25,40 @@ export const findTask = (req, res) => {
   const descriptionSearch = req.query.description;
   const dateSearch = req.query.date;
   const doneSearch = req.query.done;
+  const dataRes = [];
 
   if (id) {
     const filter = tasks.filter((element) => element.id === id);
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ 'Found: ': dataRes });
     } else {
-      res.send(`Search parameter ${id} doesn't match any`);
+      res.json(`Search parameter ${id} doesn't match any ID.`);
     }
   }
   if (employeeId) {
     const filter = tasks.filter((element) => element.employee_id === employeeId);
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ 'Found: ': dataRes });
     } else {
-      res.send(`Search parameter ${employeeId} doesn't match any`);
+      res.send(`Search parameter ${employeeId} doesn't match any employee ID.`);
     }
   }
   if (pmId) {
     const filter = tasks.filter((element) => element.pm_id === pmId);
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ Found: dataRes });
     } else {
-      res.send(`Search parameter ${pmId} doesn't match any`);
+      res.send(`Search parameter ${pmId} doesn't match any PM ID.`);
     }
   }
   if (tittleSearch) {
     const filter = tasks.filter((task) => task.tittle.includes(tittleSearch));
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ Found: dataRes });
     } else {
       res.send(`Search parameter ${tittleSearch} doesn't match any`);
     }
@@ -61,17 +66,19 @@ export const findTask = (req, res) => {
   if (descriptionSearch) {
     const newList = tasks.filter((task) => task.description.includes(descriptionSearch));
     if (newList.length > 0) {
-      res.send(newList);
+      dataRes.push(newList);
+      res.json({ Found: dataRes });
     } else {
-      res.send(`Search parameter ${descriptionSearch} doesn't match any`);
+      res.send(`Search parameter ${descriptionSearch} doesn't match any description.`);
     }
   }
   if (dateSearch) {
     const filter = tasks.filter((element) => element.date === dateSearch);
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ Found: dataRes });
     } else {
-      res.send(`Search parameter ${dateSearch} doesn't match any`);
+      res.send(`Search parameter ${dateSearch} doesn't match any date.`);
     }
   }
   if (doneSearch) {
@@ -83,9 +90,10 @@ export const findTask = (req, res) => {
     }
     const filter = tasks.filter((element) => element.done === doneBoolean);
     if (filter.length > 0) {
-      res.send(filter);
+      dataRes.push(filter);
+      res.json({ Found: dataRes });
     } else {
-      res.send(`Search parameter ${doneSearch} doesn't match any`);
+      res.send(`Search parameter ${doneSearch} doesn't match.`);
     }
   }
 };
@@ -100,7 +108,7 @@ export const addTask = (req, res) => {
         res.send(err);
       }
     });
-    res.send(`Task: ${taskData.tittle} added`);
+    res.json({ 'Task Added': taskData });
   } else {
     res.send('Data missing');
   }
@@ -117,7 +125,7 @@ export const deleteTask = (req, res) => {
         res.send(err);
       }
     });
-    res.send(`Task Id: ${taskId} deleted`);
+    res.json({ 'Task deleted': taskId });
   }
 };
 
