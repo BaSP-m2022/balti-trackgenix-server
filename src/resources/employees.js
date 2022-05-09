@@ -1,23 +1,33 @@
-// import express = require("express")
+const express = require('express');
+const employees = require('../data/employees.json');
+// const uuid = require('uuid');
 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+const app = express();
 
-// app.post('/', (req, res) => {
-//   const newEmployee = {
-//     name: req.body.name,
-//     lastName: req.body.lastName,
-//     id: uuid.v4(),
-//     email: req.body.email,
-//     password: req.body.password,
-//     rol: req.body.password,
-//     rate: req.body.rate,
-//     assignedProjects: req.body.assignedProjects
-//   }
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-//   if (!newEmployee.name || !newEmployee.lastName ||
-//       !newEmployee.email || !newEmployee.password) {
-//     return res.status(400).json({ msg:
-// 'Please include a name, lastname, email and password' });
-//   }
-// })
+// eslint-disable-next-line import/prefer-default-export
+export const createEmployee = (req, res) => {
+  const newEmployee = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    dni: req.body.dni,
+    email: req.body.email,
+    password: req.body.password,
+  };
+
+  // eslint-disable-next-line max-len
+  if (!newEmployee.first_name
+    || !newEmployee.last_name
+    || !newEmployee.dni
+    || !newEmployee.email
+    || !newEmployee.password) {
+    return res.status(400).json({
+      msg: 'Please include a name, last name, dni, email and password',
+    });
+  }
+  // res.status(200).json({ msg: 'Employee created' });
+  employees.push(newEmployee);
+  res.json(employees);
+};
