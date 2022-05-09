@@ -26,8 +26,8 @@ app.get('/admins', (req, res) => {
 app.post('/addTask', addTask);
 app.put('/editTask', editTask);
 app.delete('/deleteTask', deleteTask);
-app.get('/tasks', getTasks);
-app.get('/findTasks/:id', findTaskById);
+app.get('/getAllTasks', getTasks);
+app.get('/getATask/:id', findTaskById);
 app.get('/filterTasks', findTask);
 
 app.listen(port, () => {

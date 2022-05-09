@@ -19,7 +19,7 @@ export const findTaskById = (req, res) => {
 
 export const findTask = (req, res) => {
   const id = parseInt(req.query.id, 10);
-  const employeeId = parseInt(req.query.employeeId, 10);
+  const employeeId = parseInt(req.query.employee_id, 10);
   const pmId = parseInt(req.query.pmId, 10);
   const tittleSearch = req.query.tittle;
   const descriptionSearch = req.query.description;
@@ -51,7 +51,7 @@ export const findTask = (req, res) => {
     }
   }
   if (tittleSearch) {
-    const filter = tasks.filter((element) => element.tittle === tittleSearch);
+    const filter = tasks.filter((task) => task.tittle.includes(tittleSearch));
     if (filter.length > 0) {
       res.send(filter);
     } else {
@@ -124,22 +124,25 @@ export const deleteTask = (req, res) => {
 export const editTask = (req, res) => {
   const taskId = parseInt(req.query.id, 10);
   const taskData = req.body;
-  tasks.forEach((task, index) => {
-    if (task.id === taskId) {
-      tasks[index].employee_id = taskData.employee_id;
-      tasks[index].pm_id = taskData.pm_id;
-      tasks[index].tittle = taskData.tittle;
-      tasks[index].description = taskData.description;
-      tasks[index].date = taskData.date;
-      tasks[index].done = taskData.done;
-      fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-        if (err) {
-          res.send(err);
-        }
-      });
-    } else {
-      // add an error here
-    }
-  });
-  res.send(`Task Id: ${taskId} edited`);
+  const found = tasks.some((task) => task.id === taskId);
+  if (found) {
+    tasks.forEach((task, index) => {
+      if (task.id === taskId) {
+        tasks[index].employee_id = taskData.employee_id;
+        tasks[index].pm_id = taskData.pm_id;
+        tasks[index].tittle = taskData.tittle;
+        tasks[index].description = taskData.description;
+        tasks[index].date = taskData.date;
+        tasks[index].done = taskData.done;
+        fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+          if (err) {
+            res.send(err);
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).json({ msg: `Task id ${taskId} not found` });
+  }
+  res.json({ msg: `Task id ${taskData} edited` });
 };
