@@ -3,7 +3,12 @@ const tasks = require('../data/tasks.json');
 
 export const getTasks = (req, res) => {
   res.status(200).json({
-    Found: tasks,
+    success: true,
+    data: tasks,
+  });
+  res.status(400).json({
+    success: false,
+    msg: ('Tasks not found'),
   });
 };
 
@@ -11,16 +16,22 @@ export const findTaskById = (req, res) => {
   const taskId = parseInt(req.query.id, 10);
   const found = tasks.find((element) => element.id === taskId);
   if (found) {
-    res.json({ Found: found });
+    res.status(200).json({
+      success: true,
+      data: found,
+    });
   } else {
-    res.send(`Id: ${taskId} doesn't exist.`);
+    res.status(400).json({
+      success: false,
+      msg: (`Id: ${taskId} doesn't exist.`),
+    });
   }
 };
 
 export const findTask = (req, res) => {
   const id = parseInt(req.query.id, 10);
   const employeeId = parseInt(req.query.employee_id, 10);
-  const pmId = parseInt(req.query.pmId, 10);
+  const projectId = parseInt(req.query.project_id, 10);
   const tittleSearch = req.query.tittle;
   const descriptionSearch = req.query.description;
   const dateSearch = req.query.date;
@@ -45,13 +56,13 @@ export const findTask = (req, res) => {
       res.send(`Search parameter ${employeeId} doesn't match any employee ID.`);
     }
   }
-  if (pmId) {
-    const filter = tasks.filter((element) => element.pm_id === pmId);
+  if (projectId) {
+    const filter = tasks.filter((element) => element.pm_id === projectId);
     if (filter.length > 0) {
       dataRes.push(filter);
       res.json({ Found: dataRes });
     } else {
-      res.send(`Search parameter ${pmId} doesn't match any PM ID.`);
+      res.send(`Search parameter ${projectId} doesn't match any PM ID.`);
     }
   }
   if (tittleSearch) {
@@ -108,9 +119,16 @@ export const addTask = (req, res) => {
         res.send(err);
       }
     });
-    res.json({ 'Task Added': taskData });
+    res.status(200).json({
+      success: true,
+      msg: ('Task Added'),
+      data: taskData,
+    });
   } else {
-    res.send('Data missing');
+    res.status(400).json({
+      success: false,
+      msg: ('Data missing'),
+    });
   }
 };
 
@@ -150,7 +168,14 @@ export const editTask = (req, res) => {
       }
     });
   } else {
-    res.status(400).json({ msg: `Task id ${taskId} not found` });
+    res.status(400).json({
+      success: false,
+      msg: `Task id ${taskId} not found`,
+    });
   }
-  res.json({ msg: `Task id ${taskData} edited` });
+  res.status(200).json({
+    success: true,
+    msg: (`Task id ${taskData.id} edited`),
+    data: taskData,
+  });
 };

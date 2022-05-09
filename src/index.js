@@ -23,12 +23,12 @@ app.get('/admins', (req, res) => {
   });
 });
 
-app.post('/addTask', addTask);
-app.put('/editTask', editTask);
-app.delete('/deleteTask', deleteTask);
-app.get('/getAllTasks', getTasks);
-app.get('/getATask', findTaskById);
-app.get('/filterTasks', findTask);
+app.post('/tasks', addTask);
+app.put('/tasks', editTask);
+app.delete('/tasks', deleteTask);
+app.get('/tasks/get-all', getTasks);
+app.get('/tasks/get-by-id', findTaskById);
+app.get('/tasks/filter', findTask);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
