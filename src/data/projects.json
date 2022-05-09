@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Camila es re genia",
     "description": "posta es muy genia",
-    "status": "",
+    "status": false,
     "owner": "nisl",
     "pm": "Mariya Gebhardt",
     "client": "Meevee",
@@ -160,6 +160,14 @@
         "salary": 111154,
         "hoursInProjects": 26,
         "rates": 7
+      },
+      {
+        "name": "",
+        "id": null,
+        "roll": "",
+        "salary": "",
+        "hoursInProjects": "",
+        "rates": ""
       }
     ]
   },

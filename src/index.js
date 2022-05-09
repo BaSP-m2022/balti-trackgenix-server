@@ -12,7 +12,9 @@ app.get('/', async (req, res) => {
 });
 
 app.put('/projects/update/:id', projects.putById);
-app.delete('/projects/:id', projects.deleteById);
+app.delete('/projects/delete/:id', projects.deleteById);
+app.put('/projects/putEmployee/:id', projects.putEmployee);
+app.get('/projects/getByStatus/:status', projects.getByStatus);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
