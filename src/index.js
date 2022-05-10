@@ -1,6 +1,7 @@
 // use "import" to import libraries
 import express from 'express';
-import { createEmployee } from './resources/employees';
+import { createEmployee, updateEmployee } from './resources/employees';
+
 // import { MYFUNCION } from './resources/employees.js'
 
 // use "require" to import JSON files
@@ -28,11 +29,10 @@ app.get('/employees', (req, res) => {
     data: employees,
   });
 });
-// app.get('/admins', MYFUNCION);
 
-// app.post('/employees/newEmployee', employeess.newEmployee);
+// app.get('/admins', MYFUNCION);
 app.post('/employees', createEmployee);
-// res.send(req.body);
+app.put('/employees', updateEmployee);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

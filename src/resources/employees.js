@@ -1,23 +1,21 @@
+const fs = require('fs');
 const express = require('express');
 const employees = require('../data/employees.json');
-// const uuid = require('uuid');
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
-// eslint-disable-next-line import/prefer-default-export
 export const createEmployee = (req, res) => {
   const newEmployee = {
+    dni: req.body.dni,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    dni: req.body.dni,
     email: req.body.email,
     password: req.body.password,
   };
 
-  // eslint-disable-next-line max-len
   if (!newEmployee.first_name
     || !newEmployee.last_name
     || !newEmployee.dni
@@ -27,7 +25,38 @@ export const createEmployee = (req, res) => {
       msg: 'Please include a name, last name, dni, email and password',
     });
   }
-  // res.status(200).json({ msg: 'Employee created' });
   employees.push(newEmployee);
-  res.json(employees);
+  fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
+    if (err) {
+      res.send(err);
+    }
+  });
+  return res.json(employees);
+};
+
+export const updateEmployee = (req, res) => {
+  const employeeFound = employees.some((employee) => employee.dni === parseInt(req.query.dni, 10));
+  const updEmployee = req.body;
+  if (employeeFound) {
+    employees.forEach((employee, index) => {
+      if (employee.dni === parseInt(req.query.dni, 10)) {
+        employees[index].first_name = updEmployee.first_name;
+        employees[index].last_name = updEmployee.last_name;
+        employees[index].email = updEmployee.email;
+        employees[index].password = updEmployee.password;
+        fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
+          if (err) {
+            res.send(err);
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).json({ msg: `No member with the dni of ${req.query.dni}` });
+  }
+  res.status(200).json({
+    success: true,
+    msg: (`Employee dni ${updEmployee.dni} edited`),
+    data: updEmployee,
+  });
 };
