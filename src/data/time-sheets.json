@@ -1,0 +1,212 @@
+[
+  {
+    "employeeId": 10,
+    "assignedProject": "Aenean auctor gravida sem.",
+    "role": "QA",
+    "workedHours": [
+      {
+        "date": "31/03/2021",
+        "rate": "$26.03",
+        "hours": 6,
+        "description": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+        "taskId": 8
+      }
+    ]
+  },
+  {
+    "employeeId": 10,
+    "assignedProject": "Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+    "role": "TL",
+    "workedHours": [
+      {
+        "date": "24/02/2021",
+        "rate": "$38.40",
+        "hours": 9,
+        "description": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+        "taskId": 3
+      }
+    ]
+  },
+  {
+    "employeeId": 3,
+    "assignedProject": "Duis aliquam convallis nunc.",
+    "role": "PM",
+    "workedHours": [
+      {
+        "date": "21/01/2022",
+        "rate": "$49.22",
+        "hours": 7,
+        "description": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+        "taskId": 1
+      },
+      {
+        "date": "02/05/2021",
+        "rate": "$23.50",
+        "hours": 12,
+        "description": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+        "taskId": 10
+      },
+      {
+        "date": "12/10/2021",
+        "rate": "$48.30",
+        "hours": 7,
+        "description": "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
+        "taskId": 1
+      },
+      {
+        "date": "21/10/2021",
+        "rate": "$93.70",
+        "hours": 8,
+        "description": "Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
+        "taskId": 5
+      }
+    ]
+  },
+  {
+    "employeeId": 9,
+    "assignedProject": "Duis bibendum.",
+    "role": "PM",
+    "workedHours": [
+      {
+        "date": "23/07/2021",
+        "rate": "$47.67",
+        "hours": 5,
+        "description": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+        "taskId": 5
+      },
+      {
+        "date": "15/04/2022",
+        "rate": "$46.07",
+        "hours": 8,
+        "description": "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
+        "taskId": 1
+      },
+      {
+        "date": "29/03/2021",
+        "rate": "$95.66",
+        "hours": 8,
+        "description": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "taskId": 1
+      }
+    ]
+  },
+  {
+    "employeeId": 7,
+    "assignedProject": "Duis aliquam convallis nunc.",
+    "role": "TL",
+    "workedHours": [
+      {
+        "date": "24/03/2021",
+        "rate": "$31.01",
+        "hours": 9,
+        "description": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+        "taskId": 7
+      },
+      {
+        "date": "12/03/2022",
+        "rate": "$49.94",
+        "hours": 11,
+        "description": "In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
+        "taskId": 7
+      }
+    ]
+  },
+  {
+    "employeeId": 1,
+    "assignedProject": "Nulla nisl.",
+    "role": "QA",
+    "workedHours": [
+      {
+        "date": "26/01/2021",
+        "rate": "$30.96",
+        "hours": 12,
+        "description": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
+        "taskId": 9
+      }
+    ]
+  },
+  {
+    "employeeId": 9,
+    "assignedProject": "Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
+    "role": "QA",
+    "workedHours": [
+      {
+        "date": "30/04/2022",
+        "rate": "$22.68",
+        "hours": 9,
+        "description": "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
+        "taskId": 6
+      }
+    ]
+  },
+  {
+    "employeeId": 6,
+    "assignedProject": "Quisque ut erat.",
+    "role": "DEV",
+    "workedHours": [
+      {
+        "date": "19/06/2021",
+        "rate": "$35.18",
+        "hours": 5,
+        "description": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+        "taskId": 4
+      },
+      {
+        "date": "17/10/2021",
+        "rate": "$21.50",
+        "hours": 7,
+        "description": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "taskId": 2
+      }
+    ]
+  },
+  {
+    "employeeId": 4,
+    "assignedProject": "Ut tellus.",
+    "role": "TL",
+    "workedHours": [
+      {
+        "date": "13/07/2021",
+        "rate": "$41.32",
+        "hours": 10,
+        "description": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+        "taskId": 9
+      },
+      {
+        "date": "26/03/2022",
+        "rate": "$33.91",
+        "hours": 11,
+        "description": "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
+        "taskId": 8
+      },
+      {
+        "date": "05/01/2022",
+        "rate": "$80.74",
+        "hours": 10,
+        "description": "Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
+        "taskId": 10
+      },
+      {
+        "date": "19/02/2021",
+        "rate": "$84.34",
+        "hours": 7,
+        "description": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+        "taskId": 2
+      }
+    ]
+  },
+  {
+    "employeeId": 4,
+    "assignedProject": "Morbi quis tortor id nulla ultrices aliquet.",
+    "role": "TL",
+    "workedHours": [
+      {
+        "date": "28/03/2021",
+        "rate": "$81.67",
+        "hours": 7,
+        "description": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+        "taskId": 5
+      }
+    ]
+  }
+]
