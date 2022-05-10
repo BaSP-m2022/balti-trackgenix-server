@@ -1,7 +1,7 @@
-const failSis = require('fs');
+const fs = require('fs');
 const projects = require('../data/projects.json');
 
-function putById(req, res) {
+export const putById = (req, res) => {
   const { id } = req.params;
 
   const {
@@ -24,28 +24,42 @@ function putById(req, res) {
 
   if (projectIndex !== -1) {
     projects[projectIndex] = updatedProject;
-    failSis.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
-    res.status(200).json({ msg: 'Project updated', updatedProject });
-  } else {
-    res.status(404).json({ msg: 'Project not found' });
+    fs.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
+    return res.status(200).json({
+      success: true,
+      data: updatedProject,
+    });
   }
-}
+  return res.status(400).json({
+    success: false,
+    msg: ('Project not found'),
+  });
+};
 
-function deleteById(req, res) {
-  const { id } = req.params;
+export const deleteById = (req, res) => {
+  const projectId = req.params.id;
 
-  const projectIndex = projects.findIndex((proj) => proj.id === parseInt(id, 10));
+  const projectsFilter = projects.filter((proj) => proj.id !== projectId);
 
-  if (projectIndex !== -1) {
-    projects.splice(id, 1);
-    failSis.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
-    res.status(200).json({ msg: 'Project delete', projects });
+  if (projects.length === projectsFilter.length) {
+    res.send('project not found');
   } else {
-    res.status(404).json({ msg: 'Project not found' });
+    fs.writeFile('src/data/projects.json', JSON.stringify(projectsFilter), (err) => {
+      if (err) {
+        return res.status(400).json({
+          success: false,
+          msg: ('Project not found'),
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        data: projects,
+      });
+    });
   }
-}
+};
 
-function putEmployee(req, res) {
+export const putEmployee = (req, res) => {
   const { id } = req.params;
 
   const {
@@ -67,26 +81,29 @@ function putEmployee(req, res) {
   if (project) {
     project.employees.push(newEmployee);
     projects[projectIndex] = project;
-    failSis.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
-    res.status(200).json({ msg: 'Employee added', project });
-  } else {
-    res.status(404).json({ msg: 'Project not found' });
+    fs.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
+    return res.status(200).json({
+      success: true,
+      data: project,
+    });
   }
-}
+  return res.status(400).json({
+    success: false,
+    msg: ('Project not found'),
+  });
+};
 
-function getByStatus(req, res) {
+export const getByStatus = (req, res) => {
   const { status } = req.params;
   const projectsFilter = projects.filter((proj) => proj.status.toString() === status);
   if (projectsFilter) {
-    res.status(200).json(projectsFilter);
-  } else {
-    res.status(404).json({ msg: 'Project not found' });
+    return res.status(200).json({
+      success: true,
+      data: projectsFilter,
+    });
   }
-}
-
-module.exports = {
-  putById,
-  deleteById,
-  putEmployee,
-  getByStatus,
+  return res.status(400).json({
+    success: false,
+    msg: ('Project not found'),
+  });
 };
