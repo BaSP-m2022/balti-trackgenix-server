@@ -1,6 +1,8 @@
 // use 'import' to import libraries
 import express from 'express';
-import { addSA, findSA } from './resources/super-admins';
+import {
+  addSA, findSA, delSA, editSA,
+} from './resources/super-admins';
 // use 'require' to import JSON files
 const admins = require('./data/admins.json');
 const sAdmins = require('./data/super-admins.json');
@@ -24,9 +26,10 @@ app.get('/admins', (req, res) => {
 app.get('/super-admins', (req, res) => {
   res.status(200).json({ data: sAdmins });
 });
-app.get('/super-admins/:id', findSA);
 app.post('/super-admins', addSA);
-
+app.get('/super-admins/:id', findSA);
+app.delete('/super-admins', delSA);
+app.put('/super-admins', editSA);
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
