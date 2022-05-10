@@ -29,83 +29,67 @@ export const findTaskById = (req, res) => {
 };
 
 export const findTask = (req, res) => {
-  const id = parseInt(req.query.id, 10);
   const employeeId = parseInt(req.query.employee_id, 10);
   const projectId = parseInt(req.query.project_id, 10);
   const tittleSearch = req.query.tittle;
   const descriptionSearch = req.query.description;
   const dateSearch = req.query.date;
   const doneSearch = req.query.done;
-  const dataRes = [];
-
-  if (id) {
-    const filter = tasks.filter((element) => element.id === id);
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ 'Found: ': dataRes });
-    } else {
-      res.json(`Search parameter ${id} doesn't match any ID.`);
-    }
-  }
-  if (employeeId) {
-    const filter = tasks.filter((element) => element.employee_id === employeeId);
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ 'Found: ': dataRes });
-    } else {
-      res.send(`Search parameter ${employeeId} doesn't match any employee ID.`);
-    }
-  }
-  if (projectId) {
-    const filter = tasks.filter((element) => element.pm_id === projectId);
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ Found: dataRes });
-    } else {
-      res.send(`Search parameter ${projectId} doesn't match any PM ID.`);
-    }
-  }
-  if (tittleSearch) {
-    const filter = tasks.filter((task) => task.tittle.includes(tittleSearch));
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ Found: dataRes });
-    } else {
-      res.send(`Search parameter ${tittleSearch} doesn't match any`);
-    }
-  }
-  if (descriptionSearch) {
-    const newList = tasks.filter((task) => task.description.includes(descriptionSearch));
-    if (newList.length > 0) {
-      dataRes.push(newList);
-      res.json({ Found: dataRes });
-    } else {
-      res.send(`Search parameter ${descriptionSearch} doesn't match any description.`);
-    }
-  }
-  if (dateSearch) {
-    const filter = tasks.filter((element) => element.date === dateSearch);
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ Found: dataRes });
-    } else {
-      res.send(`Search parameter ${dateSearch} doesn't match any date.`);
-    }
-  }
+  let doneBoolean = false;
   if (doneSearch) {
-    let doneBoolean = false;
+    doneBoolean = false;
     if (doneSearch === 'true') {
       doneBoolean = true;
     } else {
       doneBoolean = false;
     }
-    const filter = tasks.filter((element) => element.done === doneBoolean);
-    if (filter.length > 0) {
-      dataRes.push(filter);
-      res.json({ Found: dataRes });
-    } else {
-      res.send(`Search parameter ${doneSearch} doesn't match.`);
-    }
+  }
+
+  let {
+    filtered1, filtered2, filtered3, filtered4, filtered5, filtered6,
+  } = [];
+
+  if (employeeId) {
+    filtered1 = tasks.filter((element) => element.employee_id === employeeId);
+  } else {
+    filtered1 = tasks;
+  }
+  if (projectId) {
+    filtered2 = filtered1.filter((element) => element.project_id === projectId);
+  } else {
+    filtered2 = filtered1;
+  }
+  if (tittleSearch) {
+    filtered3 = filtered2.filter((element) => element.tittle.includes(tittleSearch));
+  } else {
+    filtered3 = filtered2;
+  }
+  if (descriptionSearch) {
+    filtered4 = filtered3.filter((element) => element.description.includes(descriptionSearch));
+  } else {
+    filtered4 = filtered3;
+  }
+  if (dateSearch) {
+    filtered5 = filtered4.filter((element) => element.date === dateSearch);
+  } else {
+    filtered5 = filtered4;
+  }
+  if (doneSearch) {
+    filtered6 = filtered5.filter((element) => element.done === doneBoolean);
+  } else {
+    filtered6 = filtered5;
+  }
+
+  if (filtered6.length > 0) {
+    res.status(200).json({
+      success: true,
+      data: filtered6,
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: ('Pameters dot not match'),
+    });
   }
 };
 
