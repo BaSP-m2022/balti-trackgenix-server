@@ -1,0 +1,32 @@
+[
+  {
+    "firstName": "Rasta",
+    "lastName": "Carriole",
+    "email": "rfarmiloe0@opensource.org",
+    "id": 1
+  },
+  {
+    "firstName": "Kamaaina",
+    "lastName": "Kate",
+    "email": "kkatz1@wp.com",
+    "id": 2
+  },
+  {
+    "firstName": "Myrna",
+    "lastName": "Plainer",
+    "email": "mplaide2@tripod.com",
+    "id": 3
+  },
+  {
+    "firstName": "Madison",
+    "lastName": "Axon",
+    "email": "maxton3@ucoz.ru",
+    "id": 4
+  },
+  {
+    "firstName": "Melanie",
+    "lastName": "Barnard",
+    "email": "mbarnard4@samsung.com",
+    "id": 5
+  }
+]

@@ -1,8 +1,9 @@
-// use "import" to import libraries
+// use 'import' to import libraries
 import express from 'express';
-
-// use "require" to import JSON files
+import { addSA, findSA } from './resources/super-admins';
+// use 'require' to import JSON files
 const admins = require('./data/admins.json');
+const sAdmins = require('./data/super-admins.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,6 +20,12 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+app.get('/super-admins', (req, res) => {
+  res.status(200).json({ data: sAdmins });
+});
+app.get('/super-admins/:id', findSA);
+app.post('/super-admins', addSA);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
