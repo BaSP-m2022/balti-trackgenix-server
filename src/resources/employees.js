@@ -60,3 +60,24 @@ export const updateEmployee = (req, res) => {
     data: updEmployee,
   });
 };
+
+export const deleteEmployee = (req, res) => {
+  const employeeDni = parseInt(req.query.dni, 10);
+  const found = employees.filter((employee) => employee.dni !== employeeDni);
+  if (employees.length === found.length) {
+    res.send('Employee DNI not found');
+  } else {
+    fs.writeFile('src/data/employees.json', JSON.stringify(found), (err) => {
+      if (err) {
+        res.status(400).json({
+          success: false,
+          msg: ('Employee not found.'),
+        });
+      }
+    });
+    res.status(200).json({
+      success: true,
+      msg: (`Employee dni: ${employeeDni} deleted.`),
+    });
+  }
+};

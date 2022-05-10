@@ -1,6 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
-import { createEmployee, updateEmployee } from './resources/employees';
+import { createEmployee, deleteEmployee, updateEmployee } from './resources/employees';
 
 // import { MYFUNCION } from './resources/employees.js'
 
@@ -33,6 +33,7 @@ app.get('/employees', (req, res) => {
 // app.get('/admins', MYFUNCION);
 app.post('/employees', createEmployee);
 app.put('/employees', updateEmployee);
+app.delete('/employees', deleteEmployee);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
