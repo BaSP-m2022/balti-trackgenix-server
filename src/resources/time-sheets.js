@@ -63,6 +63,23 @@ export const editTimeSheet = (req, res) => {
       },
     );
   } else {
-    res.status('400').json({ success: false, msg: 'TimeSheet not found' });
+    res.status(400).json({ success: false, msg: 'TimeSheet not found' });
+  }
+};
+
+export const getAllByEmployee = (req, res) => {
+  const filterByEmployee = timeSheets.filter((ts) => ts.employeeId === parseInt(req.params.id, 10));
+
+  if (filterByEmployee.length > 0) {
+    res.json({
+      success: true,
+      msg: 'These are the time sheets found',
+      data: filterByEmployee,
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: 'Time sheets not found for this ID',
+    });
   }
 };
