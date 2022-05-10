@@ -28,14 +28,20 @@ export const findSA = (req, res) => {
 };
 
 export const delSA = (req, res) => {
-  if (findSA) {
-    res.json({
-      msg: 'Super-admin deleted',
-      superAd: superAd.filter((fSuperAd) => !idFilter(req)(fSuperAd)),
+  const found = superAd.filter((superAdm) => superAdm.id !== parseInt(req.query.id, 10));
+  if (found) {
+    failSis.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
+      if (err) {
+        res.status(400).json({
+          success: false,
+          msg: 'Super-admin not found',
+        });
+      }
     });
-    failSis.writeFileSync('./src/data/super-admins.json', JSON.stringify(superAd));
-  } else {
-    res.status(400).json({ msg: `No Super-admin with the id of ${req.params.id}` });
+    res.status(200).json({
+      success: true,
+      msg: ('Super-admin delete'),
+    });
   }
 };
 
