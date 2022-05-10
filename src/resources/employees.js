@@ -1,11 +1,5 @@
 const fs = require('fs');
-const express = require('express');
 const employees = require('../data/employees.json');
-
-const app = express();
-
-app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
 
 export const createEmployee = (req, res) => {
   const newEmployee = {
@@ -22,16 +16,24 @@ export const createEmployee = (req, res) => {
     || !newEmployee.email
     || !newEmployee.password) {
     return res.status(400).json({
+      status: false,
       msg: 'Please include a name, last name, dni, email and password',
     });
   }
   employees.push(newEmployee);
   fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
     if (err) {
-      res.send(err);
+      res.status(400).json({
+        success: false,
+        msg: (err),
+      });
     }
   });
-  return res.json(employees);
+  return res.status(200).json({
+    success: true,
+    msg: 'Employee created',
+    data: newEmployee,
+  });
 };
 
 export const updateEmployee = (req, res) => {
@@ -46,13 +48,19 @@ export const updateEmployee = (req, res) => {
         employees[index].password = updEmployee.password;
         fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
           if (err) {
-            res.send(err);
+            res.status(400).json({
+              success: false,
+              msg: (err),
+            });
           }
         });
       }
     });
   } else {
-    res.status(400).json({ msg: `No member with the dni of ${req.query.dni}` });
+    res.status(400).json({
+      success: false,
+      msg: `No member with the dni of ${req.query.dni}`,
+    });
   }
   res.status(200).json({
     success: true,
@@ -65,13 +73,16 @@ export const deleteEmployee = (req, res) => {
   const employeeDni = parseInt(req.query.dni, 10);
   const found = employees.filter((employee) => employee.dni !== employeeDni);
   if (employees.length === found.length) {
-    res.send('Employee DNI not found');
+    res.status(400).json({
+      success: false,
+      msg: 'Employee DNI not found',
+    });
   } else {
     fs.writeFile('src/data/employees.json', JSON.stringify(found), (err) => {
       if (err) {
         res.status(400).json({
           success: false,
-          msg: ('Employee not found.'),
+          msg: (err),
         });
       }
     });

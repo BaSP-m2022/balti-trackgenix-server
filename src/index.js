@@ -2,11 +2,8 @@
 import express from 'express';
 import { createEmployee, deleteEmployee, updateEmployee } from './resources/employees';
 
-// import { MYFUNCION } from './resources/employees.js'
-
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
-const employees = require('./data/employees.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,13 +21,6 @@ app.get('/admins', (req, res) => {
   });
 });
 
-app.get('/employees', (req, res) => {
-  res.status(200).json({
-    data: employees,
-  });
-});
-
-// app.get('/admins', MYFUNCION);
 app.post('/employees', createEmployee);
 app.put('/employees', updateEmployee);
 app.delete('/employees', deleteEmployee);
