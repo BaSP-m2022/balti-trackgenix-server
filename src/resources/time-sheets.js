@@ -67,7 +67,7 @@ export const editTimeSheet = (req, res) => {
   }
 };
 
-export const getAllByEmployee = (req, res) => {
+export const getAllTimeSheetsByEmployee = (req, res) => {
   const filterByEmployee = timeSheets.filter((ts) => ts.employeeId === parseInt(req.params.id, 10));
 
   if (filterByEmployee.length > 0) {

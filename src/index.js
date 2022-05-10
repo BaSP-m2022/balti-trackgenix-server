@@ -1,7 +1,7 @@
 // use "import" to import libraries
 import express from 'express';
 
-import { addTimeSheet, editTimeSheet, getAllByEmployee } from './resources/time-sheets';
+import { addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee } from './resources/time-sheets';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -13,10 +13,8 @@ app.set('json spaces', 2);
 app.use(express.json());
 
 app.post('/time-sheets/add', addTimeSheet);
-
 app.put('/time-sheets/edit/:id', editTimeSheet);
-
-app.get('/time-sheets/get-all-by-employee/:id', getAllByEmployee);
+app.get('/time-sheets/get-all-by-employee/:id', getAllTimeSheetsByEmployee);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
