@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.post('/time-sheets/add', addTimeSheet);
 
-app.put('/time-sheets/:id', editTimeSheet);
+app.put('/time-sheets/edit/:id', editTimeSheet);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
