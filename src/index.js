@@ -30,11 +30,10 @@ app.delete('/tasks', deleteTask);
 app.get('/tasks', getTasks);
 app.get('/tasks/get-by-id', findTaskById);
 app.get('/tasks/filter', findTask);
+app.get('/employees', getEmployees);
+app.get('/employees/:dni', filterByDni);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
-
-app.get('/employees', getEmployees);
-app.get('/employees/:dni', filterByDni);
