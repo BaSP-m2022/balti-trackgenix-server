@@ -2,6 +2,7 @@ const fs = require('fs');
 const projects = require('../data/projects.json');
 
 const allProjects = (req, res) => res.json(projects);
+
 const filterById = (req, res) => {
   const found = projects.find((project) => project.id === +req.params.id);
   if (found) {
@@ -16,6 +17,7 @@ const filterById = (req, res) => {
     });
   }
 };
+
 const createProject = (req, res) => {
   const newProject = {
     id: Math.random() * 10000,
@@ -42,4 +44,5 @@ const createProject = (req, res) => {
     data: projects,
   });
 };
+
 exports = { allProjects, filterById, createProject };
