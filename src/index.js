@@ -1,5 +1,8 @@
 // use "import" to import libraries
 import express from 'express';
+import {
+  getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
+} from './resources/tasks';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -19,6 +22,13 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+app.post('/tasks', addTask);
+app.put('/tasks', editTask);
+app.delete('/tasks', deleteTask);
+app.get('/tasks', getTasks);
+app.get('/tasks/get-by-id', findTaskById);
+app.get('/tasks/filter', findTask);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
