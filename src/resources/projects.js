@@ -37,26 +37,64 @@ export const putById = (req, res) => {
 };
 
 export const deleteById = (req, res) => {
-  const projectId = req.params.id;
+  const num = parseInt(req.params.id, 10);
 
-  const projectsFilter = projects.filter((proj) => proj.id !== projectId);
+  let index = -1;
 
-  if (projects.length === projectsFilter.length) {
-    res.send('project not found');
-  } else {
-    fs.writeFile('src/data/projects.json', JSON.stringify(projectsFilter), (err) => {
-      if (err) {
-        return res.status(400).json({
-          success: false,
-          msg: ('Project not found'),
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        data: projects,
-      });
+  const ids = projects.map((project) => project.id);
+
+  index = ids.indexOf(num);
+  // res.status(200).json(index);
+  if (index !== -1) {
+    projects.splice(index, 1);
+    fs.writeFileSync('src/data/projects.json', JSON.stringify(projects));
+    return res.status(200).json({
+      success: true,
+      data: projects,
     });
   }
+  return res.status(400).json({
+    success: false,
+    msg: ('Project not found'),
+  });
+
+  // let index = -1;
+  // const ids = projects.map((project) => project.id);
+  // index = ids.indexOf(req.params.id);
+
+  // if (index !== -1) {
+  //   projects.slice(index, 1);
+  //   fs.writeFile('src/data/projects.json', JSON.stringify(projects));
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: projects,
+  //   });
+  // }
+  // return res.status(400).json({
+  //   success: false,
+  //   msg: ('Project not found'),
+  // });
+
+  // const projectId = parseInt(req.params.id, 10);
+
+  // const projectsFilter = projects.filter((proj) => proj.id !== projectId);
+
+  // if (projects.length === projectsFilter.length) {
+  //   res.send('Project not found');
+  // } else {
+  //   fs.writeFile('src/data/projects.json', JSON.stringify(projectsFilter), (err) => {
+  //     if (err) {
+  //       return res.status(400).json({
+  //         success: false,
+  //         msg: ('Project not found'),
+  //       });
+  //     }
+  //     return res.status(200).json({
+  //       success: true,
+  //       data: projects,
+  //     });
+  //   });
+  // }
 };
 
 export const putEmployee = (req, res) => {

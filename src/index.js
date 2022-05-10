@@ -25,8 +25,8 @@ app.get('/admins', (req, res) => {
 
 app.put('/projects/update/:id', putById);
 app.delete('/projects/delete/:id', deleteById);
-app.put('/projects/putEmployee/:id', putEmployee);
-app.get('/projects/getByStatus/:status', getByStatus);
+app.put('/projects/put-employee/:id', putEmployee);
+app.get('/projects/get-by-status/:status', getByStatus);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
