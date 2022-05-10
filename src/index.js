@@ -26,7 +26,7 @@ app.get('/admins', (req, res) => {
 app.post('/tasks', addTask);
 app.put('/tasks', editTask);
 app.delete('/tasks', deleteTask);
-app.get('/tasks/get-all', getTasks);
+app.get('/tasks', getTasks);
 app.get('/tasks/get-by-id', findTaskById);
 app.get('/tasks/filter', findTask);
 

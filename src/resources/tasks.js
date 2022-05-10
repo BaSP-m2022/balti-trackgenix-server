@@ -45,45 +45,31 @@ export const findTask = (req, res) => {
     }
   }
 
-  let {
-    filtered1, filtered2, filtered3, filtered4, filtered5, filtered6,
-  } = [];
+  let filtered = tasks;
 
   if (employeeId) {
-    filtered1 = tasks.filter((element) => element.employee_id === employeeId);
-  } else {
-    filtered1 = tasks;
+    filtered = filtered.filter((element) => element.employee_id === employeeId);
   }
   if (projectId) {
-    filtered2 = filtered1.filter((element) => element.project_id === projectId);
-  } else {
-    filtered2 = filtered1;
+    filtered = filtered.filter((element) => element.project_id === projectId);
   }
   if (tittleSearch) {
-    filtered3 = filtered2.filter((element) => element.tittle.includes(tittleSearch));
-  } else {
-    filtered3 = filtered2;
+    filtered = filtered.filter((element) => element.tittle.includes(tittleSearch));
   }
   if (descriptionSearch) {
-    filtered4 = filtered3.filter((element) => element.description.includes(descriptionSearch));
-  } else {
-    filtered4 = filtered3;
+    filtered = filtered.filter((element) => element.description.includes(descriptionSearch));
   }
   if (dateSearch) {
-    filtered5 = filtered4.filter((element) => element.date === dateSearch);
-  } else {
-    filtered5 = filtered4;
+    filtered = filtered.filter((element) => element.date === dateSearch);
   }
   if (doneSearch) {
-    filtered6 = filtered5.filter((element) => element.done === doneBoolean);
-  } else {
-    filtered6 = filtered5;
+    filtered = filtered.filter((element) => element.done === doneBoolean);
   }
 
-  if (filtered6.length > 0) {
+  if (filtered.length > 0) {
     res.status(200).json({
       success: true,
-      data: filtered6,
+      data: filtered,
     });
   } else {
     res.status(400).json({
@@ -124,10 +110,16 @@ export const deleteTask = (req, res) => {
   } else {
     fs.writeFile('src/data/tasks.json', JSON.stringify(found), (err) => {
       if (err) {
-        res.send(err);
+        res.status(400).json({
+          success: false,
+          msg: ('Task not found.'),
+        });
       }
     });
-    res.json({ 'Task deleted': taskId });
+    res.status(200).json({
+      success: true,
+      msg: (`Task id: ${taskId} deleted.`),
+    });
   }
 };
 
