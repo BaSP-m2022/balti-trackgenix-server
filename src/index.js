@@ -1,5 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
+import { filterByDni, getEmployees } from './resources/employees';
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './resources/tasks';
@@ -14,7 +15,7 @@ app.set('json spaces', 2);
 app.use(express.json());
 
 app.get('/', async (req, res) => {
-  res.send('Hello World!');
+  res.send('<h1>Hello World! Whats new?</h1>');
 });
 
 app.get('/admins', (req, res) => {
@@ -29,6 +30,8 @@ app.delete('/tasks', deleteTask);
 app.get('/tasks', getTasks);
 app.get('/tasks/get-by-id', findTaskById);
 app.get('/tasks/filter', findTask);
+app.get('/employees', getEmployees);
+app.get('/employees/:dni', filterByDni);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
