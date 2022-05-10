@@ -1,0 +1,131 @@
+[{
+  "employeeId": 1,
+  "assignedProject": "Konklab",
+  "role": "Engineer",
+  "workedHours": [
+    {
+      "date": "4/3/2020",
+      "rate": "$75.41",
+      "hours": 1,
+      "description": "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
+      "taskId": 1
+    }
+  ]
+}, {
+  "employeeId": 2,
+  "assignedProject": "Overhold",
+  "role": "Construction Manager",
+  "workedHours": [
+    {
+      "date": "1/14/2007",
+      "rate": "$50.41",
+      "hours": 2,
+      "description": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
+      "taskId": 2
+    }
+  ]
+}, {
+  "employeeId": 3,
+  "assignedProject": "Tempsoft",
+  "role": "Construction Worker",
+  "workedHours": [
+    {
+      "date": "1/27/2020",
+      "rate": "$33.52",
+      "hours": 3,
+      "description": "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.",
+      "taskId": 3
+    }
+  ]
+}, {
+  "employeeId": 4,
+  "assignedProject": "Zaam-Dox",
+  "role": "Construction Manager",
+  "workedHours": [
+    {
+      "date": "1/6/1996",
+      "rate": "$72.70",
+      "hours": 4,
+      "description": "Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
+      "taskId": 4
+    }
+  ]
+}, {
+  "employeeId": 5,
+  "assignedProject": "Temp",
+  "role": "Construction Expeditor",
+  "workedHours": [
+    {
+      "date": "8/28/2011",
+      "rate": "$96.05",
+      "hours": 5,
+      "description": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
+      "taskId": 5
+    }
+  ]
+}, {
+  "employeeId": 6,
+  "assignedProject": "Bamity",
+  "role": "Surveyor",
+  "workedHours": [
+    {
+      "date": "3/20/2004",
+      "rate": "$33.00",
+      "hours": 6,
+      "description": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.",
+      "taskId": 6
+    }
+  ]
+}, {
+  "employeeId": 7,
+  "assignedProject": "Latlux",
+  "role": "Construction Foreman",
+  "workedHours": [
+    {
+      "date": "11/11/2011",
+      "rate": "$85.57",
+      "hours": 7,
+      "description": "In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
+      "taskId": 7
+    }
+  ]
+}, {
+  "employeeId": 8,
+  "assignedProject": "Tres-Zap",
+  "role": "Supervisor",
+  "workedHours": [
+    {
+      "date": "3/1/1994",
+      "rate": "$23.72",
+      "hours": 8,
+      "description": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
+      "taskId": 8
+    }
+  ]
+}, {
+  "employeeId": 9,
+  "assignedProject": "Treeflex",
+  "role": "Estimator",
+  "workedHours": [
+    {
+      "date": "11/30/2007",
+      "rate": "$96.29",
+      "hours": 9,
+      "description": "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.",
+      "taskId": 9
+    }
+  ]
+}, {
+  "employeeId": 10,
+  "assignedProject": "Namfix",
+  "role": "Surveyor",
+  "workedHours": [
+    {
+      "date": "3/10/2007",
+      "rate": "$43.28",
+      "hours": 10,
+      "description": "Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
+      "taskId": 10
+    }
+  ]
+}]

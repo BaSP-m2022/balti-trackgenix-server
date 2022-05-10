@@ -1,5 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
+import { deleteTs, getTs } from './resources/time-sheets';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
@@ -13,6 +14,9 @@ app.use(express.json());
 app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
+
+app.get('/time-sheets/:id', getTs);
+app.delete('/time-sheets', deleteTs);
 
 app.get('/admins', (req, res) => {
   res.status(200).json({
