@@ -1,6 +1,5 @@
 // use "import" to import libraries
 import express from 'express';
-// eslint-disable-next-line import/named
 import { filterByDni, getEmployees } from './resources/employees';
 
 // use "require" to import JSON files
@@ -27,8 +26,5 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-/* example to get data from postman */
-
 app.get('/employees', getEmployees);
-
 app.get('/employees/:dni', filterByDni);
