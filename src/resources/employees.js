@@ -16,7 +16,7 @@ export const createEmployee = (req, res) => {
     || !newEmployee.email
     || !newEmployee.password) {
     return res.status(400).json({
-      status: false,
+      success: false,
       msg: 'Please include a name, last name, dni, email and password',
     });
   }
