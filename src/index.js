@@ -1,9 +1,10 @@
 import express from 'express';
-
+import {
+  putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
+} from './resources/projects';
 import {
   createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
 } from './resources/employees';
-import { allProjects, filterById, createProject } from './resources/projects';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
 } from './resources/time-sheets';
@@ -15,6 +16,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.set('json spaces', 2);
+
 app.use(express.json());
 
 app.get('/', async (req, res) => {
@@ -24,6 +26,10 @@ app.get('/', async (req, res) => {
 app.get('/projects', allProjects);
 app.get('/projects/:id', filterById);
 app.post('/projects', createProject);
+app.put('/projects/:id', putById);
+app.delete('/projects/:id', deleteById);
+app.put('/projects/put-employee/:id', putEmployee);
+app.get('/projects/get-by-status/:status', getByStatus);
 
 app.get('/time-sheets/:id', getTimeSheets);
 app.delete('/time-sheets', deleteTimeSheets);
