@@ -5,10 +5,8 @@ import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './resources/tasks';
 
-const projects = require('./data/projects.json');
-
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.set('json spaces', 2);
 app.use(express.json());
@@ -20,6 +18,7 @@ app.get('/', async (req, res) => {
 app.get('/projects', allProjects);
 app.get('/projects/:id', filterById);
 app.post('/projects', createProject);
+
 app.post('/tasks', addTask);
 app.put('/tasks', editTask);
 app.delete('/tasks', deleteTask);
@@ -30,8 +29,4 @@ app.get('/tasks/filter', findTask);
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
-});
-
-app.get('/projects', async (req, res) => {
-  res.send(projects);
 });

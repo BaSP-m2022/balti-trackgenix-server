@@ -13,14 +13,14 @@ export const filterById = (req, res) => {
   } else {
     res.status(400).json({
       success: false,
-      msg: 'Please include id, name, owner, pm, client and date start.',
+      msg: 'Id not found',
     });
   }
 };
 
 export const createProject = (req, res) => {
   const newProject = {
-    id: Math.random() * 10000,
+    id: Math.round(Math.random() * 10000),
     name: req.body.name,
     description: req.body.description,
     status: true,
@@ -41,6 +41,6 @@ export const createProject = (req, res) => {
   fs.writeFileSync('./src/data/projects.json', JSON.stringify(projects));
   return res.status(200).json({
     success: true,
-    data: projects,
+    data: newProject,
   });
 };
