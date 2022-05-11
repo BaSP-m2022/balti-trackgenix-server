@@ -1,9 +1,16 @@
-const failSis = require('fs');
+const fs = require('fs');
 const superAd = require('../data/super-admins.json');
 
-const idFilter = (req) => (fSuperAd) => fSuperAd.id === parseInt(req.params.id, 10);
+// const idFilter = (req) => (fSuperAd) => fSuperAd.id === parseInt(req.params.id, 10);
 
-export const addSA = (req, res) => {
+export const getAllSuperAdmin = (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: getAllSuperAdmin,
+  });
+};
+
+export const addSuperAdmin = (req, res) => {
   const newSA = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -12,25 +19,37 @@ export const addSA = (req, res) => {
   };
   if (!newSA.firstName || !newSA.lastName || !newSA.email || !newSA.id) {
     return res.status(400).json({
+      success: false,
       msg: 'Please put a name, surname, email and id.',
     });
   }
   superAd.push(newSA);
-  return res.status(200).json(superAd);
+  fs.writeFileSync('src/data/super-admins.json', JSON.stringify(superAd));
+  return res.status(200).json({
+    success: true,
+    data: newSA,
+  });
 };
 
-export const findSA = (req, res) => {
-  if (findSA) {
-    res.json(superAd.filter(idFilter(req)));
+export const findSuperAdmin = (req, res) => {
+  const found = superAd.find((superAdm) => superAdm.id === +req.params.id);
+  if (found) {
+    res.status(200).json({
+      success: true,
+      data: found,
+    });
   } else {
-    res.status(400).json({ msg: `No member with the id of ${req.params.id}` });
+    res.status(400).json({
+      success: false,
+      msg: `No member with the id of ${req.params.id}`,
+    });
   }
 };
 
-export const delSA = (req, res) => {
+export const delSuperAdmin = (req, res) => {
   const found = superAd.filter((superAdm) => superAdm.id !== parseInt(req.query.id, 10));
   if (found) {
-    failSis.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
+    fs.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
       if (err) {
         res.status(400).json({
           success: false,
@@ -40,12 +59,12 @@ export const delSA = (req, res) => {
     });
     res.status(200).json({
       success: true,
-      msg: ('Super-admin delete'),
+      data: found,
     });
   }
 };
 
-export const editSA = (req, res) => {
+export const editSuperAdmin = (req, res) => {
   const saId = parseInt(req.query.id, 10);
   const saData = req.body;
   const found = superAd.some((sa) => sa.id === saId);
@@ -55,7 +74,7 @@ export const editSA = (req, res) => {
         superAd[index].firstName = saData.firstName;
         superAd[index].lastName = saData.lastName;
         superAd[index].email = saData.email;
-        failSis.writeFile('src/data/super-admins.json', JSON.stringify(superAd), (err) => {
+        fs.writeFile('src/data/super-admins.json', JSON.stringify(superAd), (err) => {
           if (err) {
             res.send(err);
           }
@@ -65,12 +84,12 @@ export const editSA = (req, res) => {
   } else {
     res.status(400).json({
       success: false,
-      msg: `sa id ${saId} not found`,
+      msg: `SA id ${saId} not found`,
     });
   }
   res.status(200).json({
     success: true,
     msg: (`sa id ${saData.id} edited`),
-    data: saData,
+    data: found,
   });
 };

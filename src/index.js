@@ -1,11 +1,10 @@
 // use 'import' to import libraries
 import express from 'express';
 import {
-  addSA, findSA, delSA, editSA,
+  addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
 } from './resources/super-admins';
 // use 'require' to import JSON files
 const admins = require('./data/admins.json');
-const sAdmins = require('./data/super-admins.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,13 +22,12 @@ app.get('/admins', (req, res) => {
   });
 });
 
-app.get('/super-admins', (req, res) => {
-  res.status(200).json({ data: sAdmins });
-});
-app.post('/super-admins', addSA);
-app.get('/super-admins/:id', findSA);
-app.delete('/super-admins', delSA);
-app.put('/super-admins', editSA);
+app.get('/super-admins', getAllSuperAdmin);
+app.get('/super-admins/:id', findSuperAdmin);
+app.post('/super-admins', addSuperAdmin);
+app.delete('/super-admins', delSuperAdmin);
+app.put('/super-admins', editSuperAdmin);
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
