@@ -1,5 +1,6 @@
 // use "import" to import libraries
 import express from 'express';
+import { allProjects, filterById, createProject } from './resources/projects';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
 } from './resources/time-sheets';
@@ -7,9 +8,6 @@ import { filterByDni, getEmployees } from './resources/employees';
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './resources/tasks';
-
-// use "require" to import JSON files
-const admins = require('./data/admins.json');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,17 +19,15 @@ app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
 });
 
+app.get('/projects', allProjects);
+app.get('/projects/:id', filterById);
+app.post('/projects', createProject);
+
 app.get('/time-sheets/:id', getTimeSheets);
 app.delete('/time-sheets', deleteTimeSheets);
 app.post('/time-sheets/add', addTimeSheet);
 app.put('/time-sheets/edit/:id', editTimeSheet);
 app.get('/time-sheets/get-all-time-sheets-by-employee/:id', getAllTimeSheetsByEmployee);
-
-app.get('/admins', (req, res) => {
-  res.status(200).json({
-    data: admins,
-  });
-});
 
 app.post('/tasks', addTask);
 app.put('/tasks', editTask);
