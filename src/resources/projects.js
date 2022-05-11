@@ -8,11 +8,19 @@ export const putById = (req, res) => {
     name, description, owner, pm, client, dateStart, employees,
   } = req.body;
 
+  let validateStatus = null;
+
+  if (req.body.status === true || req.body.status === false) {
+    validateStatus = req.body.status;
+  } else {
+    validateStatus = null;
+  }
+
   const updatedProject = {
     id: parseInt(id, 10),
     name: name || '',
     description: description || '',
-    status: true,
+    status: validateStatus,
     owner: owner || '',
     pm: pm || '',
     client: client || '',
