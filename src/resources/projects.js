@@ -12,8 +12,6 @@ export const putById = (req, res) => {
 
   if (req.body.status === true || req.body.status === false) {
     validateStatus = req.body.status;
-  } else {
-    validateStatus = null;
   }
 
   const updatedProject = {
