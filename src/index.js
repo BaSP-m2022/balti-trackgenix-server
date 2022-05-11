@@ -1,10 +1,12 @@
-// use "import" to import libraries
 import express from 'express';
+
+import {
+  createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
+} from './resources/employees';
 import { allProjects, filterById, createProject } from './resources/projects';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
 } from './resources/time-sheets';
-import { filterByDni, getEmployees } from './resources/employees';
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './resources/tasks';
@@ -38,6 +40,9 @@ app.get('/tasks/filter', findTask);
 
 app.get('/employees', getEmployees);
 app.get('/employees/:dni', filterByDni);
+app.post('/employees', createEmployee);
+app.put('/employees', updateEmployee);
+app.delete('/employees', deleteEmployee);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
