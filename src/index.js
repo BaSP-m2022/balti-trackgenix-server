@@ -23,8 +23,8 @@ app.get('/admins', (req, res) => {
   });
 });
 
-app.put('/projects/update/:id', putById);
-app.delete('/projects/delete/:id', deleteById);
+app.put('/projects/:id', putById);
+app.delete('/projects/:id', deleteById);
 app.put('/projects/put-employee/:id', putEmployee);
 app.get('/projects/get-by-status/:status', getByStatus);
 

@@ -5,14 +5,14 @@ export const putById = (req, res) => {
   const { id } = req.params;
 
   const {
-    name, description, status, owner, pm, client, dateStart, employees,
+    name, description, owner, pm, client, dateStart, employees,
   } = req.body;
 
   const updatedProject = {
     id: parseInt(id, 10),
     name: name || '',
     description: description || '',
-    status: status || '',
+    status: true,
     owner: owner || '',
     pm: pm || '',
     client: client || '',
@@ -39,11 +39,9 @@ export const putById = (req, res) => {
 export const deleteById = (req, res) => {
   const num = parseInt(req.params.id, 10);
 
-  let index = -1;
-
   const ids = projects.map((project) => project.id);
 
-  index = ids.indexOf(num);
+  const index = ids.indexOf(num);
 
   if (index !== -1) {
     projects.splice(index, 1);
