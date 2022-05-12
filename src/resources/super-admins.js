@@ -1,13 +1,8 @@
 const fs = require('fs');
 const superAd = require('../data/super-admins.json');
 
-// const idFilter = (req) => (fSuperAd) => fSuperAd.id === parseInt(req.params.id, 10);
-
 export const getAllSuperAdmin = (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: getAllSuperAdmin,
-  });
+  res.status(200).json(superAd);
 };
 
 export const addSuperAdmin = (req, res) => {
@@ -41,27 +36,31 @@ export const findSuperAdmin = (req, res) => {
   } else {
     res.status(400).json({
       success: false,
-      msg: `No member with the id of ${req.params.id}`,
+      msg: `No super admin with the id of ${req.params.id}`,
     });
   }
 };
 
 export const delSuperAdmin = (req, res) => {
   const found = superAd.filter((superAdm) => superAdm.id !== parseInt(req.query.id, 10));
-  if (found) {
-    fs.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
-      if (err) {
-        res.status(400).json({
-          success: false,
-          msg: 'Super-admin not found',
-        });
-      }
-    });
-    res.status(200).json({
-      success: true,
-      data: found,
+  if (found.length === superAd.length) {
+    res.status(400).json({
+      success: false,
+      msg: `No super admin with the id of ${req.params.id}`,
     });
   }
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        msg: (err),
+      });
+    }
+  });
+  res.status(200).json({
+    success: true,
+    data: found,
+  });
 };
 
 export const editSuperAdmin = (req, res) => {
