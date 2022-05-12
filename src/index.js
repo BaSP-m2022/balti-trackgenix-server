@@ -1,5 +1,8 @@
 import express from 'express';
 import {
+  addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
+} from './resources/super-admins';
+import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
 } from './resources/projects';
 import {
@@ -49,6 +52,12 @@ app.get('/employees/:dni', filterByDni);
 app.post('/employees', createEmployee);
 app.put('/employees', updateEmployee);
 app.delete('/employees', deleteEmployee);
+
+app.get('/super-admins', getAllSuperAdmin);
+app.get('/super-admins/:id', findSuperAdmin);
+app.post('/super-admins', addSuperAdmin);
+app.delete('/super-admins', delSuperAdmin);
+app.put('/super-admins', editSuperAdmin);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
