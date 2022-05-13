@@ -1,5 +1,6 @@
 const fs = require('fs');
 const admin = require('../data/admins.json');
+// const Admin = require('../models/Admins');
 
 export const getAllAdmins = (req, res) => {
   res.status(200).json(admin);
