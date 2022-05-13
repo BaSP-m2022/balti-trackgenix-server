@@ -1,29 +1,44 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import {
   addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
-} from './resources/admins';
+} from './controllers/admins';
 import {
   addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
-} from './resources/super-admins';
+} from './controllers/super-admins';
 import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
-} from './resources/projects';
+} from './controllers/projects';
 import {
   createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
-} from './resources/employees';
+} from './controllers/employees';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
-} from './resources/time-sheets';
+} from './controllers/time-sheets';
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
-} from './resources/tasks';
+} from './controllers/tasks';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
 
 app.use(express.json());
+
+mongoose.connect(
+  MONGO_URL,
+  (error) => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log('Not connected: ', error);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Connected to MONGO DB');
+    }
+  },
+);
 
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
