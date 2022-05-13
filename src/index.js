@@ -29,10 +29,15 @@ app.use(express.json());
 
 mongoose.connect(
   MONGO_URL,
-  () => {
-    console.log('Connected to MONGO DB');
+  (error) => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log('Not connected: ', error);
+    } else {
+      // eslint-disable-next-line no-console
+      console.log('Connected to MONGO DB');
+    }
   },
-  (error) => console.log('Not connected: ', error),
 );
 
 app.get('/', async (req, res) => {
