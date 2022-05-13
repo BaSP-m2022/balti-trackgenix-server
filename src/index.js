@@ -27,6 +27,14 @@ app.set('json spaces', 2);
 
 app.use(express.json());
 
+mongoose.connect(
+  MONGO_URL,
+  () => {
+    console.log('Connected to MONGO DB');
+  },
+  (error) => console.log('Not connected: ', error),
+);
+
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
 });
@@ -74,11 +82,3 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
-
-mongoose.connect(
-  MONGO_URL,
-  () => {
-    console.log('Connected to MONGO DB');
-  },
-  (error) => console.log('Not connected: ', error),
-);
