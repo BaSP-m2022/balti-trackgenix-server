@@ -1,5 +1,8 @@
 import express from 'express';
 import {
+  addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
+} from './resources/admins';
+import {
   addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
 } from './resources/super-admins';
 import {
@@ -58,6 +61,12 @@ app.get('/super-admins/:id', findSuperAdmin);
 app.post('/super-admins', addSuperAdmin);
 app.delete('/super-admins', delSuperAdmin);
 app.put('/super-admins', editSuperAdmin);
+
+app.get('/admins/:id', findAdmin);
+app.get('/admins', getAllAdmins);
+app.post('/admins', addAdmin);
+app.delete('/admins', delAdmin);
+app.put('/admins', editAdmin);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
