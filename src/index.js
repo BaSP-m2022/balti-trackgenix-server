@@ -1,26 +1,25 @@
 import express from 'express';
-import {
-  addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
-} from './resources/admins';
+import mongoose from 'mongoose';
 import {
   addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
-} from './resources/super-admins';
+} from './controllers/super-admins';
 import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
-} from './resources/projects';
+} from './controllers/projects';
 import {
   createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
-} from './resources/employees';
+} from './controllers/employees';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
-} from './resources/time-sheets';
+} from './controllers/time-sheets';
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
-} from './resources/tasks';
+} from './controllers/tasks';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
 
 app.use(express.json());
@@ -62,13 +61,15 @@ app.post('/super-admins', addSuperAdmin);
 app.delete('/super-admins', delSuperAdmin);
 app.put('/super-admins', editSuperAdmin);
 
-app.get('/admins/:id', findAdmin);
-app.get('/admins', getAllAdmins);
-app.post('/admins', addAdmin);
-app.delete('/admins', delAdmin);
-app.put('/admins', editAdmin);
-
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+mongoose.connect(
+  MONGO_URL,
+  () => {
+    console.log('Connected to MONGO DB');
+  },
+  (error) => console.log('Not connected: ', error),
+);

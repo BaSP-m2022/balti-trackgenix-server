@@ -1,26 +1,6 @@
-[
-  {
-    "firstName": "agus ",
-    "lastName": "ferrarello",
-    "email": "Af@tripod.com",
-    "id": 3
-  },
-  {
-    "firstName": "Madison",
-    "lastName": "Axon",
-    "email": "maxton3@ucoz.ru",
-    "id": 4
-  },
-  {
-    "firstName": "Melanie",
-    "lastName": "Barnard",
-    "email": "mbarnard4@samsung.com",
-    "id": 5
-  },
-  {
-    "firstName": "agus ",
-    "lastName": "ferra",
-    "email": "Af@tripod.com",
-    "id": "1"
-  }
-]
+{
+    "name": "esteban",
+    "lastName": "frare",
+    "email": "esteban.frare@radiumrocket.com"
+
+}
