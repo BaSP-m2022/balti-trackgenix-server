@@ -15,12 +15,12 @@ import {
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
 } from './controllers/time-sheets';
-import {
-  getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
-} from './controllers/tasks';
 
 const app = express();
 const port = process.env.PORT || 3000;
+const api = require('./routes/index');
+
+app.use('/', api);
 
 const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
@@ -57,13 +57,6 @@ app.delete('/time-sheets', deleteTimeSheets);
 app.post('/time-sheets/add', addTimeSheet);
 app.put('/time-sheets/edit/:id', editTimeSheet);
 app.get('/time-sheets/get-all-time-sheets-by-employee/:id', getAllTimeSheetsByEmployee);
-
-app.post('/tasks', addTask);
-app.put('/tasks', editTask);
-app.delete('/tasks', deleteTask);
-app.get('/tasks', getTasks);
-app.get('/tasks/get-by-id', findTaskById);
-app.get('/tasks/filter', findTask);
 
 app.get('/employees', getEmployees);
 app.get('/employees/:dni', filterByDni);
