@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const employeeSchemma = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   firstName: {
     type: String,
     required: true,
@@ -33,4 +29,4 @@ const employeeSchemma = new Schema({
   },
 });
 
-export default mongoose.model('employee', employeeSchemma);
+export default mongoose.model('employeeSchema', employeeSchemma);
