@@ -18,12 +18,10 @@ const tasksSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  // date: {
-  //   type: Date,
-  //   required: false,
-  //   inmutable: true,
-  //   default: () => Date.now(),
-  // },
+  date: {
+    type: Boolean,
+    required: false,
+  },
   done: {
     type: Boolean,
     required: true,

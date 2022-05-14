@@ -1,25 +1,21 @@
 // import TaskSchemas from '../models/Tasks';
 const joi = require('joi');
 
-const authSchema = joi.object({
-  employeeId: joi.string(),
-  projectId: joi.string().required(),
+const authSchemaPostAndPut = joi.object({
+  id: joi.string().required(),
+  employee_id: joi.string(),
+  pm_id: joi.string().required(),
   tittle: joi.string().required(),
-  description: joi.string(),
-  // date: joi.date().required(),
+  description: joi.string().max(50),
+  date: joi.date(),
   done: joi.boolean().required(),
 });
 
-// async function validateSchema(req, res, next) {
-//   try {
-//     const {
-//       employeeId, projectId, tittle, description, done,
-//     } = req.body;
-//     const result = await authSchema.validateAsync(req.body);
-//     if(result === status(200))
-//   } catch {
+const authSchemaId = joi.object({
+  id: joi.string().required(),
+});
 
-//   }
-// }
-
-module.exports = authSchema;
+exports = {
+  authSchemaPostAndPut,
+  authSchemaId,
+};
