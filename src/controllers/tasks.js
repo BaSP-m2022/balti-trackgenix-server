@@ -1,3 +1,5 @@
+import TasksModel from '../models/Tasks';
+
 const fs = require('fs');
 const tasks = require('../data/tasks.json');
 // const { authSchema } = require('../validations/tasks');
@@ -80,25 +82,36 @@ export const findTask = (req, res) => {
   }
 };
 
-export const addTask = (req, res) => {
-  const taskData = req.body;
-  if (taskData.id && taskData.employee_id && taskData.pm_id && taskData.tittle
-    && taskData.description && taskData.date && taskData.done !== '') {
-    tasks.push(taskData);
-    fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-      if (err) {
-        res.send(err);
-      }
+export const addTask = async (req, res) => {
+  if (!req.body.id && !req.body.pmId && !req.body.tittle && !req.body.done) {
+    // return res.status(400).json({
+    //   message: 'Please include id, project ID, title and done.',
+    //   data: undefined,
+    //   error: true,
+    // });
+  }
+  const TasksNew = new TasksModel({
+    id: req.body.id,
+    employeeId: req.body.employeeId || '',
+    pmId: req.body.pmId,
+    tittle: req.body.tittle,
+    description: req.body.description || '',
+    date: req.body.date || '',
+    done: req.body.done,
+  });
+  try {
+    const saveTask = await TasksNew.save();
+    tasks.push(TasksNew);
+    return res.status(201).json({
+      message: 'Task Added',
+      data: saveTask,
+      error: false,
     });
-    res.status(200).json({
-      success: true,
-      msg: ('Task Added'),
-      data: taskData,
-    });
-  } else {
-    res.status(400).json({
-      success: false,
-      msg: ('Data missing'),
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Please include id, project ID, title and done.',
+      data: undefined,
+      error: true,
     });
   }
 };

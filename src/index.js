@@ -17,7 +17,7 @@ import {
 } from './controllers/time-sheets';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9000;
 const api = require('./routes/index');
 
 app.use('/', api);
