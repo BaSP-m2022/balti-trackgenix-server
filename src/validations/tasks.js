@@ -1,4 +1,3 @@
-// import TaskSchemas from '../models/Tasks';
 const joi = require('joi');
 
 const authSchemaPostAndPut = joi.object({
