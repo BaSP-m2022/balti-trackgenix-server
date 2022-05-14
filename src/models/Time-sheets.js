@@ -1,0 +1,38 @@
+import mongoose from 'mongoose';
+
+const timeSheetSchema = new mongoose.Schema({
+  employee: {
+    type: String,
+    required: true,
+  },
+  project: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  rate: {
+    type: Number,
+    required: true,
+  },
+  workedHours: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: false,
+  },
+  task: {
+    type: String,
+    required: false,
+  },
+});
+
+export default mongoose.model('timeSheetSchema', timeSheetSchema);
