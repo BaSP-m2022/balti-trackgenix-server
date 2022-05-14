@@ -6,8 +6,8 @@ const admin = require('../data/admins.json');
 // eslint-disable-next-line consistent-return
 export const getAllAdmins = async (req, res) => {
   try {
-    const AllAdmins = await models.find({});
-    return res.status(200).json(AllAdmins);
+    const allAdmins = await models.find({});
+    return res.status(200).json(allAdmins);
   } catch (err) {
     res.status(500).json({
       msg: 'There was an error',
