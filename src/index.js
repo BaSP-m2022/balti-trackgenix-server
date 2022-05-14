@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import router from './routes/index';
 import {
   addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
 } from './controllers/admins';
@@ -10,7 +11,7 @@ import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
 } from './controllers/projects';
 import {
-  createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
+  createEmployee, deleteEmployee, updateEmployee, filterByDni,
 } from './controllers/employees';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
@@ -40,6 +41,8 @@ mongoose.connect(
   },
 );
 
+app.use(router);
+
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
 });
@@ -65,7 +68,6 @@ app.get('/tasks', getTasks);
 app.get('/tasks/get-by-id', findTaskById);
 app.get('/tasks/filter', findTask);
 
-app.get('/employees', getEmployees);
 app.get('/employees/:dni', filterByDni);
 app.post('/employees', createEmployee);
 app.put('/employees', updateEmployee);

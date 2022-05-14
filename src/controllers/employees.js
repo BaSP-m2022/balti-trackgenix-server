@@ -1,39 +1,28 @@
 const fs = require('fs');
 const employees = require('../data/employees.json');
+const Employee = require('../models/Employees');
 
-export const createEmployee = (req, res) => {
+export const createEmployee = async (req, res) => {
   const newEmployee = {
-    dni: req.body.dni,
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
+    assignedProjects: req.body.assignedProjects,
+    isActive: req.body.isActive,
   };
 
-  if (!newEmployee.first_name
-    || !newEmployee.last_name
-    || !newEmployee.dni
-    || !newEmployee.email
-    || !newEmployee.password) {
-    return res.status(400).json({
-      success: false,
-      msg: 'Please include a name, last name, dni, email and password',
+  try {
+    const employee = new Employee(newEmployee);
+    await employee.save();
+    return res.status(201).json({
+      message: 'New Employee created',
+      data: newEmployee,
+      error: false,
     });
+  } catch (error) {
+    return res.json({ msg: error });
   }
-  employees.push(newEmployee);
-  fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-    if (err) {
-      res.status(400).json({
-        success: false,
-        msg: (err),
-      });
-    }
-  });
-  return res.status(200).json({
-    success: true,
-    msg: 'Employee created',
-    data: newEmployee,
-  });
 };
 
 export const updateEmployee = (req, res) => {
