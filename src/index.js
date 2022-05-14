@@ -1,8 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {
-  addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
-} from './controllers/admins';
+
 import {
   addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
 } from './controllers/super-admins';
@@ -21,11 +19,14 @@ import {
 
 const app = express();
 const port = process.env.PORT || 3000;
+const routes = require('./routes/index').default;
 
 const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
 
 app.use(express.json());
+
+app.use('/admins', routes);
 
 mongoose.connect(
   MONGO_URL,
@@ -76,12 +77,6 @@ app.get('/super-admins/:id', findSuperAdmin);
 app.post('/super-admins', addSuperAdmin);
 app.delete('/super-admins', delSuperAdmin);
 app.put('/super-admins', editSuperAdmin);
-
-app.get('/admins/:id', findAdmin);
-app.get('/admins', getAllAdmins);
-app.post('/admins', addAdmin);
-app.delete('/admins', delAdmin);
-app.put('/admins', editAdmin);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

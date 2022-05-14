@@ -1,9 +1,18 @@
+import models from '../models/Admins';
+
 const fs = require('fs');
 const admin = require('../data/admins.json');
-// const Admin = require('../models/Admins');
 
-export const getAllAdmins = (req, res) => {
-  res.status(200).json(admin);
+// eslint-disable-next-line consistent-return
+export const getAllAdmins = async (req, res) => {
+  try {
+    const AllAdmins = await models.find({});
+    return res.status(200).json(AllAdmins);
+  } catch (err) {
+    res.status(500).json({
+      msg: 'There was an error',
+    });
+  }
 };
 
 export const addAdmin = (req, res) => {

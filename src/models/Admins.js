@@ -1,25 +1,25 @@
-const { string, boolean } = require('joi');
+// const { 'string', boolean } = require('joi');
 const mongoose = require('mongoose');
 
 const adminSchema = new mongoose.Schema({
   firstName: {
-    type: string,
+    type: 'string',
     required: true,
   },
   lastName: {
-    type: string,
+    type: 'string',
     required: true,
   },
   email: {
-    type: string,
+    type: 'string',
     required: true,
   },
   password: {
-    type: string,
+    type: 'string',
     required: true,
   },
   isActive: {
-    type: boolean,
+    type: 'boolean',
     required: true,
   },
 });

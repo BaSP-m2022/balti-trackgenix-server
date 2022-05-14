@@ -1,14 +1,16 @@
+/* eslint-disable import/no-import-module-exports */
 import express from 'express';
-import adminControllers from '../controllers/admins';
-import adminValidations from '../validations/admins';
+
+import {
+  getAllAdmins, findAdmin, delAdmin, addAdmin, editAdmin,
+} from '../controllers/admins';
 
 const router = express.Router();
 
-router
-  .get('/', adminControllers.getAdmins)
-  .post('/', adminValidations.validateCreation, adminControllers.createProject)
-  .get('/:id', adminControllers.getAdminById)
-  .put('/:id', adminControllers.updateAdmin)
-  .delete('/:id', adminControllers.deleteAdmin);
+router.get('/', getAllAdmins);
+router.post('/', addAdmin);
+router.get('/:id', findAdmin);
+router.put('/:id', editAdmin);
+router.delete('/:id', delAdmin);
 
-export default router;
+module.exports = router;
