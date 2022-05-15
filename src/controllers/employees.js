@@ -1,6 +1,5 @@
 import Employees from '../models/Employees';
 
-const fs = require('fs');
 const employees = require('../data/employees.json');
 const Employee = require('../models/Employees');
 
@@ -62,37 +61,44 @@ export const deleteEmployee = async (req, res) => {
   }
 };
 
-export const updateEmployee = (req, res) => {
-  const employeeFound = employees.some((employee) => employee.dni === parseInt(req.query.dni, 10));
-  const updEmployee = req.body;
-  if (employeeFound) {
-    employees.forEach((employee, index) => {
-      if (employee.dni === parseInt(req.query.dni, 10)) {
-        employees[index].first_name = updEmployee.first_name;
-        employees[index].last_name = updEmployee.last_name;
-        employees[index].email = updEmployee.email;
-        employees[index].password = updEmployee.password;
-        fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-          if (err) {
-            res.status(400).json({
-              success: false,
-              msg: (err),
-            });
-          }
-        });
-      }
+export const updateEmployee = async (req, res) => {
+  const updatedEmployee = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    assignedProjects: req.body.assignedProjects,
+    isActive: req.body.isActive,
+  };
+
+  try {
+    if (!req.query.id) {
+      return res.status(400).json({
+        message: 'Missing Id',
+        data: {} || [] || undefined,
+        error: true,
+      });
+    }
+    const result = await Employees.findByIdAndUpdate(req.query.id, (updatedEmployee));
+    if (!result) {
+      return res.status(404).json({
+        message: 'Employee not found',
+        data: {} || [] || undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Employee updated',
+      data: `Employee id: ${req.query.id} updated.`,
+      error: false,
     });
-  } else {
-    res.status(400).json({
-      success: false,
-      msg: `No member with the dni of ${req.query.dni}`,
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Bad request',
+      data: {} || [] || undefined,
+      error: true,
     });
   }
-  res.status(200).json({
-    success: true,
-    msg: (`Employee dni ${updEmployee.dni} edited`),
-    data: updEmployee,
-  });
 };
 
 export const getEmployees = (req, res) => res.json(employees);
