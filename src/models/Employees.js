@@ -31,3 +31,5 @@ const employeeSchemma = new Schema({
 });
 
 export default mongoose.model('employeeSchema', employeeSchemma);
+
+module.exports = mongoose.model('Employee', employeeSchemma);
