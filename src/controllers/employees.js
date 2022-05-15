@@ -1,3 +1,5 @@
+import Employees from '../models/Employees';
+
 const fs = require('fs');
 const employees = require('../data/employees.json');
 const Employee = require('../models/Employees');
@@ -21,7 +23,42 @@ export const createEmployee = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({ msg: error });
+    return res.status(400).json({
+      message: 'Missing data. Check the fields',
+      data: {} || [] || undefined,
+      error: true,
+    });
+  }
+};
+
+export const deleteEmployee = async (req, res) => {
+  try {
+    if (!req.query.id) {
+      return res.status(400).json({
+        message: 'Missing Id',
+        data: {} || [] || undefined,
+        error: true,
+      });
+    }
+    const result = await Employees.findByIdAndDelete(req.query.id);
+    if (!result) {
+      return res.status(404).json({
+        message: 'Employee not found',
+        data: {} || [] || undefined,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Employee deleted',
+      data: `Employee id: ${req.query.id} deleted.`,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Bad request',
+      data: {} || [] || undefined,
+      error: true,
+    });
   }
 };
 
@@ -56,30 +93,6 @@ export const updateEmployee = (req, res) => {
     msg: (`Employee dni ${updEmployee.dni} edited`),
     data: updEmployee,
   });
-};
-
-export const deleteEmployee = (req, res) => {
-  const employeeDni = parseInt(req.query.dni, 10);
-  const found = employees.filter((employee) => employee.dni !== employeeDni);
-  if (employees.length === found.length) {
-    res.status(400).json({
-      success: false,
-      msg: 'Employee DNI not found',
-    });
-  } else {
-    fs.writeFile('src/data/employees.json', JSON.stringify(found), (err) => {
-      if (err) {
-        res.status(400).json({
-          success: false,
-          msg: (err),
-        });
-      }
-    });
-    res.status(200).json({
-      success: true,
-      msg: (`Employee dni: ${employeeDni} deleted.`),
-    });
-  }
 };
 
 export const getEmployees = (req, res) => res.json(employees);
