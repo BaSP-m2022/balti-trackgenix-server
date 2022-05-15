@@ -1,20 +1,5 @@
 import ModelSuperAdmin from '../models/Super-admins';
 
-const getAllSuperAdmin = async (req, res) => {
-  try {
-    const allSuperAdmin = await ModelSuperAdmin.find({});
-    return res.status(200).json({
-      success: true,
-      data: allSuperAdmin,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      success: false,
-      msg: 'There was an error',
-    });
-  }
-};
-
 const crateSuperAdmin = async (req, res) => {
   try {
     const superAdminCreate = new ModelSuperAdmin({
@@ -22,9 +7,9 @@ const crateSuperAdmin = async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      isActive: req.isActive.isActive,
+      isActive: req.body.isActive,
     });
-    const result = await superAdminCreate.modelSuperAdmin.save();
+    const result = await superAdminCreate.save();
     return res.status(201).json({
       success: true,
       data: result,
@@ -117,10 +102,25 @@ const deleteSuperAdmin = async (req, res) => {
   }
 };
 
+const getSuperAdminByFilter = async (req, res) => {
+  try {
+    const allSuperAdmin = await ModelSuperAdmin.find(req.query);
+    return res.status(200).json({
+      success: true,
+      data: allSuperAdmin,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      msg: 'There was an error',
+    });
+  }
+};
+
 export default {
-  getAllSuperAdmin,
   crateSuperAdmin,
   updateSuperAdmin,
   deleteSuperAdmin,
   findSuperAdminById,
+  getSuperAdminByFilter,
 };
