@@ -1,13 +1,15 @@
 const fs = require('fs');
 const timeSheets = require('../data/time-sheets.json');
 
+export const getAllTimeSheets = (req, res) => res.json(timeSheets);
+
 export const getTimeSheets = (req, res) => {
   const found = timeSheets.find((tSheet) => tSheet.timeSheetId === parseInt(req.params.id, 10));
 
   if (found) {
     res.status(200).json({
       success: true,
-      data: timeSheets,
+      data: found,
     });
   } else {
     res.status(400).json({
