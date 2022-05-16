@@ -1,16 +1,19 @@
-import { String, Boolean } from 'joi';
 import mongoose from 'mongoose';
 
-const tasksSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const tasksSchema = new Schema({
   employeeId: {
     type: String,
     required: false,
+    unique: true,
   },
   projectId: {
     type: String,
     required: true,
+    unique: true,
   },
-  tittle: {
+  title: {
     type: String,
     required: true,
   },
@@ -18,15 +21,14 @@ const tasksSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  date: {
-    type: Boolean,
-    required: false,
-  },
+  // date: {
+  //   type: Date,
+  //   required: false,
+  // },
   done: {
     type: Boolean,
     required: true,
   },
 });
 
-const Tasks = mongoose.model('Tasks', tasksSchema);
-exports = Tasks;
+export default mongoose.model('Tasks', tasksSchema);

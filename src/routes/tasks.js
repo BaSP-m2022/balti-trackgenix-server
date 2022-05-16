@@ -1,16 +1,13 @@
-import {
-  findTaskById, findTask, addTask, deleteTask, editTask,
-} from '../controllers/tasks';
-
-const express = require('express');
-
+import express from 'express';
+import { addTask, getTasks, findTask } from '../controllers/tasks';
+// adminds controllers
 const router = express.Router();
 
+router.get('/', getTasks);
+router.get('/:id', findTask);
 router.post('/', addTask);
-router.put('/', editTask);
-router.delete('/', deleteTask);
-// router.get('/', getTasks);
-router.get('/:id', findTaskById);
-router.get('/', findTask);
+// router.put('/', editTask);
+// router.delete('/', deleteTask);
+// router.get('/get-by-id', findTaskById);
 
-exports = router;
+export default router;
