@@ -20,7 +20,7 @@ const employeeSchema = new Schema({
     required: true,
   },
   assignedProjects: [
-    { type: Number },
+    'projectId', Number,
   ],
   isActive: {
     type: Boolean,

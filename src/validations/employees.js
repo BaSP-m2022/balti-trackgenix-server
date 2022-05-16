@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const employeesValidation = (req, res, next) => {
   const employeeDataValidation = Joi.object({
-    firstName: Joi.string().min(1).max(50).required(),
-    lastName: Joi.string().min(1).max(50).required(),
+    firstName: Joi.string().min(3).max(10).required(),
+    lastName: Joi.string().min(3).max(10).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(1).max(50).required(),
     assignedProjects: Joi.array().items(Joi.number()).optional(),

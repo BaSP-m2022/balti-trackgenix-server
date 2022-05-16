@@ -98,10 +98,16 @@ export const deleteEmployee = (req, res) => {
 export const getAllEmployees = async (req, res) => {
   try {
     const allEmployees = await Employee.find({});
-    return res.status(200).json(allEmployees);
+    return res.status(200).json({
+      message: 'All Employees collected',
+      data: allEmployees,
+      error: false,
+    });
   } catch (error) {
     return res.status(400).json({
-      msg: 'There was an error',
+      message: 'There was an error',
+      data: {} || [] || undefined,
+      error: true,
     });
   }
 };
@@ -125,14 +131,22 @@ export const getEmployeesById = async (req, res) => {
   try {
     if (req.params.id) {
       const employee = await Employee.findById(req.params.id);
-      return res.status(200).json(employee);
+      return res.status(200).json({
+        message: 'Employee with the ID required collected',
+        data: employee,
+        error: false,
+      });
     }
     return res.status(400).json({
-      msg: 'missing ID parameter',
+      message: 'missing ID parameter',
+      data: {} || [] || undefined,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      message: error,
+      data: {} || [] || undefined,
+      error: true,
     });
   }
 };
