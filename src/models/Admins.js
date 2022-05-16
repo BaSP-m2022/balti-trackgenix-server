@@ -1,27 +1,30 @@
-// const { 'string', boolean } = require('joi');
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const adminSchema = new mongoose.Schema({
-  firstName: {
-    type: 'string',
-    required: true,
-  },
-  lastName: {
-    type: 'string',
-    required: true,
-  },
-  email: {
-    type: 'string',
-    required: true,
-  },
-  password: {
-    type: 'string',
-    required: true,
-  },
-  isActive: {
-    type: 'boolean',
-    required: true,
-  },
-});
+const { Schema } = mongoose;
 
-module.exports = mongoose.model('Admin', adminSchema);
+const adminSchema = new Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    isActive: {
+      type: Boolean,
+      required: true,
+    },
+  },
+);
+
+export default mongoose.model('Admin', adminSchema);
