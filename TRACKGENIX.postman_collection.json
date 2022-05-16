@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17ecbb10-d0cc-4406-b9cc-ff607820218b",
+		"_postman_id": "fe776bf5-8a2e-4117-86a9-b43103dbf2bf",
 		"name": "TRACKGENIX",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -28,45 +28,13 @@
 					"response": []
 				},
 				{
-					"name": "filter by id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"baltazar\",\r\n    \"lastName\": \"cortina\",\r\n    \"email\": \"esasdteban.frare@radiumrocket.com\",\r\n    \"id\": 50\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/admins/10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"admins",
-								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "add admin",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"baltazar\",\r\n    \"lastName\": \"cortina\",\r\n    \"email\": \"esasdteban.frare@radiumrocket.com\",\r\n    \"id\": 50\r\n}",
+							"raw": "    {\r\n        \"firstName\": \"mortal\",\r\n        \"lastName\": \"backflip\",\r\n        \"email\": \"notuvo@yanoser.com\",\r\n        \"password\": \"1211115678\",\r\n        \"isActive\": true\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -88,6 +56,66 @@
 					"response": []
 				},
 				{
+					"name": "update admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"firstName\": \"bactericio\",\r\n        \"lastName\": \"purulento\",\r\n        \"email\": \"notengo@yanosequeponer.com\",\r\n        \"password\": \"3547845678\",\r\n        \"isActive\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/admins/6282d21b087676d2eedadc41",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282d21b087676d2eedadc41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/admins/6282a9d6c717ee25a10cf6e3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admins",
+								"6282a9d6c717ee25a10cf6e3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "delete admin",
 					"request": {
 						"method": "DELETE",
@@ -102,20 +130,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/admins?id=10",
+							"raw": "http://localhost:3000/admins/6282d21b087676d2eedadc41",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"admins"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "10"
-								}
+								"admins",
+								"6282d21b087676d2eedadc41"
 							]
 						}
 					},
