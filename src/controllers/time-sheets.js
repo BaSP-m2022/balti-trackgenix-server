@@ -1,121 +1,140 @@
-const fs = require('fs');
-const timeSheets = require('../data/time-sheets.json');
+import TimeSheetModel from '../models/Time-sheets';
 
-export const getAllTimeSheets = (req, res) => res.json(timeSheets);
-
-export const getTimeSheets = (req, res) => {
-  const found = timeSheets.find((tSheet) => tSheet.timeSheetId === parseInt(req.params.id, 10));
-
-  if (found) {
-    res.status(200).json({
+export const getAllTimeSheets = async (req, res) => {
+  try {
+    const allTimeSheets = await TimeSheetModel.find({});
+    return res.status(200).json({
       success: true,
-      data: found,
+      data: allTimeSheets,
     });
-  } else {
-    res.status(400).json({
+  } catch (error) {
+    return res.status(500).json({
       success: false,
-      msg: ('Time Sheet ID not found'),
+      msg: error,
     });
   }
 };
 
-export const deleteTimeSheets = (req, res) => {
-  const found = timeSheets.filter((tSheet) => tSheet.timeSheetId !== parseInt(req.query.id, 10));
-
-  if (found) {
-    fs.writeFile('src/data/time-sheets.json', JSON.stringify(found), (err) => {
-      if (err) {
-        res.status(400).json({
-          success: false,
-          msg: ('Time Sheet not found'),
-        });
-      }
+export const getTimeSheet = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const timeSheet = await TimeSheetModel.filter(req.params.id);
+      return res.status(200).json({
+        success: true,
+        data: timeSheet,
+      });
+    }
+    return res.status(400).json({
+      success: false,
+      msg: 'Missing id parameter',
     });
-    res.status(200).json({
+  } catch (error) {
+    return res.json({
+      success: false,
+      msg: error,
+    });
+  }
+};
+
+export const deleteTimeSheets = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        success: false,
+        msg: 'Missing id parameter',
+      });
+    }
+    const result = await TimeSheetModel.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        msg: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json({
       success: true,
-      data: timeSheets,
+      msg: 'Timesheet successfully deleted',
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      msg: error,
     });
   }
 };
 
-export const addTimeSheet = (req, res) => {
-  const newTimeSheet = req.body;
-  timeSheets.push(newTimeSheet);
-  fs.writeFile(
-    'src/data/time-sheets.json',
-    JSON.stringify(timeSheets),
-    (err) => {
-      if (err) {
-        res.json({
-          success: false,
-          msg: err,
-        });
-      } else {
-        res.json({
-          success: true,
-          msg: 'Time Sheet Created',
-          data: newTimeSheet,
-        });
-      }
-    },
-  );
+export const addTimeSheet = async (req, res) => {
+  const newTimeSheet = new TimeSheetModel({
+    employee: req.body.employee,
+    project: req.body.project,
+    role: req.body.role,
+    rate: req.body.rate,
+    workedHours: req.body.workedHours,
+    description: req.body.description,
+    task: req.body.task,
+  });
+  try {
+    const savedTimeSheet = await newTimeSheet.save();
+    return res.status(201).json({
+      success: true,
+      data: savedTimeSheet,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      msg: err,
+    });
+  }
 };
 
-export const editTimeSheet = (req, res) => {
-  const tsIdx = timeSheets.findIndex((usrTs) => usrTs.timeSheetId === parseInt(req.params.id, 10));
-  const updTs = req.body;
-
-  if (tsIdx !== -1) {
-    timeSheets[tsIdx].employeeId = (
-      updTs.employeeId ? updTs.employeeId : timeSheets[tsIdx].employeeId);
-    timeSheets[tsIdx].assignedProject = (
-      updTs.assignedProject ? updTs.assignedProject : timeSheets[tsIdx.assignedProject]);
-    timeSheets[tsIdx].role = updTs.role ? updTs.role : timeSheets[tsIdx].role;
-    timeSheets[tsIdx].date = updTs.date ? updTs.date : timeSheets[tsIdx].date;
-    timeSheets[tsIdx].rate = updTs.rate ? updTs.rate : timeSheets[tsIdx].rate;
-    timeSheets[tsIdx].workedHours = (
-      updTs.workedHours ? updTs.workedHours : timeSheets[tsIdx].workedHours);
-    timeSheets[tsIdx].description = (
-      updTs.description ? updTs.description : timeSheets[tsIdx].description);
-    timeSheets[tsIdx].taskId = (
-      updTs.taskId ? updTs.taskId : timeSheets[tsIdx].taskId);
-
-    fs.writeFile(
-      'src/data/time-sheets.json',
-      JSON.stringify(timeSheets),
-      (err) => {
-        if (err) {
-          res.json({
-            success: false,
-            msg: err,
-          });
-        } else {
-          res.json({
-            success: true,
-            msg: 'Time Sheet Edited',
-            data: timeSheets[tsIdx],
-          });
-        }
-      },
+export const editTimeSheet = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        success: false,
+        msg: 'Missing id parameter',
+      });
+    }
+    const result = await TimeSheetModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
     );
-  } else {
-    res.status(400).json({ success: false, msg: 'TimeSheet not found' });
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        msg: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      msg: 'There was an error',
+    });
   }
 };
 
-export const getAllTimeSheetsByEmployee = (req, res) => {
-  const filterByEmployee = timeSheets.filter((ts) => ts.employeeId === parseInt(req.params.id, 10));
-
-  if (filterByEmployee.length > 0) {
-    res.json({
-      success: true,
-      msg: 'These are the time sheets found',
-      data: filterByEmployee,
-    });
-  } else {
-    res.status(400).json({
+export const getAllTimeSheetsByEmployee = async (req, res) => {
+  try {
+    if (req.params.employee) {
+      const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
+      return res.status(200).json({
+        success: true,
+        data: filterByEmployee,
+      });
+    }
+    return res.status(400).json({
       success: false,
-      msg: 'Time sheets not found for this ID',
+      msg: 'Missing id parameter',
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      msg: error,
     });
   }
 };

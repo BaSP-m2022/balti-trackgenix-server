@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 
-const timeSheetSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const timeSheetSchema = new Schema({
   employee: {
-    type: String, // employeeId mongoose.SchemaTypes.ObjectId
+    type: String,
     required: true,
   },
   project: {
-    type: String, // projectId
+    type: String,
     required: true,
   },
   role: {
@@ -32,10 +34,9 @@ const timeSheetSchema = new mongoose.Schema({
     required: false,
   },
   task: {
-    type: String, // taskId
+    type: String,
     required: false,
   },
 });
 
-export default mongoose.model('timeSheetSchema', timeSheetSchema);
-// const timeSheetSchema = require('./timeSheetSchema')
+export default mongoose.model('Timesheet', timeSheetSchema);
