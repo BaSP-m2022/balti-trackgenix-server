@@ -1,4 +1,4 @@
-const Admin = require('../models/Admins');
+import Admin from '../models/Admins';
 
 export const getAllAdmins = async (req, res) => {
   try {
@@ -14,21 +14,22 @@ export const getAllAdmins = async (req, res) => {
 
 export const addAdmin = async (req, res) => {
   try {
-    const newAdmin = await Admin.create({
+    const newAdmin = new Admin({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
       isActive: req.body.isActive,
     });
+    const adminSaved = await newAdmin.save();
     return res.status(201).json({
       msg: 'Admin created successfully',
-      data: newAdmin,
+      data: adminSaved,
       success: true,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: 'An error ocurred while creating a new admin',
+      msg: error,
       success: false,
     });
   }
