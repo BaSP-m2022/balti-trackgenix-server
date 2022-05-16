@@ -192,7 +192,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "  {\r\n      \"firstName\": \"Max\",\r\n      \"lastName\": \"Weber\",\r\n      \"email\": \"Max@gmail.com\",\r\n      \"password\": \"Max123456\",\r\n      \"assignedProjects\": [\r\n        {\r\n          \"projectId\": 17\r\n        }\r\n      ],\r\n      \"isActive\": true\r\n  }",
+              "raw": "  {\r\n      \"firstName\": \"asdasdassd\",\r\n      \"lastName\": \"Cellamare\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
               "options": {
                 "raw": {
                   "language": "json"
