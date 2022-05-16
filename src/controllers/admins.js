@@ -1,6 +1,6 @@
 import Admin from '../models/Admins';
 
-export const getAllAdmins = async (req, res) => {
+const getAllAdmins = async (req, res) => {
   try {
     const allAdmins = await Admin.find({});
     return res.status(200).json(allAdmins);
@@ -12,7 +12,7 @@ export const getAllAdmins = async (req, res) => {
   }
 };
 
-export const addAdmin = async (req, res) => {
+const addAdmin = async (req, res) => {
   try {
     const newAdmin = new Admin({
       firstName: req.body.firstName,
@@ -29,103 +29,67 @@ export const addAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(400).json({
-      msg: error,
+      msg: 'Admin creation failed. Please review and correct the data',
       success: false,
     });
   }
 };
 
-export const updateAdmin = async (req, res) => {
+const updateAdmin = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(400).json({
-        msg: 'No id input',
-        success: false,
-      });
-    }
     const result = await Admin.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
     );
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The Super Admin has not been found',
-        success: false,
-      });
-    }
     return res.status(200).json({
+      msg: `Admin ${req.params.id} successfully updated`,
       data: result,
       success: true,
     });
   } catch (err) {
     return res.status(400).json({
-      msg: 'An error ocurred while finding Admin',
+      msg: `No admin with the id of ${req.params.id}`,
       success: false,
     });
   }
 };
 
-export const findAdminById = async (req, res) => {
+const findAdminById = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(404).json({
-        msg: 'No id input',
-        success: false,
-      });
-    }
-    const { id } = req.params;
-    const result = await Admin.findById(id);
+    const result = await Admin.findById(req.params.id);
     return res.status(200).json({
       data: result,
       success: true,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: 'Error finding the admin',
+      msg: `No admin with the id of ${req.params.id}`,
       success: false,
     });
   }
 };
 
-export const delAdmin = async (req, res) => {
+const delAdmin = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'No id input',
-        success: false,
-      });
-    }
     const result = await Admin.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'Admin has not founded',
-        success: false,
-      });
-    }
     return res.status(200).json({
+      msg: `Admin ${req.params.id} deleted successfully`,
       data: result,
       success: true,
     });
   } catch (err) {
     return res.status(400).json({
-      msg: 'An error ocurred while deleting the admin specified',
+      msg: `No admin with the id of ${req.params.id}`,
       success: false,
     });
   }
 };
 
-export const getAdmin = async (req, res) => {
-  try {
-    const admins = await Admin.find(req.query);
-    return res.status(200).json({
-      data: admins,
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'An error ocurred',
-      success: false,
-    });
-  }
+export default {
+  getAllAdmins,
+  delAdmin,
+  addAdmin,
+  findAdminById,
+  updateAdmin,
 };

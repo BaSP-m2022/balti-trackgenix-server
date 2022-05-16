@@ -5,8 +5,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const routes = require('./routes/index');
 
-app.use('/', routes.default);
-
 const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
 
@@ -24,6 +22,8 @@ mongoose.connect(
     }
   },
 );
+
+app.use('/', routes.default);
 
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
