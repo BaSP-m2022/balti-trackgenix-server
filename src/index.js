@@ -12,7 +12,7 @@ import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
 } from './controllers/projects';
 import {
-  createEmployee, deleteEmployee, updateEmployee, filterByDni, getAllEmployees, getEmployeesById,
+  getAllEmployees, getEmployeesById,
 } from './controllers/employees';
 import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
@@ -71,10 +71,10 @@ app.get('/tasks/filter', findTask);
 
 app.get('/employees', getAllEmployees);
 app.get('/employees', getEmployeesById);
-app.get('/employees/:dni', filterByDni);
-app.post('/employees', createEmployee);
-app.put('/employees', updateEmployee);
-app.delete('/employees', deleteEmployee);
+// app.get('/employees/:dni', filterByDni);
+// app.post('/employees', createEmployee);
+// app.put('/employees', updateEmployee);
+// app.delete('/employees', deleteEmployee);
 
 app.get('/super-admins', getAllSuperAdmin);
 app.get('/super-admins/:id', findSuperAdmin);

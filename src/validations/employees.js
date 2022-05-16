@@ -5,7 +5,7 @@ const employeesValidation = (req, res, next) => {
     firstName: Joi.string().min(3).max(10).required(),
     lastName: Joi.string().min(3).max(10).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(1).max(50).required(),
+    password: Joi.string().min(8).required(),
     assignedProjects: Joi.array().items(Joi.number()).optional(),
     isActive: Joi.boolean().required(),
   });
@@ -15,7 +15,8 @@ const employeesValidation = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       msg: 'There was an error during the validation of the request',
-      error: validation.error.details[0].message,
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
