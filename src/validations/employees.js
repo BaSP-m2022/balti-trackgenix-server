@@ -21,15 +21,12 @@ export const validateCreation = (req, res, next) => {
 };
 
 export const validatUpdate = (req, res, next) => {
-  const projectsArray = Joi.object({
-    projectId: Joi.number(),
-  });
   const employeUpdate = Joi.object({
     firstName: Joi.string().min(3).max(10).required(),
     lastName: Joi.string().min(3).max(10).required(),
-    email: Joi.email().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
-    assignedProjects: Joi.array().items(projectsArray),
+    assignedProjects: Joi.array().items(Joi.number()),
     isActive: Joi.boolean().required(),
   });
   const validation = employeUpdate.validate(req.body);

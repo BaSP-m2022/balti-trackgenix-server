@@ -21,7 +21,7 @@ export const createEmployee = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: 'Missing data. Check the fields',
-      data: {} || [] || undefined,
+      data: error,
       error: true,
     });
   }
@@ -92,7 +92,7 @@ export const updateEmployee = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: 'Bad request',
-      data: {} || [] || undefined,
+      data: error,
       error: true,
     });
   }
