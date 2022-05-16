@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const employeeSchemma = new Schema({
+const employeeSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -20,9 +20,7 @@ const employeeSchemma = new Schema({
     required: true,
   },
   assignedProjects: [
-    {
-      projectId: { type: Number },
-    },
+    { type: Number },
   ],
   isActive: {
     type: Boolean,
@@ -30,6 +28,4 @@ const employeeSchemma = new Schema({
   },
 });
 
-export default mongoose.model('employeeSchema', employeeSchemma);
-
-module.exports = mongoose.model('Employee', employeeSchemma);
+export default mongoose.model('Employee', employeeSchema);

@@ -1,3 +1,5 @@
+import Employee from '../models/Employees';
+
 const fs = require('fs');
 const employees = require('../data/employees.json');
 
@@ -93,7 +95,16 @@ export const deleteEmployee = (req, res) => {
   }
 };
 
-export const getEmployees = (req, res) => res.json(employees);
+export const getAllEmployees = async (req, res) => {
+  try {
+    const allEmployees = await Employee.find({});
+    return res.status(200).json(allEmployees);
+  } catch (error) {
+    return res.status(400).json({
+      msg: 'There was an error',
+    });
+  }
+};
 
 export const filterByDni = (req, res) => {
   const found = employees.find((employee) => employee.dni === parseInt(req.params.dni, 10));
@@ -105,7 +116,23 @@ export const filterByDni = (req, res) => {
   } else {
     res.status(400).json({
       success: false,
-      msg: (`There are no employee by dni ${req.params.dni}`),
+      msg: (`There are no employees by dni ${req.params.dni}`),
+    });
+  }
+};
+
+export const getEmployeesById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const employee = await Employee.findById(req.params.id);
+      return res.status(200).json(employee);
+    }
+    return res.status(400).json({
+      msg: 'missing ID parameter',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
     });
   }
 };
