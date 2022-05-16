@@ -11,9 +11,6 @@ import {
   putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
 } from './controllers/projects';
 import {
-  createEmployee, deleteEmployee, updateEmployee, filterByDni,
-} from './controllers/employees';
-import {
   deleteTimeSheets, getTimeSheets, addTimeSheet, editTimeSheet, getAllTimeSheetsByEmployee,
 } from './controllers/time-sheets';
 import {
@@ -67,11 +64,6 @@ app.delete('/tasks', deleteTask);
 app.get('/tasks', getTasks);
 app.get('/tasks/get-by-id', findTaskById);
 app.get('/tasks/filter', findTask);
-
-app.get('/employees/:dni', filterByDni);
-app.post('/employees', createEmployee);
-app.put('/employees', updateEmployee);
-app.delete('/employees', deleteEmployee);
 
 app.get('/super-admins', getAllSuperAdmin);
 app.get('/super-admins/:id', findSuperAdmin);

@@ -1,8 +1,5 @@
 import Employees from '../models/Employees';
 
-const employees = require('../data/employees.json');
-const Employee = require('../models/Employees');
-
 export const createEmployee = async (req, res) => {
   const newEmployee = {
     firstName: req.body.firstName,
@@ -14,7 +11,7 @@ export const createEmployee = async (req, res) => {
   };
 
   try {
-    const employee = new Employee(newEmployee);
+    const employee = new Employees(newEmployee);
     await employee.save();
     return res.status(201).json({
       message: 'New Employee created',
@@ -97,23 +94,6 @@ export const updateEmployee = async (req, res) => {
       message: 'Bad request',
       data: {} || [] || undefined,
       error: true,
-    });
-  }
-};
-
-export const getEmployees = (req, res) => res.json(employees);
-
-export const filterByDni = (req, res) => {
-  const found = employees.find((employee) => employee.dni === parseInt(req.params.dni, 10));
-  if (found) {
-    res.status(200).json({
-      success: true,
-      data: found,
-    });
-  } else {
-    res.status(400).json({
-      success: false,
-      msg: (`There are no employee by dni ${req.params.dni}`),
     });
   }
 };

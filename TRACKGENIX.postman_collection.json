@@ -129,7 +129,99 @@
 		},
 		{
 			"name": "Employees",
-			"item": []
+      "item": [
+        {
+          "name": "create-employee",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n      \"firstName\": \"asdasdassd\",\r\n      \"lastName\": \"Cellamare\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/employees/create",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "employees",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-employee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/employees/delete?id=62801f52d6e5ae3614c2deb1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "employees",
+                "delete"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "62801f52d6e5ae3614c2deb1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-employee",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n      \"firstName\": \"Max\",\r\n      \"lastName\": \"Weber\",\r\n      \"email\": \"Max@gmail.com\",\r\n      \"password\": \"Max123456\",\r\n      \"assignedProjects\": [\r\n        {\r\n          \"projectId\": 17\r\n        }\r\n      ],\r\n      \"isActive\": true\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/employees/update/?id=62803b947f1178909ffe559b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "employees",
+                "update",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "62803b947f1178909ffe559b"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
 		},
 		{
 			"name": "Time-sheets",
