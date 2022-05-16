@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17ecbb10-d0cc-4406-b9cc-ff607820218b",
+		"_postman_id": "72e79608-2afa-4466-982d-9c0fdefe1310",
 		"name": "TRACKGENIX",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -133,7 +133,201 @@
 		},
 		{
 			"name": "Time-sheets",
-			"item": []
+			"item": [
+				{
+					"name": "A single Time sheet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/118",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"118"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Time sheets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "118",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Time sheets by employee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/get-all-time-sheets-by-employee/Fefe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"get-all-time-sheets-by-employee",
+								"Fefe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Time sheet by id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6281c1fc29cc2b63bf50256b\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/6281c1fc29cc2b63bf50256b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"6281c1fc29cc2b63bf50256b"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6281c1fc29cc2b63bf50256b",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Timesheet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee\": \"Empleado1\",\r\n    \"project\": \"Proyecto1\",\r\n    \"role\": \"dev\",\r\n    \"rate\": 60,\r\n    \"workedHours\": 24,\r\n    \"description\": \"descripcion1\",\r\n    \"task\": \"tarea1\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Time sheet",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee\": \"employee actualizado\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/time-sheets/edit/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"time-sheets",
+								"edit",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Task",

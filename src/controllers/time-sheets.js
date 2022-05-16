@@ -4,13 +4,15 @@ export const getAllTimeSheets = async (req, res) => {
   try {
     const allTimeSheets = await TimeSheetModel.find({});
     return res.status(200).json({
-      success: true,
+      message: 'All timesheets',
       data: allTimeSheets,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      success: false,
-      msg: error,
+      message: error,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -18,20 +20,23 @@ export const getAllTimeSheets = async (req, res) => {
 export const getTimeSheet = async (req, res) => {
   try {
     if (req.params.id) {
-      const timeSheet = await TimeSheetModel.filter(req.params.id);
+      const timeSheet = await TimeSheetModel.findById(req.params.id);
       return res.status(200).json({
-        success: true,
+        message: `Timesheet with the id ${req.params.id}`,
         data: timeSheet,
+        error: false,
       });
     }
     return res.status(400).json({
-      success: false,
-      msg: 'Missing id parameter',
+      message: 'Missing id parameter',
+      data: undefined,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      success: false,
-      msg: error,
+      message: 'Id does not exist',
+      data: error,
+      error: true,
     });
   }
 };
@@ -40,25 +45,29 @@ export const deleteTimeSheets = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        success: false,
-        msg: 'Missing id parameter',
+        message: 'Missing id parameter',
+        data: undefined,
+        error: true,
       });
     }
     const result = await TimeSheetModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        success: false,
-        msg: 'The timesheet has not been found',
+        message: 'The timesheet has not been found',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
-      success: true,
       msg: 'Timesheet successfully deleted',
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.json({
-      success: false,
-      msg: error,
+      message: `There is no timesheet with the id : ${req.params.id}`,
+      data: error,
+      error: true,
     });
   }
 };
@@ -76,13 +85,15 @@ export const addTimeSheet = async (req, res) => {
   try {
     const savedTimeSheet = await newTimeSheet.save();
     return res.status(201).json({
-      success: true,
+      message: 'Timesheet successfully created',
       data: savedTimeSheet,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
-      success: false,
-      msg: err,
+      message: err,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -91,8 +102,9 @@ export const editTimeSheet = async (req, res) => {
   try {
     if (!req.params) {
       return res.status(400).json({
-        success: false,
-        msg: 'Missing id parameter',
+        message: 'Missing id parameter',
+        data: undefined,
+        error: true,
       });
     }
     const result = await TimeSheetModel.findByIdAndUpdate(
@@ -102,18 +114,21 @@ export const editTimeSheet = async (req, res) => {
     );
     if (!result) {
       return res.status(404).json({
-        success: false,
-        msg: 'The timesheet has not been found',
+        message: 'The timesheet has not been found',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json({
-      success: true,
+      message: 'Timesheet edited',
       data: result,
+      error: false,
     });
   } catch (error) {
     return res.json({
-      success: false,
-      msg: 'There was an error',
+      message: 'There was an error',
+      data: error,
+      error: true,
     });
   }
 };
@@ -123,18 +138,21 @@ export const getAllTimeSheetsByEmployee = async (req, res) => {
     if (req.params.employee) {
       const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
       return res.status(200).json({
-        success: true,
+        message: `Timesheets with the employee ${req.params.employee}`,
         data: filterByEmployee,
+        error: false,
       });
     }
     return res.status(400).json({
-      success: false,
-      msg: 'Missing id parameter',
+      message: 'Missing id parameter',
+      data: undefined,
+      error: true,
     });
   } catch (error) {
     return res.json({
-      success: false,
-      msg: error,
+      message: 'There was an error',
+      data: error,
+      error: true,
     });
   }
 };
