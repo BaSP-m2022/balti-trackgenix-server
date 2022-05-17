@@ -7,7 +7,7 @@ export const getTasks = async (req, res) => {
       tasks = await TasksModel.find(req.query);
       if (tasks === 0) {
         return res.status(404).json({
-          message: 'Task filtered by non-existent query.',
+          message: 'Error. Nonexistent query.',
           data: undefined,
           error: true,
         });
