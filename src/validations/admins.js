@@ -11,8 +11,9 @@ const createAdminValidation = (req, res, next) => {
   const valid = newAdmin.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'Please check again the entered fields',
-      success: false,
+      msg: 'You must complete all fields to create an admin. Make sure each input has the right data.',
+      data: undefined,
+      error: true,
     });
   }
   return next();
@@ -29,8 +30,9 @@ const updateAdminValidation = (req, res, next) => {
   const valid = updateAdmin.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'Please check again the entered fields',
-      success: false,
+      msg: 'Make sure each input has the right data',
+      data: undefined,
+      error: true,
     });
   }
   return next();

@@ -3,15 +3,22 @@ import Admin from '../models/Admins';
 const getAllAdmins = async (req, res) => {
   try {
     const allAdmins = await Admin.find({});
-    return res.status(200).json({
-      msg: 'This is the complete list of admins',
-      data: allAdmins,
-      success: true,
+    if (allAdmins) {
+      return res.status(200).json({
+        msg: 'This is the complete list of admins',
+        data: allAdmins,
+        error: false,
+      });
+    } return res.status(404).json({
+      msg: 'No list of admins found',
+      data: undefined,
+      error: true,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'An error ocurred',
-      success: false,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -26,15 +33,22 @@ const addAdmin = async (req, res) => {
       isActive: req.body.isActive,
     });
     const adminSaved = await newAdmin.save();
-    return res.status(201).json({
-      msg: 'Admin created successfully',
-      data: adminSaved,
-      success: true,
+    if (adminSaved) {
+      return res.status(201).json({
+        msg: 'Admin created successfully',
+        data: adminSaved,
+        error: false,
+      });
+    } return res.status(400).json({
+      msg: 'Admin creation failed. Please review and correct the data',
+      data: undefined,
+      error: true,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: 'Admin creation failed. Please review and correct the data',
-      success: false,
+      msg: 'There was an error',
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -50,17 +64,18 @@ const updateAdmin = async (req, res) => {
       return res.status(200).json({
         msg: `Admin ${req.params.id} successfully updated`,
         data: result,
-        success: true,
+        error: false,
       });
     } return res.status(404).json({
       msg: `No admin with the id of ${req.params.id}`,
       data: undefined,
-      success: false,
+      error: true,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      success: false,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -72,17 +87,18 @@ const findAdminById = async (req, res) => {
       return res.status(200).json({
         msg: `Admin ${req.params.id} found`,
         data: result,
-        success: true,
+        error: false,
       });
     } return res.status(404).json({
       msg: `No admin with the id of ${req.params.id}`,
       data: undefined,
-      success: false,
+      error: true,
     });
   } catch (error) {
     return res.status(400).json({
       msg: 'There was an error',
-      success: false,
+      data: undefined,
+      error: true,
     });
   }
 };
@@ -94,17 +110,18 @@ const delAdmin = async (req, res) => {
       return res.status(200).json({
         msg: `Admin ${req.params.id} deleted successfully`,
         data: result,
-        success: true,
+        error: false,
       });
     } return res.status(404).json({
       msg: `Admin ${req.params.id} not found`,
       data: undefined,
-      success: false,
+      error: true,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      success: false,
+      data: undefined,
+      error: true,
     });
   }
 };
