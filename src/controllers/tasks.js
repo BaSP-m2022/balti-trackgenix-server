@@ -1,6 +1,5 @@
-const TasksModel = require('../models/Tasks');
+import TasksModel from '../models/Tasks';
 
-// const tasks = require('../data/tasks.json');
 export const getTasks = async (req, res) => {
   try {
     const tasks = await TasksModel.find({});
@@ -19,73 +18,24 @@ export const getTasks = async (req, res) => {
 };
 
 export const findTask = async (req, res) => {
-  const { id } = req.params;
+  // const { id } = req.params;
   try {
-    const task = await TasksModel.findById(id);
+    const taskById = await TasksModel.findById(req.params.id);
+    // return res.status(200).json({});
     return res.status(200).json({
-      message: (`Request Successful. Task with Id: ${id}founded.`),
-      data: task,
+      message: (`Request Successful. Task with Id: ${req.params.id} found.`),
+      data: taskById,
       error: false,
     });
   } catch (err) {
-    return res.status(400).json({
-      message: (`Id: ${id} doesn't exist.`),
+    return res.status(404).json({
+      // message: (`Id: ${id} doesn't exist.`),
+      message: ('Id: doesnt exist.'),
       data: undefined,
       error: true,
     });
   }
 };
-
-// export const findTask = (req, res) => {
-//   const employeeId = parseInt(req.query.employee_id, 10);
-//   const projectId = parseInt(req.query.project_id, 10);
-//   const tittleSearch = req.query.tittle;
-//   const descriptionSearch = req.query.description;
-//   const dateSearch = req.query.date;
-//   const doneSearch = req.query.done;
-//   let doneBoolean = false;
-//   if (doneSearch) {
-//     doneBoolean = false;
-//     if (doneSearch === 'true') {
-//       doneBoolean = true;
-//     } else {
-//       doneBoolean = false;
-//     }
-//   }
-
-//   let filtered = tasks;
-
-//   if (employeeId) {
-//     filtered = filtered.filter((element) => element.employee_id === employeeId);
-//   }
-//   if (projectId) {
-//     filtered = filtered.filter((element) => element.project_id === projectId);
-//   }
-//   if (tittleSearch) {
-//     filtered = filtered.filter((element) => element.tittle.includes(tittleSearch));
-//   }
-//   if (descriptionSearch) {
-//     filtered = filtered.filter((element) => element.description.includes(descriptionSearch));
-//   }
-//   if (dateSearch) {
-//     filtered = filtered.filter((element) => element.date === dateSearch);
-//   }
-//   if (doneSearch) {
-//     filtered = filtered.filter((element) => element.done === doneBoolean);
-//   }
-
-//   if (filtered.length > 0) {
-//     res.status(200).json({
-//       success: true,
-//       data: filtered,
-//     });
-//   } else {
-//     res.status(400).json({
-//       success: false,
-//       msg: ('Pameters dot not match'),
-//     });
-//   }
-// };
 
 export const addTask = async (req, res) => {
   try {
@@ -97,8 +47,8 @@ export const addTask = async (req, res) => {
       // date: req.body.date,
       done: req.body.done,
     });
-    // lo paso a minuscula asi no hay id repetidos, usando unique
-    taskNew.toLowerCase();
+    // lo paso a minuscula asi no hay id repetidos, usando unique ?
+    // taskNew.toLowerCase();
     const saveTask = await taskNew.save();
     return res.status(201).json({
       message: 'Task Added',
@@ -114,56 +64,38 @@ export const addTask = async (req, res) => {
   }
 };
 
-// export const deleteTask = (req, res) => {
-//   const taskId = parseInt(req.query.id, 10);
-//   const found = tasks.filter((element) => element.id !== taskId);
-//   if (tasks.length === found.length) {
-//     res.send('Task ID not found');
-//   } else {
-//     fs.writeFile('src/data/tasks.json', JSON.stringify(found), (err) => {
-//       if (err) {
-//         res.status(400).json({
-//           success: false,
-//           msg: ('Task not found.'),
-//         });
-//       }
-//     });
-//     res.status(200).json({
-//       success: true,
-//       msg: (`Task id: ${taskId} deleted.`),
-//     });
-//   }
-// };
+export const editTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const modifiedTask = await TasksModel.findByIdAndUpdate(id, req.body, { new: true });
+    return res.status(200).json({
+      message: 'Task Modified',
+      data: modifiedTask,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: 'Error Id dont exist',
+      data: undefined,
+      error: true,
+    });
+  }
+};
 
-// export const editTask = (req, res) => {
-//   const taskId = parseInt(req.query.id, 10);
-//   const taskData = req.body;
-//   const found = tasks.some((task) => task.id === taskId);
-//   if (found) {
-//     tasks.forEach((task, index) => {
-//       if (task.id === taskId) {
-//         tasks[index].employee_id = taskData.employee_id;
-//         tasks[index].pm_id = taskData.pm_id;
-//         tasks[index].tittle = taskData.tittle;
-//         tasks[index].description = taskData.description;
-//         tasks[index].date = taskData.date;
-//         tasks[index].done = taskData.done;
-//         fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-//           if (err) {
-//             res.send(err);
-//           }
-//         });
-//       }
-//     });
-//   } else {
-//     res.status(400).json({
-//       success: false,
-//       msg: `Task id ${taskId} not found`,
-//     });
-//   }
-//   res.status(200).json({
-//     success: true,
-//     msg: (`Task id ${taskData.id} edited`),
-//     data: taskData,
-//   });
-// };
+export const deleteTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteTaskById = await TasksModel.findByIdAndDelete(id);
+    return res.status(204).json({
+      message: 'Task Deleted',
+      data: deleteTaskById,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: `Task with id: ${id} not found`,
+      data: undefined,
+      error: true,
+    });
+  }
+};
