@@ -157,7 +157,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/super-admin/",
+							"raw": "http://localhost:3000/super-admin/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -178,7 +178,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/super-admin/628180705a6f6d438bb6fc75",
+							"raw": "http://localhost:3000/super-admin/628180705a6f6d438bb6fc75",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -199,7 +199,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/super-admin/628180705a6f6d438bb6fc75",
+							"raw": "http://localhost:3000/super-admin/628180705a6f6d438bb6fc75",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -229,7 +229,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/super-admin/62817fe45a6f6d438bb6fc71",
+							"raw": "http://localhost:3000/super-admin/62817fe45a6f6d438bb6fc71",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -250,7 +250,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/super-admin?isActive=true",
+							"raw": "http://localhost:3000/super-admin?isActive=true",
 							"protocol": "http",
 							"host": [
 								"localhost"

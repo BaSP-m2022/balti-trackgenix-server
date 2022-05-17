@@ -11,8 +11,8 @@ const createSuperAdminValidation = (req, res, next) => {
   const valid = superAdminObj.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'There was an error',
-      success: valid.error.details[0].message,
+      msg: valid.error.details[0].message,
+      error: true,
     });
   }
   return next();
@@ -29,8 +29,8 @@ const updateSuperAdminValidation = (req, res, next) => {
   const valid = superAdminObJ.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: 'There was an error',
-      success: valid.error.details[0].message,
+      msg: valid.error.details[0].message,
+      error: true,
     });
   }
   return next();

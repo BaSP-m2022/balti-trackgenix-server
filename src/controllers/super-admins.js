@@ -18,7 +18,7 @@ const crateSuperAdmin = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      data: undefined,
+      data: err,
       error: true,
     });
   }
@@ -34,7 +34,7 @@ const updateSuperAdmin = async (req, res) => {
     if (!result) {
       return res.status(404).json({
         msg: 'The Super Admin has not been found',
-        data: undefined,
+        data: result,
         error: true,
       });
     }
@@ -46,7 +46,7 @@ const updateSuperAdmin = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      data: undefined,
+      data: err,
       error: true,
     });
   }
@@ -54,43 +54,12 @@ const updateSuperAdmin = async (req, res) => {
 
 const findSuperAdminById = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(404).json({
-        msg: 'You must specify an id',
-        data: undefined,
-        error: true,
-      });
-    }
     const { id } = req.params;
     const result = await ModelSuperAdmin.findById(id);
-    return res.status(200).json({
-      msg: 'Request Successful',
-      data: result,
-      error: false,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      msg: 'There was an error',
-      data: undefined,
-      error: true,
-    });
-  }
-};
-
-const deleteSuperAdmin = async (req, res) => {
-  try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'Missing id parameter',
-        data: undefined,
-        error: true,
-      });
-    }
-    const result = await ModelSuperAdmin.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
         msg: 'The Super Admin has not been found',
-        data: undefined,
+        data: result,
         error: true,
       });
     }
@@ -102,7 +71,31 @@ const deleteSuperAdmin = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      data: undefined,
+      data: err,
+      error: true,
+    });
+  }
+};
+
+const deleteSuperAdmin = async (req, res) => {
+  try {
+    const result = await ModelSuperAdmin.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'The Super Admin has not been found',
+        data: result,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      msg: 'Request Successful',
+      data: result,
+      error: false,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      data: err,
       error: true,
     });
   }
@@ -119,7 +112,7 @@ const getSuperAdminByFilter = async (req, res) => {
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
-      data: undefined,
+      data: err,
       error: true,
     });
   }
