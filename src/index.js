@@ -7,9 +7,6 @@ import {
   addSuperAdmin, findSuperAdmin, delSuperAdmin, editSuperAdmin, getAllSuperAdmin,
 } from './controllers/super-admins';
 import {
-  putById, deleteById, putEmployee, getByStatus, allProjects, filterById, createProject,
-} from './controllers/projects';
-import {
   createEmployee, deleteEmployee, updateEmployee, filterByDni, getEmployees,
 } from './controllers/employees';
 import {
@@ -44,13 +41,13 @@ app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
 });
 
-app.get('/projects', allProjects);
-app.get('/projects/:id', filterById);
-app.post('/projects', createProject);
-app.put('/projects/:id', putById);
-app.delete('/projects/:id', deleteById);
-app.put('/projects/put-employee/:id', putEmployee);
-app.get('/projects/get-by-status/:status', getByStatus);
+// app.get('/projects', allProjects);
+// app.get('/projects/:id', filterById);
+// app.post('/projects', createProject);
+// app.put('/projects/:id', putById);
+// app.delete('/projects/:id', deleteById);
+// app.put('/projects/put-employee/:id', putEmployee);
+// app.get('/projects/get-by-status/:status', getByStatus);
 
 app.get('/time-sheets/:id', getTimeSheets);
 app.delete('/time-sheets', deleteTimeSheets);

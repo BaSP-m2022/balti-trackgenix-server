@@ -4,6 +4,7 @@ const { Schema } = mongoose.Schema;
 
 const projectSchema = new Schema(
   {
+    projectName: { type: String, required: true },
     description: { type: String, required: false },
     isActive: { type: Boolean, required: true },
     admin: { type: String, required: true },
