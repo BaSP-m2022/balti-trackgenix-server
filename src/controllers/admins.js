@@ -3,9 +3,13 @@ import Admin from '../models/Admins';
 const getAllAdmins = async (req, res) => {
   try {
     const allAdmins = await Admin.find({});
-    return res.status(200).json(allAdmins);
+    return res.status(200).json({
+      msg: 'This is the complete list of admins',
+      data: allAdmins,
+      success: true,
+    });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       msg: 'An error ocurred',
       success: false,
     });
@@ -42,14 +46,20 @@ const updateAdmin = async (req, res) => {
       req.body,
       { new: true },
     );
-    return res.status(200).json({
-      msg: `Admin ${req.params.id} successfully updated`,
-      data: result,
-      success: true,
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} successfully updated`,
+        data: result,
+        success: true,
+      });
+    } return res.status(404).json({
+      msg: `No admin with the id of ${req.params.id}`,
+      data: undefined,
+      success: false,
     });
   } catch (err) {
     return res.status(400).json({
-      msg: `No admin with the id of ${req.params.id}`,
+      msg: 'There was an error',
       success: false,
     });
   }
@@ -58,13 +68,20 @@ const updateAdmin = async (req, res) => {
 const findAdminById = async (req, res) => {
   try {
     const result = await Admin.findById(req.params.id);
-    return res.status(200).json({
-      data: result,
-      success: true,
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} found`,
+        data: result,
+        success: true,
+      });
+    } return res.status(404).json({
+      msg: `No admin with the id of ${req.params.id}`,
+      data: undefined,
+      success: false,
     });
   } catch (error) {
     return res.status(400).json({
-      msg: `No admin with the id of ${req.params.id}`,
+      msg: 'There was an error',
       success: false,
     });
   }
@@ -73,14 +90,20 @@ const findAdminById = async (req, res) => {
 const delAdmin = async (req, res) => {
   try {
     const result = await Admin.findByIdAndDelete(req.params.id);
-    return res.status(200).json({
-      msg: `Admin ${req.params.id} deleted successfully`,
-      data: result,
-      success: true,
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} deleted successfully`,
+        data: result,
+        success: true,
+      });
+    } return res.status(404).json({
+      msg: `Admin ${req.params.id} not found`,
+      data: undefined,
+      success: false,
     });
   } catch (err) {
     return res.status(400).json({
-      msg: `No admin with the id of ${req.params.id}`,
+      msg: 'There was an error',
       success: false,
     });
   }
