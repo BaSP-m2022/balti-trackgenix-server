@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17ecbb10-d0cc-4406-b9cc-ff607820218b",
+		"_postman_id": "0d138a3e-cfbb-4554-b9ae-50b911d9a7a1",
 		"name": "TRACKGENIX",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -129,7 +129,47 @@
 		},
 		{
 			"name": "Employees",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees/62803cc52b30ff7fa8ef796c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"62803cc52b30ff7fa8ef796c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
