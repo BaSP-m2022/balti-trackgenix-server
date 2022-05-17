@@ -6,12 +6,10 @@ const tasksSchema = new Schema({
   employeeId: {
     type: String,
     required: false,
-    // unique: true,
   },
   projectId: {
     type: String,
     required: true,
-    // unique: true,
   },
   title: {
     type: String,
@@ -23,11 +21,11 @@ const tasksSchema = new Schema({
   },
   date: {
     type: Date,
-    default: () => Date.now(),
     required: false,
   },
   done: {
     type: Boolean,
+    default: false,
     required: true,
   },
 });
