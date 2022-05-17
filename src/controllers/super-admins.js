@@ -13,13 +13,13 @@ const crateSuperAdmin = async (req, res) => {
     return res.status(201).json({
       msg: 'Request Successful',
       data: result,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
       data: undefined,
-      success: false,
+      error: true,
     });
   }
 };
@@ -35,19 +35,19 @@ const updateSuperAdmin = async (req, res) => {
       return res.status(404).json({
         msg: 'The Super Admin has not been found',
         data: undefined,
-        success: false,
+        error: true,
       });
     }
     return res.status(200).json({
       msg: 'Request Successful',
       data: result,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
       data: undefined,
-      success: false,
+      error: true,
     });
   }
 };
@@ -58,7 +58,7 @@ const findSuperAdminById = async (req, res) => {
       return res.status(404).json({
         msg: 'You must specify an id',
         data: undefined,
-        success: false,
+        error: true,
       });
     }
     const { id } = req.params;
@@ -66,13 +66,13 @@ const findSuperAdminById = async (req, res) => {
     return res.status(200).json({
       msg: 'Request Successful',
       data: result,
-      success: true,
+      error: false,
     });
   } catch (error) {
     return res.status(400).json({
       msg: 'There was an error',
       data: undefined,
-      success: false,
+      error: true,
     });
   }
 };
@@ -83,7 +83,7 @@ const deleteSuperAdmin = async (req, res) => {
       return res.status(400).json({
         msg: 'Missing id parameter',
         data: undefined,
-        success: false,
+        error: true,
       });
     }
     const result = await ModelSuperAdmin.findByIdAndDelete(req.params.id);
@@ -91,19 +91,19 @@ const deleteSuperAdmin = async (req, res) => {
       return res.status(404).json({
         msg: 'The Super Admin has not been found',
         data: undefined,
-        success: false,
+        error: true,
       });
     }
     return res.status(200).json({
       msg: 'Request Successful',
       data: result,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
       data: undefined,
-      success: false,
+      error: true,
     });
   }
 };
@@ -114,13 +114,13 @@ const getSuperAdminByFilter = async (req, res) => {
     return res.status(200).json({
       msg: 'Request Successful',
       data: allSuperAdmin,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
       msg: 'There was an error',
       data: undefined,
-      success: false,
+      error: true,
     });
   }
 };

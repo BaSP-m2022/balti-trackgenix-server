@@ -23,7 +23,7 @@ mongoose.connect(
   },
 );
 
-app.use('/api', router);
+app.use(router);
 
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
