@@ -11,7 +11,7 @@ export const getAllEmployees = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       message: 'There was an error',
-      data: {} || [] || undefined,
+      data: undefined,
       error: true,
     });
   }
@@ -29,13 +29,13 @@ export const getEmployeesById = async (req, res) => {
     }
     return res.status(400).json({
       message: 'missing ID parameter',
-      data: {} || [] || undefined,
+      data: undefined,
       error: true,
     });
   } catch (error) {
     return res.json({
       message: error,
-      data: {} || [] || undefined,
+      data: undefined,
       error: true,
     });
   }
