@@ -146,7 +146,7 @@
 					"response": []
 				},
 				{
-					"name": "Filter By Id",
+					"name": "Get Project By Id",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -166,7 +166,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Project",
+					"name": "Create New Project",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -185,7 +185,7 @@
 					"response": []
 				},
 				{
-					"name": "Put By Id",
+					"name": "Update Project By Id",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -225,28 +225,7 @@
 					"response": []
 				},
 				{
-					"name": "Put Employee By Id",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/projects/put-employee/id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"put-employee",
-								"id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get By Status",
+					"name": "Get Project By Status",
 					"request": {
 						"method": "GET",
 						"header": [],
