@@ -2,8 +2,8 @@ import Joi from 'joi';
 
 const createSuperAdminValidation = (req, res, next) => {
   const superAdminObj = Joi.object({
-    firstName: Joi.string().min(3).max(20).required(),
-    lastName: Joi.string().min(3).max(20).required(),
+    firstName: Joi.string().min(3).max(30).required(),
+    lastName: Joi.string().min(3).max(30).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
     isActive: Joi.boolean().required(),
@@ -20,8 +20,8 @@ const createSuperAdminValidation = (req, res, next) => {
 
 const updateSuperAdminValidation = (req, res, next) => {
   const superAdminObJ = Joi.object({
-    firstName: Joi.string().min(3).max(20),
-    lastName: Joi.string().min(3).max(20),
+    firstName: Joi.string().min(3).max(30),
+    lastName: Joi.string().min(3).max(30),
     email: Joi.string().email(),
     password: Joi.string().min(8),
     isActive: Joi.boolean(),

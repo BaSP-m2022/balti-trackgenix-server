@@ -26,13 +26,6 @@ const crateSuperAdmin = async (req, res) => {
 
 const updateSuperAdmin = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(400).json({
-        msg: 'Missing id parameter',
-        data: undefined,
-        success: false,
-      });
-    }
     const result = await ModelSuperAdmin.findByIdAndUpdate(
       req.params.id,
       req.body,
