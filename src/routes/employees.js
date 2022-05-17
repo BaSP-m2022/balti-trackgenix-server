@@ -1,11 +1,11 @@
 import express from 'express';
 import { createEmployee, deleteEmployee, updateEmployee } from '../controllers/employees';
-import { validateCreation, validatUpdate } from '../validations/employees';
+import employeeValidation from '../validations/employees';
 
 const router = express.Router();
 
-router.post('/create', validateCreation, createEmployee);
-router.delete('/delete', deleteEmployee);
-router.put('/update', validatUpdate, updateEmployee);
+router.post('/', employeeValidation, createEmployee);
+router.delete('/:id', deleteEmployee);
+router.put('/:id', employeeValidation, updateEmployee);
 
 export default router;

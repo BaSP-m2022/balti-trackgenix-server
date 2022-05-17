@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17ecbb10-d0cc-4406-b9cc-ff607820218b",
+		"_postman_id": "04dde361-a1ff-4f63-b76f-345f6081fbe9",
 		"name": "TRACKGENIX",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -129,99 +129,99 @@
 		},
 		{
 			"name": "Employees",
-      "item": [
-        {
-          "name": "create-employee",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "  {\r\n      \"firstName\": \"asdasdassd\",\r\n      \"lastName\": \"Cellamare\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/employees/create",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "employees",
-                "create"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "delete-employee",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:3000/employees/delete?id=62801f52d6e5ae3614c2deb1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "employees",
-                "delete"
-              ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": "62801f52d6e5ae3614c2deb1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "update-employee",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "  {\r\n      \"firstName\": \"asdasdassd\",\r\n      \"lastName\": \"Cellamare\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/employees/update/?id=62803b947f1178909ffe559b",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "employees",
-                "update",
-                ""
-              ],
-              "query": [
-                {
-                  "key": "id",
-                  "value": "62803b947f1178909ffe559b"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
+			"item": [
+				{
+					"name": "create-employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n      \"firstName\": \"aaaaaa\",\r\n      \"lastName\": \"asdasdasd\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/employees/delete?id=62801f52d6e5ae3614c2deb1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "62801f52d6e5ae3614c2deb1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-employee",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n      \"firstName\": \"Msssati\",\r\n      \"lastName\": \"Weber\",\r\n      \"email\": \"Max@gmail.com\",\r\n      \"password\": \"Max123456\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": true\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/employees/62803cc52b30ff7fa8ef796c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"employees",
+								"62803cc52b30ff7fa8ef796c"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "62803b947f1178909ffe559b",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Time-sheets",
