@@ -1,14 +1,14 @@
 import express from 'express';
 import {
-  getAllProjects, getProjectById, updateProjectById, getProjectsByStatus, createNewProject,
+  getProjectById, updateProjectById, getProjectsByStatus,
 } from '../controllers/projects';
+import updateProjectValidation from '../validations/projects';
 
 const router = express.Router();
 
-router.get('/', getAllProjects)
+router
   .get('/:id', getProjectById)
-  .put('/:id', updateProjectById)
-  .get('/get-by-status/:status', getProjectsByStatus)
-  .post('/', createNewProject);
+  .put('/:id', updateProjectValidation, updateProjectById)
+  .get('/get-by-status/:status', getProjectsByStatus);
 
 export default router;
