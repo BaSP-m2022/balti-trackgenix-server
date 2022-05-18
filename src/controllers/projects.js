@@ -20,7 +20,7 @@ export const updateProjectById = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       msg: 'There was an error',
       data: error,
       error: true,
@@ -43,7 +43,7 @@ export const getProjectsByStatus = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       msg: 'There was an error',
       data: error,
       error: true,
@@ -67,7 +67,7 @@ export const getProjectById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       msg: 'There was an error',
       data: error,
       error: true,
