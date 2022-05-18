@@ -9,7 +9,8 @@ const getAllAdmins = async (req, res) => {
         data: allAdmins,
         error: false,
       });
-    } return res.status(404).json({
+    }
+    return res.status(404).json({
       msg: 'No list of admins found',
       data: undefined,
       error: true,
@@ -39,7 +40,8 @@ const addAdmin = async (req, res) => {
         data: adminSaved,
         error: false,
       });
-    } return res.status(400).json({
+    }
+    return res.status(400).json({
       msg: 'Admin creation failed. Please review and correct the data',
       data: undefined,
       error: true,
@@ -66,7 +68,8 @@ const updateAdmin = async (req, res) => {
         data: result,
         error: false,
       });
-    } return res.status(404).json({
+    }
+    return res.status(404).json({
       msg: `No admin with the id of ${req.params.id}`,
       data: undefined,
       error: true,
@@ -89,7 +92,8 @@ const findAdminById = async (req, res) => {
         data: result,
         error: false,
       });
-    } return res.status(404).json({
+    }
+    return res.status(404).json({
       msg: `No admin with the id of ${req.params.id}`,
       data: undefined,
       error: true,
@@ -112,7 +116,8 @@ const delAdmin = async (req, res) => {
         data: result,
         error: false,
       });
-    } return res.status(404).json({
+    }
+    return res.status(404).json({
       msg: `Admin ${req.params.id} not found`,
       data: undefined,
       error: true,
