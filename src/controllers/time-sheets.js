@@ -9,7 +9,7 @@ export const getAllTimeSheets = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: error,
       data: undefined,
       error: true,
@@ -19,22 +19,22 @@ export const getAllTimeSheets = async (req, res) => {
 
 export const getTimeSheet = async (req, res) => {
   try {
-    if (req.params.id) {
-      const timeSheet = await TimeSheetModel.findById(req.params.id);
-      return res.status(200).json({
-        message: `Timesheet with the id ${req.params.id}`,
-        data: timeSheet,
-        error: false,
+    const timeSheet = await TimeSheetModel.findById(req.params.id);
+    if (!timeSheet) {
+      return res.status(404).json({
+        message: 'Timesheet not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(400).json({
-      message: 'Missing id parameter',
-      data: undefined,
-      error: true,
+    return res.status(200).json({
+      message: `Timesheet with the id ${req.params.id}`,
+      data: timeSheet,
+      error: false,
     });
   } catch (error) {
-    return res.json({
-      message: 'Id does not exist',
+    return res.status(400).json({
+      message: 'There was an error',
       data: error,
       error: true,
     });
@@ -45,7 +45,7 @@ export const deleteTimeSheets = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        message: 'Missing id parameter',
+        message: 'There was an error',
         data: undefined,
         error: true,
       });
@@ -64,8 +64,8 @@ export const deleteTimeSheets = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
-      message: `There is no timesheet with the id : ${req.params.id}`,
+    return res.status(400).json({
+      message: 'There was an error',
       data: error,
       error: true,
     });
@@ -77,6 +77,7 @@ export const addTimeSheet = async (req, res) => {
     employee: req.body.employee,
     project: req.body.project,
     role: req.body.role,
+    date: Date.now(),
     rate: req.body.rate,
     workedHours: req.body.workedHours,
     description: req.body.description,
@@ -100,13 +101,6 @@ export const addTimeSheet = async (req, res) => {
 
 export const editTimeSheet = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(400).json({
-        message: 'Missing id parameter',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await TimeSheetModel.findByIdAndUpdate(
       req.params.id,
       req.body,

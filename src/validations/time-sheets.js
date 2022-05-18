@@ -1,11 +1,11 @@
 import Joi from 'joi';
 
-// eslint-disable-next-line import/prefer-default-export
 export const validateTimeSheetCreation = (req, res, next) => {
   const createTimeSheet = Joi.object({
-    employee: Joi.string().required(),
-    project: Joi.string().required(),
-    role: Joi.string().required(),
+    employee: Joi.string().min(3).max(30).required(),
+    project: Joi.string().min(3).max(30).required(),
+    role: Joi.string().min(2).max(3).required(),
+    date: Joi.date().greater('1-1-2022').less('now'),
     rate: Joi.number().required(),
     workedHours: Joi.number().required(),
     description: Joi.string(),
@@ -24,9 +24,9 @@ export const validateTimeSheetCreation = (req, res, next) => {
 
 export const validateTimeSheetUpdate = (req, res, next) => {
   const updateTimeSheet = Joi.object({
-    employee: Joi.string(),
-    project: Joi.string(),
-    role: Joi.string(),
+    employee: Joi.string().min(3).max(30),
+    project: Joi.string().min(3).max(30),
+    role: Joi.string().min(2).max(3),
     rate: Joi.number(),
     workedHours: Joi.number(),
     description: Joi.string(),

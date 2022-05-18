@@ -1,9 +1,8 @@
-const express = require('express');
+import express from 'express';
+import timeSheetRouter from './time-sheets';
 
 const router = express.Router();
 
-const timeSheetRouter = require('./time-sheets');
-
 router.use('/time-sheets', timeSheetRouter);
 
-module.exports = router;
+export default router;

@@ -214,7 +214,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/get-all-time-sheets-by-employee/Fefe",
+							"raw": "http://localhost:3000/time-sheets/get-by-employee/Fefe",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -222,7 +222,7 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-								"get-all-time-sheets-by-employee",
+								"get-by-employee",
 								"Fefe"
 							]
 						}
@@ -279,10 +279,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": \"Empleado1\",\r\n    \"project\": \"Proyecto1\",\r\n    \"role\": \"dev\",\r\n    \"rate\": 60,\r\n    \"workedHours\": 24,\r\n    \"description\": \"descripcion1\",\r\n    \"task\": \"tarea1\"\r\n}"
+							"raw": "{\r\n    \"employee\": \"JuanchoTacorta\",\r\n    \"project\": \"Megaman\",\r\n    \"role\": \"qa\",\r\n    \"workedHours\": 24,\r\n    \"rate\": 23,\r\n\r\n    \"description\": \"ola k ase\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/add",
+							"raw": "http://localhost:3000/time-sheets/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -290,7 +290,7 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-								"add"
+								""
 							]
 						}
 					},
@@ -309,10 +309,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": \"employee actualizado\"\r\n}"
+							"raw": "{\r\n    \"employee\": \"JuanPerez\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/edit/",
+							"raw": "http://localhost:3000/time-sheets/628511d396fa2b6d65d003bb",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -320,8 +320,7 @@
 							"port": "3000",
 							"path": [
 								"time-sheets",
-								"edit",
-								""
+								"628511d396fa2b6d65d003bb"
 							]
 						}
 					},

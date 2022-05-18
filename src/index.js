@@ -15,16 +15,16 @@ import {
 import {
   getTasks, findTaskById, findTask, addTask, deleteTask, editTask,
 } from './controllers/tasks';
+import router from './routes/index';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const api = require('./routes/index');
 
 const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
 app.set('json spaces', 2);
 
 app.use(express.json());
-app.use('/', api);
+app.use('/', router);
 
 mongoose.connect(
   MONGO_URL,
@@ -50,14 +50,6 @@ app.put('/projects/:id', putById);
 app.delete('/projects/:id', deleteById);
 app.put('/projects/put-employee/:id', putEmployee);
 app.get('/projects/get-by-status/:status', getByStatus);
-
-// timesheets routes
-
-// app.get('/time-sheets/:id', getTimeSheets);
-// app.delete('/time-sheets', deleteTimeSheets);
-// app.post('/time-sheets/add', addTimeSheet);
-// app.put('/time-sheets/edit/:id', editTimeSheet);
-// app.get('/time-sheets/get-all-time-sheets-by-employee/:id', getAllTimeSheetsByEmployee);
 
 app.post('/tasks', addTask);
 app.put('/tasks', editTask);

@@ -17,8 +17,6 @@ const timeSheetSchema = new Schema({
   },
   date: {
     type: Date,
-    immutable: true,
-    default: () => Date.now(),
     required: true,
   },
   rate: {
