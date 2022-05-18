@@ -4,11 +4,12 @@ const getAllProjects = async (req, res) => {
   try {
     const findAll = await Projects.find({});
     return res.status(200).json({
+      msg: 'All the projects found',
       data: findAll,
       error: false,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       msg: err,
       error: true,
     });
@@ -17,13 +18,6 @@ const getAllProjects = async (req, res) => {
 
 const deleteById = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'ID project does not exist',
-        data: undefined,
-        error: true,
-      });
-    }
     const deleted = await Projects.findByIdAndDelete(req.params.id);
     if (!deleted) {
       return res.status(404).json({
