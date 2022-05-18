@@ -7,121 +7,7 @@
 	"item": [
 		{
 			"name": "admins",
-			"item": [
-				{
-					"name": "get all admins",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/admins",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"admins"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "filter by id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"baltazar\",\r\n    \"lastName\": \"cortina\",\r\n    \"email\": \"esasdteban.frare@radiumrocket.com\",\r\n    \"id\": 50\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/admins/10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"admins",
-								"10"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "add admin",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"baltazar\",\r\n    \"lastName\": \"cortina\",\r\n    \"email\": \"esasdteban.frare@radiumrocket.com\",\r\n    \"id\": 50\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/admins",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"admins"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete admin",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/admins?id=10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"admins"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "10"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"item": []
 		},
 		{
 			"name": "Projects",
@@ -349,7 +235,136 @@
 		},
 		{
 			"name": "Task",
-			"item": []
+			"item": [
+				{
+					"name": "get all tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeId\": \"23322\",\r\n    \"projectId\": \"222\",\r\n    \"title\": \"Sed accumsadsan felis.\",\r\n    \"description\": \"Prasadesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\",\r\n    \"done\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks/6282dd76e317e11cca0c3f10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6282dd76e317e11cca0c3f10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admin",
