@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const employeeSchemma = new Schema({
+const employeeSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -20,9 +20,7 @@ const employeeSchemma = new Schema({
     required: true,
   },
   assignedProjects: [
-    {
-      projectId: { type: Number },
-    },
+    Number,
   ],
   isActive: {
     type: Boolean,
@@ -30,4 +28,4 @@ const employeeSchemma = new Schema({
   },
 });
 
-export default mongoose.model('employeeSchema', employeeSchemma);
+export default mongoose.model('Employee', employeeSchema);
