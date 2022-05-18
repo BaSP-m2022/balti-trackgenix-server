@@ -23,7 +23,7 @@ const createProjectValidation = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       msg: 'Error during validation, check all the parameters',
-      error: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
