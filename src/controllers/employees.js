@@ -29,13 +29,6 @@ export const createEmployee = async (req, res) => {
 
 export const deleteEmployee = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing Id',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await Employees.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
@@ -45,14 +38,14 @@ export const deleteEmployee = async (req, res) => {
       });
     }
     return res.status(200).json({
-      message: 'Employee deleted',
-      data: `Employee id: ${req.params.id} deleted.`,
+      message: `Employee id: ${req.params.id} deleted.`,
+      data: result,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
       message: 'Bad request',
-      data: undefined,
+      data: error,
       error: true,
     });
   }
@@ -69,17 +62,10 @@ export const updateEmployee = async (req, res) => {
   };
 
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'Missing Id',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await Employees.findByIdAndUpdate(req.params.id, (updatedEmployee));
     if (!result) {
       return res.status(404).json({
-        message: 'Employee not found',
+        message: `Employee id: ${req.params.id} not found`,
         data: undefined,
         error: true,
       });
