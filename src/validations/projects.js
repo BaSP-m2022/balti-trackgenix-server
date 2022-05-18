@@ -21,7 +21,8 @@ const updateProjectValidation = (req, res, next) => {
   if (validation.error) {
     return res.status(400).json({
       msg: 'Error during data validation!',
-      error: validation.error.details[0].message,
+      data: validation.error.details[0].message,
+      error: true,
     });
   }
   return next();
