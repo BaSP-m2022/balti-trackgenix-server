@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
-import router from './routes/index';
+import router from './routes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +23,8 @@ mongoose.connect(
     }
   },
 );
+
+app.use(router);
 
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
