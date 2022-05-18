@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import router from './routes/index';
 import {
   addAdmin, findAdmin, delAdmin, editAdmin, getAllAdmins,
 } from './controllers/admins';
@@ -23,6 +24,7 @@ const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_D
 app.set('json spaces', 2);
 
 app.use(express.json());
+app.use(router);
 
 mongoose.connect(
   MONGO_URL,
@@ -40,14 +42,6 @@ mongoose.connect(
 app.get('/', async (req, res) => {
   res.send('<h1>Hello World! Whats new?</h1>');
 });
-
-// app.get('/projects', allProjects);
-// app.get('/projects/:id', filterById);
-// app.post('/projects', createProject);
-// app.put('/projects/:id', putById);
-// app.delete('/projects/:id', deleteById);
-// app.put('/projects/put-employee/:id', putEmployee);
-// app.get('/projects/get-by-status/:status', getByStatus);
 
 app.get('/time-sheets/:id', getTimeSheets);
 app.delete('/time-sheets', deleteTimeSheets);

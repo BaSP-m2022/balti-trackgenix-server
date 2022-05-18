@@ -2,9 +2,9 @@ import Joi from 'joi';
 
 const createProjectValidation = (req, res, next) => {
   const employeesSchema = Joi.object({
-    id: Joi.string().required(),
-    role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required,
-    rate: Joi.number().required,
+    employeeId: Joi.number().required(),
+    role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
+    rate: Joi.number().required(),
     hoursInProject: Joi.number().required(),
   });
 
@@ -13,9 +13,9 @@ const createProjectValidation = (req, res, next) => {
     description: Joi.string().min(10).max(140).optional(),
     isActive: Joi.boolean().required(),
     admin: Joi.string().required(),
-    client: Joi.string().min(1).max(20).required,
+    client: Joi.string().min(1).max(20).required(),
     startDate: Joi.date().required(),
-    endDate: Joi.date().optional,
+    endDate: Joi.date().optional(),
     employees: Joi.array().items(employeesSchema),
   });
 
@@ -29,4 +29,6 @@ const createProjectValidation = (req, res, next) => {
   return next();
 };
 
-export default (createProjectValidation);
+export default {
+  createProjectValidation,
+};

@@ -1,80 +1,72 @@
-import ProjectModel from '../models/Projects';
+import Projects from '../models/Projects';
 
-const allProjects = async (req, res) => {
+const getAllProjects = async (req, res) => {
   try {
-    const findAll = await ProjectModel.find([]);
+    const findAll = await Projects.find({});
     return res.status(200).json({
       data: findAll,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(500).json({
       msg: err,
-      success: false,
+      error: true,
     });
   }
 };
 
 const deleteById = async (req, res) => {
   try {
-    const deleted = await ProjectModel.findByIdAndDelete(req.params.id);
-    return res.status(200).json({
-      msg: 'Project deleted',
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'ID project does not exist',
+        data: undefined,
+        error: true,
+      });
+    }
+    const deleted = await Projects.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({
+        msg: 'Project not found.',
+        data: undefined,
+        error: true,
+      });
+    } return res.status(200).json({
+      msg: 'Project deleted.',
       data: deleted,
-      success: true,
+      error: false,
     });
   } catch (err) {
     return res.status(400).json({
-      msg: 'Project not found.',
-      success: false,
-    });
-  }
-};
-
-const filterById = async (req, res) => {
-  try {
-    const found = await ProjectModel.findById(req.params.id);
-    return res.status(200).json({
-      data: found,
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'Project not found.',
-      success: false,
+      msg: 'there was an error',
+      data: undefined,
+      error: true,
     });
   }
 };
 
 const createProject = async (req, res) => {
-  const newProject = new ProjectModel({
-    projectName: req.body.projectName,
-    description: req.body.description,
-    status: true,
-    owner: req.body.owner,
-    pm: req.body.pm,
-    client: req.body.client,
-    dateStart: req.body.dateStart,
-    employees: req.body.employees,
-  });
   try {
-    const projectCreated = await newProject.s();
-    return res.status(200).json({
-      msg: 'Project created.',
-      data: projectCreated,
-      success: true,
+    const newProjects = new Projects({
+      ...req.body,
     });
-  } catch (err) {
+    await newProjects.save();
+    return res.status(201).json({
+      msg: 'New Project successfully created',
+      data: newProjects,
+      error: false,
+    });
+  } catch (error) {
     return res.status(400).json({
-      success: false,
-      msg: 'Please include id, name, owner, pm, client and date start.',
+      msg: 'There was an error',
+      data: error,
+      error: false,
     });
   }
 };
 
 export {
-  allProjects,
+  getAllProjects,
   deleteById,
-  filterById,
   createProject,
 };

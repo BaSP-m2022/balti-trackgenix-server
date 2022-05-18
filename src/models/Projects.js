@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 const projectSchema = new Schema(
   {
@@ -14,7 +14,7 @@ const projectSchema = new Schema(
     employees:
       [
         {
-          id: { type: String, required: true },
+          employeeId: { type: Number, required: true },
           role: { type: String, required: true, enum: ['DEV', 'QA', 'PM', 'TL'] },
           rate: { type: Number, required: true },
           hoursInProject: { type: Number, required: true },
