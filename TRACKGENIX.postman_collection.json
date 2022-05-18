@@ -233,7 +233,136 @@
 		},
 		{
 			"name": "Super-admin",
-			"item": []
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"firstName\": \"Felipe\",\r\n    \"lastName\": \"Berenstein\",\r\n    \"email\": \"fb@gmail.com\",\r\n    \"password\": \"fb4561237\",\r\n    \"isActive\": false\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/super-admin/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"super-admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admin/628180705a6f6d438bb6fc75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"super-admin",
+								"628180705a6f6d438bb6fc75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admin/628180705a6f6d438bb6fc75",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"super-admin",
+								"628180705a6f6d438bb6fc75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"firstName\": \"Lucas\",\r\n    \"lastName\": \"Prat\",\r\n    \"email\": \"lp@gmail.com\",\r\n    \"password\": \"lp4561237\",\r\n    \"isActive\": false\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/super-admin/62817fe45a6f6d438bb6fc71",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"super-admin",
+								"62817fe45a6f6d438bb6fc71"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by query params(filter)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/super-admin?isActive=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"super-admin"
+							],
+							"query": [
+								{
+									"key": "isActive",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
