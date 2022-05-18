@@ -19,18 +19,11 @@ export const getAllEmployees = async (req, res) => {
 
 export const getEmployeesById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const employee = await Employee.findById(req.params.id);
-      return res.status(200).json({
-        message: 'Employee with the ID required collected',
-        data: employee,
-        error: false,
-      });
-    }
-    return res.status(400).json({
-      message: 'missing ID parameter',
-      data: undefined,
-      error: true,
+    const employee = await Employee.findById(req.params.id);
+    return res.status(200).json({
+      message: 'Employee with the ID required collected',
+      data: employee,
+      error: false,
     });
   } catch (error) {
     return res.json({
