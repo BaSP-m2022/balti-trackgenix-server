@@ -1,20 +1,18 @@
 import Joi from 'joi';
 
-const employeesValidation = (req, res, next) => {
-  const employeeDataValidation = Joi.object({
+const employeeValidation = (req, res, next) => {
+  const employeValidate = Joi.object({
     firstName: Joi.string().min(3).max(10).required(),
     lastName: Joi.string().min(3).max(10).required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
-    assignedProjects: Joi.array().items(Joi.number()).optional(),
+    assignedProjects: Joi.array().items(Joi.number()),
     isActive: Joi.boolean().required(),
   });
-
-  const validation = employeeDataValidation.validate(req.body);
-
+  const validation = employeValidate.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      msg: 'There was an error during the validation of the request',
+      message: 'Missing data',
       data: validation.error.details[0].message,
       error: true,
     });
@@ -22,4 +20,4 @@ const employeesValidation = (req, res, next) => {
   return next();
 };
 
-export default { employeesValidation };
+export default employeeValidation;
