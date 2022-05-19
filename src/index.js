@@ -12,19 +12,20 @@ app.set('json spaces', 2);
 
 app.use(express.json());
 
-mongoose.connect(
-  url,
-  (error) => {
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.log('Not connected: ', error);
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('Connected to MONGO DB');
-    }
-  },
-);
-
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(
+    url,
+    (error) => {
+      if (error) {
+        // eslint-disable-next-line no-console
+        console.log('Not connected: ', error);
+      } else {
+        // eslint-disable-next-line no-console
+        console.log('Connected to MONGO DB');
+      }
+    },
+  );
+}
 app.use('/', routes);
 
 app.get('/', async (req, res) => {
@@ -35,3 +36,5 @@ app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening on port ${port}`);
 });
+
+export default app;
