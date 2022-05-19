@@ -1,6 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes';
+require('dotenv').config({path:'../.env'});
+const prueba = process.env.PORT;
+console.log("escuchando en el puerto: ", prueba);
 
 const app = express();
 const port = process.env.PORT || 3000;
