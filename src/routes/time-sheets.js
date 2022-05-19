@@ -1,3 +1,4 @@
+import express from 'express';
 import {
   deleteTimeSheets,
   getTimeSheet,
@@ -8,8 +9,6 @@ import {
 } from '../controllers/time-sheets';
 
 import { validateTimeSheetCreation, validateTimeSheetUpdate } from '../validations/time-sheets';
-
-const express = require('express');
 
 const router = express.Router();
 

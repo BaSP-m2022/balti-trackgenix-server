@@ -3,6 +3,6 @@ import timeSheetRouter from './time-sheets';
 
 const router = express.Router();
 
-router.use('/time-sheets', timeSheetRouter);
+router.use('/timesheets', timeSheetRouter);
 
 export default router;

@@ -136,19 +136,32 @@
 			"item": [
 				{
 					"name": "A single Time sheet",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6282b11d07fc2aabd0f2d994\"\r\n}"
+						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/118",
+							"raw": "http://localhost:3000/timesheets/628276b00c5e0d55e99c2c7f",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
-								"118"
+								"timesheets",
+								"628276b00c5e0d55e99c2c7f"
 							]
 						}
 					},
@@ -173,14 +186,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/",
+							"raw": "http://localhost:3000/timesheets/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
+								"timesheets",
 								""
 							],
 							"query": [
@@ -214,14 +227,14 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/get-by-employee/Fefe",
+							"raw": "http://localhost:3000/timesheets/get-by-employee/Fefe",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
+								"timesheets",
 								"get-by-employee",
 								"Fefe"
 							]
@@ -245,15 +258,15 @@
 							"raw": "{\r\n    \"id\": \"6281c1fc29cc2b63bf50256b\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/6281c1fc29cc2b63bf50256b",
+							"raw": "http://localhost:3000/timesheets/6281c2415b98fb680069e21e",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
-								"6281c1fc29cc2b63bf50256b"
+								"timesheets",
+								"6281c2415b98fb680069e21e"
 							],
 							"query": [
 								{
@@ -279,17 +292,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": \"JuanchoTacorta\",\r\n    \"project\": \"Megaman\",\r\n    \"role\": \"qa\",\r\n    \"workedHours\": 24,\r\n    \"rate\": 23,\r\n\r\n    \"description\": \"ola k ase\"\r\n}"
+							"raw": "{\r\n    \"employee\": \"probandoFechaDeNuevo\",\r\n    \"project\": \"Megaman\",\r\n    \"role\": \"qa\",\r\n    \"date\": \"2-2-2022\",\r\n    \"workedHours\": 24,\r\n    \"rate\": 23,\r\n    \"description\": \"ola k ase\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/",
+							"raw": "http://localhost:3000/timesheets/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
+								"timesheets",
 								""
 							]
 						}
@@ -312,14 +325,14 @@
 							"raw": "{\r\n    \"employee\": \"JuanPerez\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/time-sheets/628511d396fa2b6d65d003bb",
+							"raw": "http://localhost:3000/timesheets/628511d396fa2b6d65d003bb",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"time-sheets",
+								"timesheets",
 								"628511d396fa2b6d65d003bb"
 							]
 						}

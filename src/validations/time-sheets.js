@@ -27,6 +27,7 @@ export const validateTimeSheetUpdate = (req, res, next) => {
     employee: Joi.string().min(3).max(30),
     project: Joi.string().min(3).max(30),
     role: Joi.string().min(2).max(3),
+    date: Joi.date().greater('1-1-2022').less('now'),
     rate: Joi.number(),
     workedHours: Joi.number(),
     description: Joi.string(),

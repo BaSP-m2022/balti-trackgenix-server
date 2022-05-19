@@ -43,13 +43,6 @@ export const getTimeSheet = async (req, res) => {
 
 export const deleteTimeSheets = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        message: 'There was an error',
-        data: undefined,
-        error: true,
-      });
-    }
     const result = await TimeSheetModel.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
@@ -119,7 +112,7 @@ export const editTimeSheet = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'There was an error',
       data: error,
       error: true,
@@ -129,21 +122,21 @@ export const editTimeSheet = async (req, res) => {
 
 export const getAllTimeSheetsByEmployee = async (req, res) => {
   try {
-    if (req.params.employee) {
-      const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
+    const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
+    if (filterByEmployee.length) {
       return res.status(200).json({
         message: `Timesheets with the employee ${req.params.employee}`,
         data: filterByEmployee,
         error: false,
       });
     }
-    return res.status(400).json({
-      message: 'Missing id parameter',
+    return res.status(404).json({
+      message: 'The employee has not been found',
       data: undefined,
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(400).json({
       message: 'There was an error',
       data: error,
       error: true,
