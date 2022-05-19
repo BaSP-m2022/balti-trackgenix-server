@@ -1,127 +1,94 @@
-import ModelSuperAdmin from '../models/Super-admins';
+const fs = require('fs');
+const superAd = require('../data/super-admins.json');
 
-const crateSuperAdmin = async (req, res) => {
-  try {
-    const superAdminCreate = new ModelSuperAdmin({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
-      isActive: req.body.isActive,
-    });
-    const result = await superAdminCreate.save();
-    return res.status(201).json({
-      msg: 'Request Successful',
-      data: result,
-      error: false,
-    });
-  } catch (err) {
+export const getAllSuperAdmin = (req, res) => {
+  res.status(200).json(superAd);
+};
+
+export const addSuperAdmin = (req, res) => {
+  const newSA = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    id: req.body.id,
+  };
+  if (!newSA.firstName || !newSA.lastName || !newSA.email || !newSA.id) {
     return res.status(400).json({
-      msg: 'There was an error',
-      data: err,
-      error: true,
+      success: false,
+      msg: 'Please put a name, surname, email and id.',
+    });
+  }
+  superAd.push(newSA);
+  fs.writeFileSync('src/data/super-admins.json', JSON.stringify(superAd));
+  return res.status(200).json({
+    success: true,
+    data: newSA,
+  });
+};
+
+export const findSuperAdmin = (req, res) => {
+  const found = superAd.find((superAdm) => superAdm.id === +req.params.id);
+  if (found) {
+    res.status(200).json({
+      success: true,
+      data: found,
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: `No super admin with the id of ${req.params.id}`,
     });
   }
 };
 
-const updateSuperAdmin = async (req, res) => {
-  try {
-    const result = await ModelSuperAdmin.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The Super Admin has not been found',
-        data: result,
-        error: true,
+export const delSuperAdmin = (req, res) => {
+  const found = superAd.filter((superAdm) => superAdm.id !== parseInt(req.query.id, 10));
+  if (found.length === superAd.length) {
+    res.status(400).json({
+      success: false,
+      msg: `No super admin with the id of ${req.params.id}`,
+    });
+  }
+  fs.writeFile('src/data/super-admins.json', JSON.stringify(found), (err) => {
+    if (err) {
+      res.status(400).json({
+        success: false,
+        msg: (err),
       });
     }
-    return res.status(200).json({
-      msg: 'Request Successful',
-      data: result,
-      error: false,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'There was an error',
-      data: err,
-      error: true,
-    });
-  }
+  });
+  res.status(200).json({
+    success: true,
+    data: found,
+  });
 };
 
-const findSuperAdminById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await ModelSuperAdmin.findById(id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The Super Admin has not been found',
-        data: result,
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      msg: 'Request Successful',
-      data: result,
-      error: false,
+export const editSuperAdmin = (req, res) => {
+  const saId = parseInt(req.query.id, 10);
+  const saData = req.body;
+  const found = superAd.some((sa) => sa.id === saId);
+  if (found) {
+    superAd.forEach((sa, index) => {
+      if (sa.id === saId) {
+        superAd[index].firstName = saData.firstName;
+        superAd[index].lastName = saData.lastName;
+        superAd[index].email = saData.email;
+        fs.writeFile('src/data/super-admins.json', JSON.stringify(superAd), (err) => {
+          if (err) {
+            res.send(err);
+          }
+        });
+      }
     });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'There was an error',
-      data: err,
-      error: true,
-    });
-  }
-};
-
-const deleteSuperAdmin = async (req, res) => {
-  try {
-    const result = await ModelSuperAdmin.findByIdAndDelete(req.params.id);
-    if (!result) {
-      return res.status(404).json({
-        msg: 'The Super Admin has not been found',
-        data: result,
-        error: true,
-      });
-    }
-    return res.status(200).json({
-      msg: 'Request Successful',
-      data: result,
-      error: false,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'There was an error',
-      data: err,
-      error: true,
+  } else {
+    res.status(400).json({
+      success: false,
+      msg: `SA id ${saId} not found`,
     });
   }
-};
-
-const getSuperAdminByFilter = async (req, res) => {
-  try {
-    const allSuperAdmin = await ModelSuperAdmin.find(req.query);
-    return res.status(200).json({
-      msg: 'Request Successful',
-      data: allSuperAdmin,
-      error: false,
-    });
-  } catch (err) {
-    return res.status(400).json({
-      msg: 'There was an error',
-      data: err,
-      error: true,
-    });
-  }
-};
-
-export default {
-  crateSuperAdmin,
-  updateSuperAdmin,
-  deleteSuperAdmin,
-  findSuperAdminById,
-  getSuperAdminByFilter,
+  res.status(200).json({
+    success: true,
+    msg: (`sa id ${saData.id} edited`),
+    data: found,
+  });
 };
