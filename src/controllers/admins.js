@@ -1,96 +1,140 @@
-const fs = require('fs');
-const admin = require('../data/admins.json');
+import Admin from '../models/Admins';
 
-export const getAllAdmins = (req, res) => {
-  res.status(200).json(admin);
-};
-
-export const addAdmin = (req, res) => {
-  const newAdm = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    id: req.body.id,
-  };
-  if (!newAdm.firstName || !newAdm.lastName || !newAdm.email || !newAdm.id) {
-    return res.status(400).json({
-      success: false,
-      msg: 'Please put a name, surname, email and id.',
-    });
-  }
-  admin.push(newAdm);
-  fs.writeFileSync('src/data/admins.json', JSON.stringify(admin));
-  return res.status(200).json({
-    success: true,
-    data: newAdm,
-  });
-};
-
-export const findAdmin = (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const found = admin.find((adm) => adm.id === id);
-  if (found) {
-    res.status(200).json({
-      success: true,
-      data: found,
-    });
-  } else {
-    res.status(400).json({
-      success: false,
-      msg: `No admin with the id of ${req.params.id}`,
-    });
-  }
-};
-
-export const delAdmin = (req, res) => {
-  const found = admin.filter((adm) => adm.id !== parseInt(req.query.id, 10));
-  if (found.length === admin.length) {
-    res.status(400).json({
-      success: false,
-      msg: `No admin with the id of ${req.params.id}`,
-    });
-  }
-  fs.writeFile('src/data/admins.json', JSON.stringify(found), (err) => {
-    if (err) {
-      res.status(400).json({
-        success: false,
-        msg: (err),
+const getAllAdmins = async (req, res) => {
+  try {
+    const allAdmins = await Admin.find({});
+    if (allAdmins) {
+      return res.status(200).json({
+        msg: 'This is the complete list of admins',
+        data: allAdmins,
+        error: false,
       });
     }
-  });
-  res.status(200).json({
-    msg: 'Admin has been deleted',
-    success: true,
-    data: found,
-  });
-};
-
-export const editAdmin = (req, res) => {
-  const admId = parseInt(req.query.id, 10);
-  const admData = req.body;
-  const found = admin.some((sa) => sa.id === admId);
-  if (found) {
-    admin.forEach((sa, index) => {
-      if (sa.id === admId) {
-        admin[index].firstName = admData.firstName;
-        admin[index].lastName = admData.lastName;
-        admin[index].email = admData.email;
-        fs.writeFile('src/data/admins.json', JSON.stringify(admin), (err) => {
-          if (err) {
-            res.send(err);
-          }
-        });
-      }
+    return res.status(404).json({
+      msg: 'No list of admins found',
+      data: undefined,
+      error: true,
     });
-  } else {
-    res.status(400).json({
-      success: false,
-      msg: `Admin id ${admId} not found`,
+  } catch (err) {
+    return res.status(400).json({
+      msg: 'An error ocurred',
+      data: undefined,
+      error: true,
     });
   }
-  res.status(200).json({
-    success: true,
-    msg: `admin id ${admData.id} edited`,
-    data: found,
-  });
+};
+
+const addAdmin = async (req, res) => {
+  try {
+    const newAdmin = new Admin({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      isActive: req.body.isActive,
+    });
+    const adminSaved = await newAdmin.save();
+    if (adminSaved) {
+      return res.status(201).json({
+        msg: 'Admin created successfully',
+        data: adminSaved,
+        error: false,
+      });
+    }
+    return res.status(400).json({
+      msg: 'Admin creation failed. Please review and correct the data',
+      data: undefined,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const updateAdmin = async (req, res) => {
+  try {
+    const result = await Admin.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} successfully updated`,
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      msg: `No admin with the id of ${req.params.id}`,
+      data: undefined,
+      error: true,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const findAdminById = async (req, res) => {
+  try {
+    const result = await Admin.findById(req.params.id);
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} found`,
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      msg: `No admin with the id of ${req.params.id}`,
+      data: undefined,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+const delAdmin = async (req, res) => {
+  try {
+    const result = await Admin.findByIdAndDelete(req.params.id);
+    if (result) {
+      return res.status(200).json({
+        msg: `Admin ${req.params.id} deleted successfully`,
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      msg: `Admin ${req.params.id} not found`,
+      data: undefined,
+      error: true,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      msg: 'There was an error',
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
+export default {
+  getAllAdmins,
+  delAdmin,
+  addAdmin,
+  findAdminById,
+  updateAdmin,
 };
