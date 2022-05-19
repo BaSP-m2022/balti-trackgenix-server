@@ -9,7 +9,6 @@ const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_D
 app.set('json spaces', 2);
 
 app.use(express.json());
-app.use(routes);
 
 mongoose.connect(
   MONGO_URL,
