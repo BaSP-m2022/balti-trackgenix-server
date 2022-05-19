@@ -1,4 +1,5 @@
 import express from 'express';
+import adminRoutes from './admins';
 import tasksRouter from './tasks';
 import employeeRoutes from './employees';
 import projectRoutes from './projects';
@@ -10,5 +11,6 @@ router.use('/tasks', tasksRouter);
 router.use('/employees', employeeRoutes);
 router.use('/projects', projectRoutes);
 router.use('/super-admin', superAdminRoutes);
+router.use('/admins', adminRoutes);
 
 export default router;
