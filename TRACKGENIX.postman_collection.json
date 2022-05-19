@@ -32,15 +32,10 @@
 					"response": []
 				},
 				{
-<<<<<<< HEAD
 					"name": "add admin",
-=======
-					"name": "Get Project By Id",
->>>>>>> origin/master
 					"request": {
 						"method": "POST",
 						"header": [],
-<<<<<<< HEAD
 						"body": {
 							"mode": "raw",
 							"raw": "    {\r\n        \"firstName\": \"mortal\",\r\n        \"lastName\": \"backflip\",\r\n        \"email\": \"notuvo@yanoser.com\",\r\n        \"password\": \"1211115678\",\r\n        \"isActive\": true\r\n    }",
@@ -52,17 +47,12 @@
 						},
 						"url": {
 							"raw": "http://localhost:3000/admins",
-=======
-						"url": {
-							"raw": "http://localhost:3000/projects/id",
->>>>>>> origin/master
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-<<<<<<< HEAD
 								"admins"
 							]
 						}
@@ -92,119 +82,22 @@
 							"path": [
 								"admins",
 								"6282d21b087676d2eedadc41"
-=======
-								"projects",
-								"id"
->>>>>>> origin/master
 							]
 						}
 					},
 					"response": []
 				},
 				{
-<<<<<<< HEAD
 					"name": "filter by id",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
-=======
-					"name": "Create New Project",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/projects",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Project By Id",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/projects/id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete By Id",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/projects/id",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"id"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Project By Status",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/projects/get-by-status/status",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"projects",
-								"get-by-status",
-								"status"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Employees",
-			"item": [
-				{
-					"name": "create-employee",
->>>>>>> origin/master
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-<<<<<<< HEAD
 							"raw": "",
-=======
-							"raw": "  {\r\n      \"firstName\": \"aaaaaa\",\r\n      \"lastName\": \"asdasdasd\",\r\n      \"email\": \"mati@gmail.com\",\r\n      \"password\": \"asdasdadsasd123123\",\r\n      \"assignedProjects\":  [1],\r\n      \"isActive\": false\r\n  }",
->>>>>>> origin/master
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,24 +105,15 @@
 							}
 						},
 						"url": {
-<<<<<<< HEAD
 							"raw": "http://localhost:3000/admins/6282a9d6c717ee25a10cf6e3",
-=======
-							"raw": "http://localhost:3000/employees/",
->>>>>>> origin/master
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-<<<<<<< HEAD
 								"admins",
 								"6282a9d6c717ee25a10cf6e3"
-=======
-								"employees",
-								""
->>>>>>> origin/master
 							]
 						}
 					},
@@ -276,31 +160,15 @@
 							}
 						},
 						"url": {
-<<<<<<< HEAD
 							"raw": "http://localhost:3000/admins/6282d21b087676d2eedadc41",
-=======
-							"raw": "http://localhost:3000/employees/62803cc52b30ff7fa8ef796c",
->>>>>>> origin/master
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-<<<<<<< HEAD
 								"admins",
 								"6282d21b087676d2eedadc41"
-=======
-								"employees",
-								"62803cc52b30ff7fa8ef796c"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "62803b947f1178909ffe559b",
-									"disabled": true
-								}
->>>>>>> origin/master
 							]
 						}
 					},
