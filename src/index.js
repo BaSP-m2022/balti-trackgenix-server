@@ -1,20 +1,19 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes';
-require('dotenv').config({path:'../.env'});
-const prueba = process.env.PORT;
-console.log("escuchando en el puerto: ", prueba);
+
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const MONGO_URL = 'mongodb+srv://BaSP:BaSP2022@cluster0.nsjbc.mongodb.net/BaSP_Database?retryWrites=true&w=majority';
+const url = process.env.MONGO_URL;
 app.set('json spaces', 2);
 
 app.use(express.json());
 
 mongoose.connect(
-  MONGO_URL,
+  url,
   (error) => {
     if (error) {
       // eslint-disable-next-line no-console
