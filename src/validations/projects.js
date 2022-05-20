@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const createProjectValidation = (req, res, next) => {
   const employeesSchema = Joi.object({
-    employeeId: Joi.number().required(),
+    employeeId: Joi.string().required(),
     role: Joi.string().valid('DEV', 'QA', 'PM', 'TL').required(),
     rate: Joi.number().required(),
     hoursInProject: Joi.number().required(),
