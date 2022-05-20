@@ -1,4 +1,5 @@
 export default [{
+  id: '1',
   firstName: 'Nicolas',
   lastName: 'Costanza',
   email: 'nicolas22@gmail.com',
@@ -7,6 +8,7 @@ export default [{
   isActive: true,
 },
 {
+  id: '2',
   firstName: 'Camila',
   lastName: 'figueroa',
   email: 'sadcamil@gmail.com',
@@ -15,6 +17,7 @@ export default [{
   isActive: true,
 },
 {
+  id: '3',
   firstName: 'Federico',
   lastName: 'Troanes',
   email: 'fedetroanes@gmail.com',
