@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'airbnb-base',
@@ -12,5 +13,9 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 0,
+    'max-len': [
+      'error',
+      120,
+    ],
   },
 };
