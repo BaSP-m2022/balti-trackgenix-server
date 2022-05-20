@@ -1,10 +1,10 @@
 import request from 'supertest';
 import app from '../index';
 import Admins from '../models/Admins';
-import adminsSeed from '../seed/admins';
+import employeesSeed from '../seed/employees';
 
 beforeAll(async () => {
-  await Admins.collection.insertMany(adminsSeed);
+  await Admins.collection.insertMany(employeesSeed);
 });
 
 describe('/GET /admins', () => {
