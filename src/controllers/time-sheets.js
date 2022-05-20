@@ -2,7 +2,7 @@ import TimeSheetModel from '../models/Time-sheets';
 
 export const getAllTimeSheets = async (req, res) => {
   try {
-    const allTimeSheets = await TimeSheetModel.find({});
+    const allTimeSheets = await TimeSheetModel.find({}).populate('Employees', 'Projects', 'Tasks');
     return res.status(200).json({
       message: 'All timesheets',
       data: allTimeSheets,
@@ -19,7 +19,7 @@ export const getAllTimeSheets = async (req, res) => {
 
 export const getTimeSheet = async (req, res) => {
   try {
-    const timeSheet = await TimeSheetModel.findById(req.params.id);
+    const timeSheet = await TimeSheetModel.findById(req.params.id).populate('Employees', 'Projects', 'Tasks');
     if (!timeSheet) {
       return res.status(404).json({
         message: 'Timesheet not found',
@@ -43,7 +43,7 @@ export const getTimeSheet = async (req, res) => {
 
 export const deleteTimeSheets = async (req, res) => {
   try {
-    const result = await TimeSheetModel.findByIdAndDelete(req.params.id);
+    const result = await TimeSheetModel.findByIdAndDelete(req.params.id).populate('Employees', 'Projects', 'Tasks');
     if (!result) {
       return res.status(404).json({
         message: 'The timesheet has not been found',
@@ -98,7 +98,7 @@ export const editTimeSheet = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
+    ).populate('Employees', 'Projects', 'Tasks');
     if (!result) {
       return res.status(404).json({
         message: 'The timesheet has not been found',
@@ -122,7 +122,11 @@ export const editTimeSheet = async (req, res) => {
 
 export const getAllTimeSheetsByEmployee = async (req, res) => {
   try {
-    const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
+    const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee }).populate(
+      'Employees',
+      'Projects',
+      'Tasks',
+    );
     if (filterByEmployee.length) {
       return res.status(200).json({
         message: `Timesheets with the employee ${req.params.employee}`,
