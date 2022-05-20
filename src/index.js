@@ -1,11 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes';
-// aca no paso el path en el config, sino no funciona
-require('dotenv').config();
+import 'dotenv/config';
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 
 const url = process.env.MONGO_URL;
 app.set('json spaces', 2);

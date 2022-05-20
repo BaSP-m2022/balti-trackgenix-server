@@ -1,11 +1,9 @@
-// import { request } from 'express';
 import request from 'supertest';
 import app from '../index';
 import Admins from '../models/Admins';
 import adminsSeed from '../seed/admins';
-import * as jestSetup from '../../jest.setup';
 
-jestSetup.beforeAll(async () => {
+beforeAll(async () => {
   await Admins.collection.insertMany(adminsSeed);
 });
 

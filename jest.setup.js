@@ -5,7 +5,7 @@ const mongoServer = new MongoMemoryServer();
 let mongo;
 
 // Make the connection to a fake database
-export const beforeAll = (async () => {
+beforeAll(async () => {
   mongo = await MongoMemoryServer.create();
   const uri = mongo.getUri();
 
@@ -17,7 +17,7 @@ export const beforeAll = (async () => {
 });
 
 // Disconnection the fake database
-export const afterAll = (async () => {
+afterAll(async () => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await mongoServer.stop();
