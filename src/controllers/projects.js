@@ -43,32 +43,9 @@ export const deleteById = async (req, res) => {
 
 export const createProject = async (req, res) => {
   try {
-    // const newProject = new Projects({
-    //   projectName: req.body.projectName,
-    //   description: req.body.description,
-    //   isActive: req.body.isActive,
-    //   admin: req.body.admin,
-    //   client: req.body.client,
-    //   startDate: req.body.startDate,
-    //   endDate: req.body.endDate,
-    //   employees: [...req.body.employees],
-    // //   // [
-    // //   //   {
-    // //   //     employeeId: req.body.employees[0].employeeId,
-    // //   //     // role: req.body.employees[0].role,
-    // //   //     // rate: req.body.employees[0].rate,
-    // //   //     // hoursInProject: req.body.employees[0].hoursInProject,
-    // //   //   },
-    // //   // ],
-    // // });
-    // // // const user = await Employees.findById(userId);
-    // // // console.log(`user ${user}`);
-    // // // console.log(newProject);
-
     const newProjects = new Projects({
       ...req.body,
     });
-
     await newProjects.save();
     return res.status(201).json({
       msg: 'New Project successfully created',
