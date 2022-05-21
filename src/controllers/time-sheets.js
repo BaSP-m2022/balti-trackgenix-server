@@ -2,7 +2,7 @@ import TimeSheetModel from '../models/Time-sheets';
 
 export const getAllTimeSheets = async (req, res) => {
   try {
-    const allTimeSheets = await TimeSheetModel.find({});
+    const allTimeSheets = await TimeSheetModel.find({}).populate('employee', 'project', 'task');
     return res.status(200).json({
       message: 'All timesheets',
       data: allTimeSheets,
@@ -19,7 +19,7 @@ export const getAllTimeSheets = async (req, res) => {
 
 export const getTimeSheet = async (req, res) => {
   try {
-    const timeSheet = await TimeSheetModel.findById(req.params.id);
+    const timeSheet = await TimeSheetModel.findById(req.params.id).populate('employee', 'project', 'task');
     if (!timeSheet) {
       return res.status(404).json({
         message: 'Timesheet not found',
