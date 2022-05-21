@@ -10,7 +10,16 @@ const projectSchema = new Schema(
     client: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: false },
-    admin: { type: Schema.Types.ObjectId, required: true, ref: 'Admin' },
+    admin: { type: String, required: true },
+    employees:
+    [
+      {
+        employeeId: { type: Number, required: true },
+        role: { type: String, required: true, enum: ['DEV', 'QA', 'PM', 'TL'] },
+        rate: { type: Number, required: true },
+        hoursInProject: { type: Number, required: true },
+      },
+    ],
   },
 );
 
