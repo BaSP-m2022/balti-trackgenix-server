@@ -94,11 +94,8 @@ export const addTimeSheet = async (req, res) => {
 
 export const editTimeSheet = async (req, res) => {
   try {
-    const result = await TimeSheetModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await TimeSheetModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .populate('employee', 'project', 'task');
     if (!result) {
       return res.status(404).json({
         message: 'The timesheet has not been found',
