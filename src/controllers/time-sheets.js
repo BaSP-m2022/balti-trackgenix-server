@@ -2,7 +2,10 @@ import TimeSheetModel from '../models/Time-sheets';
 
 export const getAllTimeSheets = async (req, res) => {
   try {
-    const allTimeSheets = await TimeSheetModel.find({});
+    const allTimeSheets = await TimeSheetModel.find({})
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     return res.status(200).json({
       message: 'All timesheets',
       data: allTimeSheets,
@@ -19,7 +22,10 @@ export const getAllTimeSheets = async (req, res) => {
 
 export const getTimeSheet = async (req, res) => {
   try {
-    const timeSheet = await TimeSheetModel.findById(req.params.id);
+    const timeSheet = await TimeSheetModel.findById(req.params.id)
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (!timeSheet) {
       return res.status(404).json({
         message: 'Timesheet not found',
@@ -94,11 +100,10 @@ export const addTimeSheet = async (req, res) => {
 
 export const editTimeSheet = async (req, res) => {
   try {
-    const result = await TimeSheetModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const result = await TimeSheetModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (!result) {
       return res.status(404).json({
         message: 'The timesheet has not been found',
@@ -122,7 +127,10 @@ export const editTimeSheet = async (req, res) => {
 
 export const getAllTimeSheetsByEmployee = async (req, res) => {
   try {
-    const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee });
+    const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee })
+      .populate('employee')
+      .populate('project')
+      .populate('task');
     if (filterByEmployee.length) {
       return res.status(200).json({
         message: `Timesheets with the employee ${req.params.employee}`,

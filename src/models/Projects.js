@@ -7,10 +7,10 @@ const projectSchema = new Schema(
     projectName: { type: String, required: true },
     description: { type: String, required: false },
     isActive: { type: Boolean, required: true },
-    admin: { type: String, required: true },
     client: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: false },
+    admin: { type: String, required: true },
     employees:
       [
         {
