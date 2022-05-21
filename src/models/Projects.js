@@ -9,8 +9,8 @@ const projectSchema = new Schema(
     isActive: { type: Boolean, required: true },
     admin: { type: Schema.Types.ObjectId, required: true, ref: 'Admin' },
     client: { type: String, required: true },
-    startDate: { type: String, required: true },
-    endDate: { type: String, required: false },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: false },
     employees:
       [
         {

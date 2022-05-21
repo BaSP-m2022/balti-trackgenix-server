@@ -40,9 +40,9 @@ const updateProjectValidation = (req, res, next) => {
     projectName: Joi.string().min(1).max(30),
     description: Joi.string().min(10).max(140),
     isActive: Joi.boolean(),
-    admin: Joi.string().required(),
+    admin: Joi.string(),
     client: Joi.string().min(1).max(20),
-    startDate: Joi.date().required(),
+    startDate: Joi.date(),
     endDate: Joi.date(),
     employees: Joi.array().items(employeesSchema),
   });
