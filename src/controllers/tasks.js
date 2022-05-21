@@ -2,7 +2,9 @@ import TasksModel from '../models/Tasks';
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await TasksModel.find({});
+    const tasks = await TasksModel.find({})
+      .populate('employeeId')
+      .populate('projectId');
     return res.status(200).json({
       message: 'Request Successful. All tasks.',
       data: tasks,
@@ -19,7 +21,7 @@ export const getTasks = async (req, res) => {
 
 export const findTask = async (req, res) => {
   try {
-    const taskById = await TasksModel.findById(req.params.id);
+    const taskById = await TasksModel.findById(req.params.id).populate('employeeId', 'projectId');
     if (taskById) {
       return res.status(200).json({
         message: (`Request Successful. Task with Id: ${req.params.id} found.`),
@@ -69,7 +71,8 @@ export const addTask = async (req, res) => {
 export const editTask = async (req, res) => {
   const { id } = req.params;
   try {
-    const modifiedTask = await TasksModel.findByIdAndUpdate(id, req.body, { new: true });
+    const modifiedTask = await TasksModel.findByIdAndUpdate(id, req.body, { new: true })
+      .populate('employeeId', 'projectId');
     if (modifiedTask) {
       return res.status(200).json({
         message: 'Task Modified',

@@ -1,5 +1,4 @@
 export default [{
-  id: '1',
   firstName: 'Nicolas',
   lastName: 'Costanza',
   email: 'nicolas22@gmail.com',
@@ -8,16 +7,14 @@ export default [{
   isActive: true,
 },
 {
-  id: '2',
   firstName: 'Camila',
   lastName: 'figueroa',
-  email: 'sadcamil@gmail.com',
+  email: 'sadsdssacamil@gmail.com',
   password: 'h231dda4',
   assignedProjects: ['2134b7f40b47573aa06aef3', '6223b7f40b4357e81sa06ef3', '1223b234a4357e81sa06ef3'],
   isActive: true,
 },
 {
-  id: '3',
   firstName: 'Federico',
   lastName: 'Troanes',
   email: 'fedetroanes@gmail.com',
