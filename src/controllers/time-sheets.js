@@ -129,7 +129,8 @@ export const getAllTimeSheetsByEmployee = async (req, res) => {
   try {
     const filterByEmployee = await TimeSheetModel.find({ employee: req.params.employee })
       .populate('employee')
-      .populate('project');
+      .populate('project')
+      .populate('task');
     if (filterByEmployee.length) {
       return res.status(200).json({
         message: `Timesheets with the employee ${req.params.employee}`,
