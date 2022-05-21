@@ -1,7 +1,5 @@
 import Projects from '../models/Projects';
 
-// import { getEmployeesById } from './employees';
-
 export const getAllProjects = async (req, res) => {
   try {
     const findAll = await Projects.find({}).populate('employees.employeeId').populate('admin');
