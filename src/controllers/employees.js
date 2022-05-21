@@ -45,7 +45,7 @@ export const createEmployee = async (req, res) => {
 
 export const deleteEmployee = async (req, res) => {
   try {
-    const result = await Employees.findByIdAndDelete(req.params.id).populate('assignedProjects');
+    const result = await Employees.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
         message: 'Employee not found',
