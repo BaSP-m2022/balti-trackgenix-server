@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
+
 export default [{
-  _id: '62893107ea8586fcd9e96120',
+  _id: mongoose.Types.ObjectId('6289110ececee60c913cb4fa'),
   projectName: 'ESTAaaa',
   description: 'descripcion 2',
   isActive: true,
