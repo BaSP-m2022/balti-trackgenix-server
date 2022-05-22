@@ -20,7 +20,7 @@ beforeAll(async () => {
 describe('/GET get all timesheets', () => {
   test('Response should return a status 200', async () => {
     const response = await request(app).get('/timesheets').send();
-    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
   });
   test('Response should return a status 400', async () => {
     const response = await request(app).get('/timesheet').send();
@@ -162,5 +162,20 @@ describe('PUT edit timesheet', () => {
       },
     );
     expect(response.error).toBeTruthy();
+  });
+});
+
+describe('DELETE timesheet', () => {
+  test('Response should return a status 200', async () => {
+    const response = await request(app).delete('/timesheets/6285b864f52d378096258169').send();
+    expect(response.status).toBe(200);
+  });
+  test('Response should return a status 400', async () => {
+    const response = await request(app).delete('/timesheet').send();
+    expect(response.status).toBe(404);
+  });
+  test('Response should return a not found message', async () => {
+    const response = await request(app).delete('/timesheets/6285b864f52d378096258169').send();
+    expect(response.body.message).toEqual('The timesheet has not been found');
   });
 });
