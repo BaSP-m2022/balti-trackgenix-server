@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../index';
 import Timesheet from '../models/Time-sheets';
 import Employees from '../models/Employees';
@@ -51,5 +52,56 @@ describe('/GET /timesheets/:id', () => {
   test('Response should return minimum body content', async () => {
     const response = await request(app).get('/timesheets').send();
     expect(Object.keys(response.body.data[0]).length).toBeGreaterThan(5);
+  });
+});
+
+describe('POST /timesheet/create', () => {
+  test('Response should return error because there is no data', async () => {
+    const response = await request(app).post('/timesheets').send();
+    expect(response.error).toBeTruthy();
+  });
+  test('Create response should return a status 201', async () => {
+    const response = await request(app).post('/timesheets').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    expect(response.status).toBe(201);
+  });
+  test('Create response should return error validation', async () => {
+    const response = await request(app).post('/timesheets').send(
+      {
+        employee: 'fakeId',
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    // eslint-disable-next-line no-underscore-dangle
+    expect(response.body.message._message).toEqual('Timesheet validation failed');
+  });
+  test('Create response should return error validation', async () => {
+    const response = await request(app).post('/timesheets').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 'worngTypeToBeTested',
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    // eslint-disable-next-line no-underscore-dangle
+    expect(response.body.data).toEqual('"rate" must be a number');
   });
 });
