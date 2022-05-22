@@ -17,7 +17,7 @@ beforeAll(async () => {
   await Tasks.collection.insertMany(taskSeed);
 });
 
-describe('/GET /timesheets', () => {
+describe('/GET get all timesheets', () => {
   test('Response should return a status 200', async () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.error).toBeFalsy();
@@ -36,7 +36,7 @@ describe('/GET /timesheets', () => {
   });
 });
 
-describe('/GET /timesheets/:id', () => {
+describe('/GET get timesheets by id', () => {
   test('Response should return a status 200', async () => {
     const response = await request(app).get('/timesheets/6285b864f52d378096258169').send();
     expect(response.error).toBeFalsy();
@@ -55,7 +55,7 @@ describe('/GET /timesheets/:id', () => {
   });
 });
 
-describe('POST /timesheet/create', () => {
+describe('POST create timesheet', () => {
   test('Response should return error because there is no data', async () => {
     const response = await request(app).post('/timesheets').send();
     expect(response.error).toBeTruthy();
@@ -103,5 +103,64 @@ describe('POST /timesheet/create', () => {
     );
     // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data).toEqual('"rate" must be a number');
+  });
+});
+
+describe('PUT edit timesheet', () => {
+  test('Edit response should return a status 200', async () => {
+    const response = await request(app).put('/timesheets/6285b864f52d378096258169').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    expect(response.status).toBe(200);
+  });
+  test('Edit response should return: The timesheet has not been found', async () => {
+    const response = await request(app).put('/timesheets/6288f73964ed6961bb7c2073').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    expect(response.body.message).toEqual('The timesheet has not been found');
+  });
+  test('Wrong endpoint response should return: There was an error', async () => {
+    const response = await request(app).put('/timesheets/asd').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 'qa',
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    expect(response.body.message).toEqual('There was an error');
+  });
+  test('Edit response should return error validation', async () => {
+    const response = await request(app).put('/timesheets/6285b864f52d378096258169').send(
+      {
+        employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+        project: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+        role: 1234,
+        rate: 10,
+        workedHours: 33,
+        description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+        task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
+      },
+    );
+    expect(response.error).toBeTruthy();
   });
 });
