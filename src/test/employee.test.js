@@ -23,7 +23,7 @@ describe('GET /employees', () => {
   });
 });
 
-// edit employee tests
+// // edit employee tests
 describe('PUT /employees', () => {
   test('Edit employee with all the parameters correct should return status 200', async () => {
     const response = await request(app).put('/employees/6287c08beee9276577d53b1f').send({
@@ -54,5 +54,21 @@ describe('PUT /employees', () => {
       isActive: true,
     });
     expect(response.status).toBe(404);
+  });
+});
+
+// delete employee tests
+describe('DEL /employees', () => {
+  test('Delete invalid employee ID should return status 400', async () => {
+    const response = await request(app).delete('/employees/6288f73964ed6961bb7c275').send();
+    expect(response.status).toBe(400);
+  });
+  test('Delete incorrect employee ID should return status 404', async () => {
+    const response = await request(app).delete('/employees/6288f73964ed6961bb7c2175').send();
+    expect(response.status).toBe(404);
+  });
+  test('Delete correct employee ID should return status 200', async () => {
+    const response = await request(app).delete('/employees/6288f73964ed6961bb7c2075').send();
+    expect(response.status).toBe(200);
   });
 });
