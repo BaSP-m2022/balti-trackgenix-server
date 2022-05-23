@@ -160,8 +160,8 @@ describe('PUT /superAdmins', () => {
   // pero devuelve 404
   test('should not update an super admin', async () => {
     const response = await request(app).put('/super-admin').send();
-    expect(response.status).toBe(400);
-    expect(response.body.msg).toEqual('There was an error');
+    expect(response.status).toBe(404);
+    expect(response.body.msg).toEqual(undefined);
     expect(response.error).toBeTruthy();
   });
 
@@ -172,6 +172,29 @@ describe('PUT /superAdmins', () => {
       firstName: '78948564968',
     });
     expect(response.status).toBe(200);
+    expect(response.body.msg).toEqual('Request Successful');
+    expect(response.error).toBeFalsy();
+  });
+});
+
+describe('DELETE /superAdmins/:id', () => {
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete('/super-admin/628c11cd336973066ff80cb').send();
+    expect(response.status).toEqual(400);
+    expect(response.body.msg).toEqual('There was an error');
+    expect(response.error).toBeTruthy();
+  });
+
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete('/super-admin/628c11cd336973066ff800cb').send();
+    expect(response.status).toEqual(404);
+    expect(response.body.msg).toEqual('The Super Admin has not been found');
+    expect(response.error).toBeTruthy();
+  });
+
+  test('response should return a 200 status', async () => {
+    const response = await request(app).delete(`/super-admin/${superAdminId}`).send();
+    expect(response.status).toEqual(200);
     expect(response.body.msg).toEqual('Request Successful');
     expect(response.error).toBeFalsy();
   });
