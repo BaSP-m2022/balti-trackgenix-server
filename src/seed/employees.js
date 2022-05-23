@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId(3),
+  _id: mongoose.Types.ObjectId('6287c08beee9276577d53b1f'),
   firstName: 'Nicolas',
   lastName: 'Costanza',
   email: 'nicolas22@gmail.com',
@@ -11,7 +11,7 @@ export default [{
   __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId(4),
+  _id: mongoose.Types.ObjectId('6287e6f01c1709ee93503342'),
   firstName: 'Camila',
   lastName: 'figueroa',
   email: 'sadsdssacamil@gmail.com',
@@ -21,7 +21,7 @@ export default [{
   __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId(2),
+  _id: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
   firstName: 'Federico',
   lastName: 'Troanes',
   email: 'fedetroanes@gmail.com',
