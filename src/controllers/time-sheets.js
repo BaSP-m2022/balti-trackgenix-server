@@ -6,7 +6,6 @@ export const getAllTimeSheets = async (req, res) => {
       .populate('employee')
       .populate('project')
       .populate('task');
-    console.log(allTimeSheets);
     return res.status(200).json({
       message: 'All timesheets',
       data: allTimeSheets,
