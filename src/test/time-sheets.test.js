@@ -22,7 +22,7 @@ describe('/GET get all timesheets', () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.status).toBe(200);
   });
-  test('Response should return a status 400', async () => {
+  test('Response should return a status 404', async () => {
     const response = await request(app).get('/timesheet').send();
     expect(response.status).toBe(404);
   });
@@ -39,9 +39,9 @@ describe('/GET get all timesheets', () => {
 describe('/GET get timesheets by id', () => {
   test('Response should return a status 200', async () => {
     const response = await request(app).get('/timesheets/6285b864f52d378096258169').send();
-    expect(response.error).toBeFalsy();
+    expect(response.status).toBe(200);
   });
-  test('Response should return a status 400', async () => {
+  test('Response should return a status 404', async () => {
     const response = await request(app).get('/timesheet').send();
     expect(response.status).toBe(404);
   });
@@ -56,7 +56,7 @@ describe('/GET get timesheets by id', () => {
 });
 
 describe('POST create timesheet', () => {
-  test('Response should return error because there is no data', async () => {
+  test('Response should return error because we are not sending data', async () => {
     const response = await request(app).post('/timesheets').send();
     expect(response.error).toBeTruthy();
   });
@@ -101,7 +101,6 @@ describe('POST create timesheet', () => {
         task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
       },
     );
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data).toEqual('"rate" must be a number');
   });
 });
