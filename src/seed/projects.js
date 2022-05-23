@@ -1,4 +1,7 @@
+import mongoose from 'mongoose';
+
 export default [{
+  _id: mongoose.Types.ObjectId('6287f93beee9276577d60c1f'),
   projectName: 'First Project',
   description: 'Description of project',
   isActive: true,
@@ -14,8 +17,10 @@ export default [{
       hoursInProject: 500,
     },
   ],
+  __v: 0,
 },
 {
+  _id: mongoose.Types.ObjectId('6288k93beee9276577d60c1s'),
   projectName: 'Second Project',
   description: 'Description of project',
   isActive: true,
@@ -31,8 +36,10 @@ export default [{
       hoursInProject: 700,
     },
   ],
+  __v: 0,
 },
 {
+  _id: mongoose.Types.ObjectId('1998k93beee9276577d60c4u'),
   projectName: 'Third Project',
   description: 'Description of project',
   isActive: false,
@@ -48,8 +55,10 @@ export default [{
       hoursInProject: 200,
     },
   ],
+  __v: 0,
 },
 {
+  _id: mongoose.Types.ObjectId('0034k93beee9276577d60c4g'),
   projectName: 'Fourth Project',
   description: 'Description of project',
   isActive: false,
@@ -65,8 +74,10 @@ export default [{
       hoursInProject: 700,
     },
   ],
+  __v: 0,
 },
 {
+  _id: mongoose.Types.ObjectId('9547k93beee9276577s60c2g'),
   projectName: 'Fifth Project',
   description: 'Description of project',
   isActive: true,
@@ -82,8 +93,10 @@ export default [{
       hoursInProject: 1000,
     },
   ],
+  __v: 0,
 },
 {
+  _id: mongoose.Types.ObjectId('5432k93befe9276577s60c2r'),
   projectName: 'Sixth Project',
   description: 'Description of project',
   isActive: false,
@@ -99,5 +112,6 @@ export default [{
       hoursInProject: 500,
     },
   ],
+  __v: 0,
 },
 ];
