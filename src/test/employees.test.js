@@ -21,7 +21,7 @@ describe('/POST /employees', () => {
       lastName: 'Troanes',
       email: 'fedetroanes@gmail.com',
       password: 'fedekun23w3',
-      assignedProjects: ['2'],
+      assignedProjects: ['6287f93beee9276577d60c1f'],
       isActive: true,
     });
     expect(response.status).toBe(201);
