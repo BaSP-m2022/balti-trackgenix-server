@@ -101,7 +101,7 @@ export const updateEmployee = async (req, res) => {
   };
 
   try {
-    const result = await Employees.findByIdAndUpdate(req.params.id, (updatedEmployee)).populate('assignedProjects');
+    const result = await Employees.findByIdAndUpdate(req.params.id, (updatedEmployee)).populate('assignedProjects ');
     if (!result) {
       return res.status(404).json({
         message: `Employee id: ${req.params.id} not found`,
