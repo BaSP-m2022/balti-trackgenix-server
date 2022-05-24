@@ -22,9 +22,9 @@ describe('/GET get all timesheets', () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.status).toBe(200);
   });
-  test('Response should return a status 404', async () => {
-    const response = await request(app).get('/timesheet').send();
-    expect(response.status).toBe(404);
+  test('Response should return a status 400', async () => {
+    const response = await request(app).get('/timesheets/wrong-endpoint').send();
+    expect(response.status).toBe(400);
   });
   test('Response should return a non empty body content', async () => {
     const response = await request(app).get('/timesheets').send();
@@ -41,9 +41,9 @@ describe('/GET get timesheets by id', () => {
     const response = await request(app).get('/timesheets/6285b864f52d378096258169').send();
     expect(response.status).toBe(200);
   });
-  test('Response should return a status 404', async () => {
-    const response = await request(app).get('/timesheet').send();
-    expect(response.status).toBe(404);
+  test('Response should return a status 400', async () => {
+    const response = await request(app).get('/timesheets/wrong-endpoint').send();
+    expect(response.status).toBe(400);
   });
   test('Response should return a non empty body content', async () => {
     const response = await request(app).get('/timesheets').send();
@@ -170,8 +170,8 @@ describe('DELETE timesheet', () => {
     expect(response.status).toBe(200);
   });
   test('Response should return a status 400', async () => {
-    const response = await request(app).delete('/timesheet').send();
-    expect(response.status).toBe(404);
+    const response = await request(app).delete('/timesheets/wrong-endpoint').send();
+    expect(response.status).toBe(400);
   });
   test('Response should return a not found message', async () => {
     const response = await request(app).delete('/timesheets/6285b864f52d378096258169').send();
