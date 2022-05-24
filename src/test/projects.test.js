@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../index';
 import projectModel from '../models/Projects';
@@ -22,21 +23,21 @@ describe('/GetAll /projects', () => {
 });
 
 describe('/POST /projects', () => {
-  test('Should create an project successfully', async () => {
+  test('Should create a project successfully', async () => {
     const response = await request(app).post('/projects').send({
-      projectName: 'Second Project',
+      projectName: 'First Project',
       description: 'Description of project',
       isActive: true,
-      admin: '6287b9da26cff823b1f9055b',
-      client: 'Fernando Morelli',
-      startDate: 2015 - 25 - 10,
-      endDate: 2015 - 25 - 10,
+      admin: mongoose.Types.ObjectId('6287b91426cff823b1f9055a'),
+      client: 'Camila Figueroa',
+      startDate: 2010 - 13 - 12,
+      endDate: 2020 - 13 - 12,
       employees: [
         {
-          employeeId: '6287e6f01c1709ee93503342',
-          role: 'QA',
-          rate: 3000,
-          hoursInProject: 700,
+          employeeId: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
+          role: 'DEV',
+          rate: 2000,
+          hoursInProject: 500,
         },
       ],
     });
@@ -45,7 +46,7 @@ describe('/POST /projects', () => {
     expect(response.body.msg).toEqual('New Project successfully created');
   });
 
-  test('Check that it is not null or with an error', async () => {
+  test('Check that have an error', async () => {
     const response = await request(app).post('/projects').send();
     expect(response.status).toBe(400);
     expect(response.body.msg).toEqual('Error during validation, check all the parameters');
@@ -54,40 +55,65 @@ describe('/POST /projects', () => {
 
   test('With an correct user the response should return a not undefined data', async () => {
     const response = await request(app).post('/projects').send({
-      projectName: 'Second Project',
+      projectName: 'First Project',
       description: 'Description of project',
       isActive: true,
-      admin: '6287b9da26cff823b1f9055b',
-      client: 'Fernando Morelli',
-      startDate: 2015 - 25 - 10,
-      endDate: 2021 - 25 - 10,
+      admin: mongoose.Types.ObjectId('6287b91426cff823b1f9055a'),
+      client: 'Camila Figueroa',
+      startDate: 2010 - 13 - 12,
+      endDate: 2020 - 13 - 12,
       employees: [
         {
-          employeeId: '6287e6f01c1709ee93503342',
-          role: 'QA',
-          rate: 3000,
-          hoursInProject: 700,
+          employeeId: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
+          role: 'DEV',
+          rate: 2000,
+          hoursInProject: 500,
         },
       ],
     });
     expect(response.body.data).not.toBeUndefined();
   });
 
-  test('Should return error with joi validation', async () => {
+  test('I verify that the employee has been created with the data sent through the body', async () => {
     const response = await request(app).post('/projects').send({
-      projectName: 'Second Project of lalalalalalalalala',
+      projectName: 'First Project',
       description: 'Description of project',
-      isActive: null,
-      admin: '6287b9da26cff823b1f9055b',
-      client: 'Fernando Morelli',
-      startDate: 2015 - 25 - 10,
-      endDate: 2021 - 25 - 10,
+      isActive: true,
+      admin: mongoose.Types.ObjectId('6287b91426cff823b1f9055a'),
+      client: 'Camila Figueroa',
+      startDate: 2010 - 13 - 12,
+      endDate: 2020 - 13 - 12,
       employees: [
         {
-          employeeId: '6287e6f01c1709ee93503342',
-          role: 'QA',
-          rate: 3000,
-          hoursInProject: 700,
+          employeeId: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
+          role: 'DEV',
+          rate: 2000,
+          hoursInProject: 500,
+        },
+      ],
+    });
+    expect(response.body.data.projectName).toEqual('First Project');
+    expect(response.body.data.description).toEqual('Description of project');
+    expect(response.body.data.isActive).toBe(true);
+    expect(response.body.data.admin).toEqual('6287b91426cff823b1f9055a');
+    expect(response.body.data.client).toEqual('Camila Figueroa');
+  });
+
+  test('Should return error with joi validation', async () => {
+    const response = await request(app).post('/projects').send({
+      projectName: 'First Project lalalalalalalalalalalalala',
+      description: 'Description of project',
+      isActive: null,
+      admin: mongoose.Types.ObjectId('6287b91426cff823b1f9055a'),
+      client: 'Camila Figueroa',
+      startDate: 2010 - 13 - 12,
+      endDate: 2020 - 13 - 12,
+      employees: [
+        {
+          employeeId: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
+          role: 'DEV',
+          rate: 2000,
+          hoursInProject: 500,
         },
       ],
     });
