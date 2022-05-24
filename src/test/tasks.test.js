@@ -112,3 +112,49 @@ describe('CREATE a task', () => {
     expect(response.body.message).toEqual('"title" must be a string');
   });
 });
+
+describe('PUT update task', () => {
+  const idTest = '6288fa66a52cdee44fee0144';
+  const testUpdateTask = {
+    title: 'Task 6 Lucas',
+    description: 'This is the task 6.5',
+    done: false,
+  };
+  test('Should update a task', async () => {
+    const response = await request(app).put(`/tasks/${idTest}`).send(testUpdateTask);
+    expect(response.status).toBe(200);
+    expect(response.body.error).toBeFalsy();
+  });
+  test('Message should indicate that task has been updated', async () => {
+    const response = await request(app).put(`/tasks/${idTest}`).send(testUpdateTask);
+    expect(response.body.message).toEqual('Task Modified');
+  });
+  test('Verify that task has been updated with same data that was submitted', async () => {
+    const response = await request(app).put(`/tasks/${idTest}`).send(testUpdateTask);
+    expect(response.body.data.title).toEqual('Task 6 Lucas');
+    expect(response.body.data.description).toEqual('This is the task 6.5');
+    expect(response.body.data.done).not.toBeTruthy();
+  });
+  test('If ID is invalid then response should return a 400 status and a correct unsuccessful msg', async () => {
+    const response = await request(app).put('/tasks/6288fa66a52cdee44fee0244').send();
+    expect(response.status).toBe(400);
+    expect(response.body.message).toEqual("Id: 6288fa66a52cdee44fee0244 doesn't exist.");
+  });
+  test('If ID format is invalid then response should return a 500 status', async () => {
+    const response = await request(app).put('/tasks/6288').send();
+    expect(response.status).toBe(500);
+  });
+  test('Response should return validation error joi', async () => {
+    const response = await request(app).put(`/tasks/${idTest}`).send({
+      title: 356426,
+      description: 'This is the task 6.5',
+    });
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual('"title" must be a string');
+  });
+});
+
+// describe('DELETE update task', () => {
+
+// });
