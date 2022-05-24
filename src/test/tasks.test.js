@@ -98,7 +98,7 @@ describe('CREATE a task', () => {
     const response = await request(app).post('/tasks').send(testTask);
     expect(response.body.message).toEqual('"title" is required');
   });
-  test('Should return validation error joi', async () => {
+  test('Response should return validation error joi', async () => {
     const response = await request(app).post('/tasks').send({
       employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
       projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
