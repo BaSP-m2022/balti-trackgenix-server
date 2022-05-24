@@ -107,7 +107,6 @@ describe('CREATE a task', () => {
       date: 2020 - 12 - 11,
       done: true,
     });
-    console.log(response.body.message);
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
     expect(response.body.message).toEqual('"title" must be a string');
