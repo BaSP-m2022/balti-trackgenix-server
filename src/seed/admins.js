@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
+
 export default [{
-  idEmployee: '6282d21b087676d2eedadc41',
+  idEmployee: mongoose.Types.ObjectId('628cf218c545127e724c881c'),
   firstName: 'mortal',
   lastName: 'backflip',
   email: 'notuvo@yanoser.com',
@@ -7,7 +9,7 @@ export default [{
   isActive: true,
 },
 {
-  idEmployee: '628c0382f003358d3de1e4ba',
+  idEmployee: mongoose.Types.ObjectId('628cf22111b8397990200a06'),
   firstName: 'Monica',
   lastName: 'Geller',
   email: 'mgeller@friends.com',
@@ -15,34 +17,11 @@ export default [{
   isActive: true,
 },
 {
-  idEmployee: '628c049501bf8fdf39edf8ed',
+  idEmployee: mongoose.Types.ObjectId('628cf2263d81b46d975f94ba'),
   firstName: 'Chandler',
   lastName: 'Bing',
   email: 'cbing@friends.com',
   password: '1211115878',
   isActive: true,
 },
-{
-  idEmployee: '628c2d300c303668d2850b44',
-  firstName: 'Ross',
-  lastName: 'Geller',
-  email: 'rgeller@friends.com',
-  password: '121889673',
-  isActive: true,
-},
-{
-  idEmployee: '628c2d247a7a6865d5f60f42',
-  firstName: 'Rachel',
-  lastName: 'Green',
-  email: 'rgreen@friends.com',
-  password: '0006122018',
-  isActive: true,
-},
-{
-  idEmployee: '628c2d1c83caa8c896456159',
-  firstName: 'Phoebe ',
-  lastName: 'Buffay',
-  email: 'pbuffay@friends.com',
-  password: '1211115675',
-  isActive: true,
-}];
+];
