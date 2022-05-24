@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export default [{
   _id: mongoose.Types.ObjectId('6287c08beee9276577d53b1f'),
-  // firstName: 'Nicolas',
+  firstName: 'Nicolas',
   lastName: 'Costanza',
   email: 'nicolas22@gmail.com',
   password: 'hola1234',
@@ -30,4 +30,5 @@ export default [{
   password: 'fedekun23w3',
   assignedProjects: [mongoose.Types.ObjectId('628cdcd07a9afd1c52e6ff1e')],
   isActive: true,
+  __v: 0,
 }];

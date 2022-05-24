@@ -27,7 +27,8 @@ describe('/GET /employees', () => {
     const allEmployees = Object.values(response.body.data);
     for (let i = 0; i < allEmployees.length; i += 1) {
       const valuesFields = Object.values(allEmployees[i]);
-      for (let j = 0; j < valuesFields.length; j += 1) {
+      expect(valuesFields.length).toBe(8);
+      for (let j = 0; j < 7; j += 1) {
         expect(valuesFields[j]).not.toBe(null);
       }
     }
