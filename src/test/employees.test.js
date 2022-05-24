@@ -22,22 +22,16 @@ describe('/GET /employees', () => {
     const response = await request(app).get('/employees').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
-  // test('check that each field is not empty', async () => {
-  //   const response = await request(app).get('/employees').send();
-  //   const arrayValues = Object.values(response.body.data);
-  //   console.log(arrayValues);
-  // const values2 = Object.values(arrayValues[0]);
-  // console.log(values2[1]);
-  // for (let i = 0; i < arrayValues.length; i + 1) {
-  //   const values = Object.values(arrayValues[i]);
-  //   // console.log(values[2]);
-  //   for (let j = 0; j < values.length; j + 1) {
-  //     console.log(values[j]);
-  //     expect(values[j]).not.toBe(null);
-  //   }
-  // }
-  // expect(response.body.data.length).toBeGreaterThan(0);
-  // });
+  test('check that each field is not empty', async () => {
+    const response = await request(app).get('/employees').send();
+    const allEmployees = Object.values(response.body.data);
+    for (let i = 0; i < allEmployees.length; i += 1) {
+      const valuesFields = Object.values(allEmployees[i]);
+      for (let j = 0; j < valuesFields.length; j += 1) {
+        expect(valuesFields[j]).not.toBe(null);
+      }
+    }
+  });
 });
 
 describe('/POST /employees', () => {

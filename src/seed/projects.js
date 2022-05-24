@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('6287f93beee9276577d60c1f'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
   projectName: 'First Project',
   description: 'Description of project',
   isActive: true,
@@ -17,10 +17,9 @@ export default [{
       hoursInProject: 500,
     },
   ],
-  __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('6288a93beee9276577d60c1b'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca56'),
   projectName: 'Second Project',
   description: 'Description of project',
   isActive: true,
@@ -36,10 +35,9 @@ export default [{
       hoursInProject: 700,
     },
   ],
-  __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('1998a93beee9276577d60c4b'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca59'),
   projectName: 'Third Project',
   description: 'Description of project',
   isActive: false,
@@ -55,10 +53,9 @@ export default [{
       hoursInProject: 200,
     },
   ],
-  __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('0034a93beee9276577d60c4a'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca58'),
   projectName: 'Fourth Project',
   description: 'Description of project',
   isActive: false,
@@ -74,10 +71,9 @@ export default [{
       hoursInProject: 700,
     },
   ],
-  __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('9547b93beee9276577b60c2b'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
   projectName: 'Fifth Project',
   description: 'Description of project',
   isActive: true,
@@ -87,16 +83,15 @@ export default [{
   endDate: 2020 - 13 - 12,
   employees: [
     {
-      employeeId: '6287c08beee9276577d53b1f',
+      employeeId: '6288f73964ed6961bb7c2075',
       role: 'PM',
       rate: 8000,
       hoursInProject: 1000,
     },
   ],
-  __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('5432a93befe9276577a60c2b'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca50'),
   projectName: 'Sixth Project',
   description: 'Description of project',
   isActive: false,
@@ -106,12 +101,11 @@ export default [{
   endDate: 2021 - 25 - 10,
   employees: [
     {
-      employeeId: '6287e6f01c1709ee93503342',
+      employeeId: '6288f73964ed6961bb7c2075',
       role: 'DEV',
       rate: 7000,
       hoursInProject: 500,
     },
   ],
-  __v: 0,
 },
 ];
