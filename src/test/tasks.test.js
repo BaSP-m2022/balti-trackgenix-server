@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../index';
 import Tasks from '../models/Tasks';
 import Projects from '../models/Projects';
@@ -58,5 +59,57 @@ describe('GET task by id', () => {
   test('If ID format is invalid then response should return a 500 status', async () => {
     const response = await request(app).get('/tasks/6288').send();
     expect(response.status).toBe(500);
+  });
+});
+
+describe('CREATE a task', () => {
+  const testTask = {
+    employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
+    projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
+    title: 'Task 6 Cami',
+    description: 'This is the task 6',
+    date: 2020 - 12 - 11,
+    done: true,
+  };
+  test('Should create a task', async () => {
+    const response = await request(app).post('/tasks').send(testTask);
+    expect(response.status).toBe(201);
+    expect(response.body.error).toBeFalsy();
+  });
+  test('Message should indicate the creation of task', async () => {
+    const response = await request(app).post('/tasks').send(testTask);
+    expect(response.body.message).toEqual('Task Added');
+  });
+  test('Verify that task has been created with same data that was submitted', async () => {
+    const response = await request(app).post('/tasks').send(testTask);
+    expect(response.body.data.employeeId).toEqual('628cdc224fc0ef4f8c43b1b1');
+    expect(response.body.data.projectId).toEqual('62891944b389642a7f13ca51');
+    expect(response.body.data.title).toEqual('Task 6 Cami');
+    expect(response.body.data.description).toEqual('This is the task 6');
+    expect(response.body.data.date).not.toBeNull();
+    expect(response.body.data.done).toBeTruthy();
+  });
+  test('Response should return a 400 status if the required fields are incorrect', async () => {
+    delete testTask.title;
+    const response = await request(app).post('/tasks').send(testTask);
+    expect(response.status).toBe(400);
+  });
+  test('Message should indicate the error in data', async () => {
+    const response = await request(app).post('/tasks').send(testTask);
+    expect(response.body.message).toEqual('"title" is required');
+  });
+  test('Should return validation error joi', async () => {
+    const response = await request(app).post('/tasks').send({
+      employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
+      projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
+      title: 356426,
+      description: 'This is the task 6',
+      date: 2020 - 12 - 11,
+      done: true,
+    });
+    console.log(response.body.message);
+    expect(response.status).toBe(400);
+    expect(response.body.error).toBeTruthy();
+    expect(response.body.message).toEqual('"title" must be a string');
   });
 });
