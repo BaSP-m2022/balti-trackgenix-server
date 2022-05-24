@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../index';
 import Projects from '../models/Projects';
@@ -7,8 +8,9 @@ import employeesSeed from '../seed/employees';
 import Admins from '../models/Admins';
 import adminsSeed from '../seed/admins';
 
-const projectID = '62891944b389642a7f13ca58';
-const wrongID = '62891944b389642a';
+const projectID = '628cf237305204bf7d672d7b';
+const wrongPath = '62891944b389642a';
+const wrongID = '628cf237305204bf7d672d7c';
 
 beforeAll(async () => {
   await Projects.collection.insertMany(projectsSeed);
@@ -24,7 +26,7 @@ describe('/GET /projects', () => {
     expect(response.body.error).toBeFalsy();
   });
   test('Wrong path data, should return error', async () => {
-    const response = await request(app).get(`/projects/${wrongID}`).send();
+    const response = await request(app).get(`/projects/${wrongPath}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
     expect(response.body.msg).toEqual('There was an error');
@@ -55,18 +57,18 @@ describe('/PUT /projects', () => {
     expect(response.body.error).toBe(true);
     expect(response.body.msg).toEqual('Error during data validation!');
   });
-  test('Wrong id data, should return not found', async () => {
-    const response = await request(app).put(`/projects/${wrongID}`).send({
+  test('Wrong input data should return error', async () => {
+    const response = await request(app).put(`/projects/${wrongPath}`).send({
       projectName: 'Fourth Project',
       description: 'Description of project',
       isActive: false,
-      admin: '6287b9da26cff823b1f9055b',
+      admin: mongoose.Types.ObjectId('628cf22111b8397990200a06'),
       client: 'Nicolas Costanza',
       startDate: 2015 - 25 - 10,
       endDate: 2021 - 25 - 10,
       employees: [
         {
-          employeeId: '6287e6f01c1709ee93503342',
+          employeeId: mongoose.Types.ObjectId('628cf152c7dfd0c4fe2edb9e'),
           role: 'TL',
           rate: 5000,
           hoursInProject: 700,
@@ -76,6 +78,28 @@ describe('/PUT /projects', () => {
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
     expect(response.body.msg).toEqual('There was an error');
+  });
+  test('Wrong ID, should return not found', async () => {
+    const response = await request(app).put(`/projects/${wrongID}`).send({
+      projectName: 'Fourth Project',
+      description: 'Description of project',
+      isActive: false,
+      admin: mongoose.Types.ObjectId('628cf22111b8397990200a06'),
+      client: 'Nicolas Costanza',
+      startDate: 2015 - 25 - 10,
+      endDate: 2021 - 25 - 10,
+      employees: [
+        {
+          employeeId: mongoose.Types.ObjectId('628cf152c7dfd0c4fe2edb9e'),
+          role: 'TL',
+          rate: 5000,
+          hoursInProject: 700,
+        },
+      ],
+    });
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe(true);
+    expect(response.body.msg).toEqual(`Project not found for id: ${wrongID}`);
   });
 });
 
@@ -87,9 +111,15 @@ describe('/DELETE /projects', () => {
     expect(response.body.msg).toEqual('Project deleted.');
   });
   test('Wrong path data, should return error', async () => {
-    const response = await request(app).delete(`/projects/${wrongID}`);
+    const response = await request(app).delete(`/projects/${wrongPath}`);
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
     expect(response.body.msg).toEqual('There was an error');
+  });
+  test('Wrong ID, should return not found', async () => {
+    const response = await request(app).delete(`/projects/${wrongID}`);
+    expect(response.status).toBe(404);
+    expect(response.body.error).toBe(true);
+    expect(response.body.msg).toEqual('Project not found.');
   });
 });
