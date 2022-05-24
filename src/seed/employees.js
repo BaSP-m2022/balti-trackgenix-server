@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default [{
-  _id: mongoose.Types.ObjectId('6287c08beee9276577d53b1f'),
+  _id: mongoose.Types.ObjectId('62891944b389642a7f13ca53'),
   firstName: 'Nicolas',
   lastName: 'Costanza',
   email: 'nicolas22@gmail.com',
@@ -11,7 +11,7 @@ export default [{
   __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('6287e6f01c1709ee93503342'),
+  _id: mongoose.Types.ObjectId('628cf152c7dfd0c4fe2edb9e'),
   firstName: 'Camila',
   lastName: 'figueroa',
   email: 'sadsdssacamil@gmail.com',
@@ -21,11 +21,12 @@ export default [{
   __v: 0,
 },
 {
-  _id: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+  _id: mongoose.Types.ObjectId('628cf15a2ca8617119124234'),
   firstName: 'Federico',
   lastName: 'Troanes',
   email: 'fedetroanes@gmail.com',
   password: 'fedekun23w3',
   assignedProjects: ['2134b7f40b47573aa06aef3'],
   isActive: true,
-}];
+},
+];
