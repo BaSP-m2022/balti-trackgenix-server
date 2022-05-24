@@ -41,12 +41,28 @@ describe('/POST /employees', () => {
       lastName: 'Troanes',
       email: 'fedetroanes@gmail.com',
       password: 'fedekun23w3',
-      assignedProjects: mongoose.Types.ObjectId['6287f93beee9276577d60c1f'],
+      assignedProjects: [mongoose.Types.ObjectId('62891944b389642a7f13ca56')],
       isActive: true,
     });
     expect(response.status).toBe(201);
     expect(response.body.error).toBeFalsy();
     expect(response.body.message).toEqual('New Employee created');
+  });
+  test('I verify that the employee has been created with the data sent through the body', async () => {
+    const response = await request(app).post('/employees').send({
+      firstName: 'Federico',
+      lastName: 'Troanes',
+      email: 'fedetroanes@gmail.com',
+      password: 'fedekun23w3',
+      assignedProjects: [mongoose.Types.ObjectId('62891944b389642a7f13ca58')],
+      isActive: true,
+    });
+    expect(response.body.data.firstName).toEqual('Federico');
+    expect(response.body.data.lastName).toEqual('Troanes');
+    expect(response.body.data.email).toEqual('fedetroanes@gmail.com');
+    expect(response.body.data.password).toEqual('fedekun23w3');
+    expect(response.body.data.assignedProjects).toEqual(['62891944b389642a7f13ca58']);
+    expect(response.body.data.isActive).toBeTruthy();
   });
   test('It should return error by not passing body', async () => {
     const response = await request(app).post('/employees').send();
