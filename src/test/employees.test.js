@@ -22,7 +22,7 @@ describe('/GET /employees', () => {
     const response = await request(app).get('/employees').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
-  test('check that each field is not empty', async () => {
+  test('check that each field is not null', async () => {
     const response = await request(app).get('/employees').send();
     const allEmployees = Object.values(response.body.data);
     for (let i = 0; i < allEmployees.length; i += 1) {
