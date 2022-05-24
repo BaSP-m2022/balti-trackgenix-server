@@ -15,8 +15,8 @@ describe('GET /superAdmins', () => {
   test('response should return a 200 status, false error and data', async () => {
     const response = await request(app).get('/super-admin').send();
     expect(response.status).toBe(200);
+    expect(response.body.msg).toEqual('Request Successful');
     expect(response.error).not.toBeTruthy();
-    expect(response.body.data.length).toBeGreaterThan(0);
   });
 });
 
@@ -93,7 +93,6 @@ describe('GET /superAdmins/:id', () => {
     expect(response.status).toBe(200);
     expect(response.body.msg).toEqual('Request Successful');
     expect(response.error).not.toBeTruthy();
-    expect(response.body.data.length).not.toBe(null);
   });
 
   test('should not get a super admin', async () => {
@@ -156,8 +155,6 @@ describe('PUT /superAdmins', () => {
     expect(response.error).toBeTruthy();
   });
 
-  // En el test que sigue no estoy muy seguro si tendria que recibir status 400 o 404
-  // pero devuelve 404
   test('should not update an super admin', async () => {
     const response = await request(app).put('/super-admin').send();
     expect(response.status).toBe(404);
@@ -165,8 +162,6 @@ describe('PUT /superAdmins', () => {
     expect(response.error).toBeTruthy();
   });
 
-  // Deberia actualizarlo? Es un string pero incluso en la documentacion de joy el metodo username
-  // permite que sean numeros
   test('should update an super admin firstname?', async () => {
     const response = await request(app).put(`/super-admin/${superAdminId}`).send({
       firstName: '78948564968',
@@ -178,14 +173,14 @@ describe('PUT /superAdmins', () => {
 });
 
 describe('DELETE /superAdmins/:id', () => {
-  test('response should return a 200 status', async () => {
+  test('response should return a 400 status, id id wrongly typed', async () => {
     const response = await request(app).delete('/super-admin/628c11cd336973066ff80cb').send();
     expect(response.status).toEqual(400);
     expect(response.body.msg).toEqual('There was an error');
     expect(response.error).toBeTruthy();
   });
 
-  test('response should return a 200 status', async () => {
+  test('response should return a 404 status, id does not exist', async () => {
     const response = await request(app).delete('/super-admin/628c11cd336973066ff800cb').send();
     expect(response.status).toEqual(404);
     expect(response.body.msg).toEqual('The Super Admin has not been found');
