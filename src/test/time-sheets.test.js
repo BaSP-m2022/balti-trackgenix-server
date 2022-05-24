@@ -29,9 +29,6 @@ describe('/GET get all timesheets', () => {
   test('Response should return a non empty body content', async () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.body.data.length).toBeGreaterThan(0);
-  });
-  test('Response should return minimum body content', async () => {
-    const response = await request(app).get('/timesheets').send();
     expect(Object.keys(response.body.data[0]).length).toBeGreaterThan(5);
   });
 });
@@ -48,9 +45,6 @@ describe('/GET get timesheets by id', () => {
   test('Response should return a non empty body content', async () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.body.data.length).toBeGreaterThan(0);
-  });
-  test('Response should return minimum body content', async () => {
-    const response = await request(app).get('/timesheets').send();
     expect(Object.keys(response.body.data[0]).length).toBeGreaterThan(5);
   });
 });
