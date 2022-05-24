@@ -155,6 +155,20 @@ describe('PUT update task', () => {
   });
 });
 
-// describe('DELETE update task', () => {
-
-// });
+describe('DELETE update task', () => {
+  const idTest = '6288fa66a52cdee44fee0144';
+  test('Response should return a status 200', async () => {
+    const response = await request(app).delete(`/tasks/${idTest}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.message).toEqual('Task Deleted');
+  });
+  test('If ID is invalid then response should return a 404 status and a correct unsuccessful msg', async () => {
+    const response = await request(app).delete('/tasks/6288fa66a52cdee44fee0244').send();
+    expect(response.status).toBe(404);
+    expect(response.body.message).toEqual('Task with id: 6288fa66a52cdee44fee0244 not found');
+  });
+  test('If ID format is invalid then response should return a 400 status', async () => {
+    const response = await request(app).delete('/tasks/6288').send();
+    expect(response.status).toBe(400);
+  });
+});
