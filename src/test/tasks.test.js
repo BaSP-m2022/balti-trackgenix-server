@@ -52,7 +52,6 @@ describe('/POST /tasks', () => {
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
     title: 'Task 6 Cami',
     description: 'This is the task 6',
-    date: 2020 - 12 - 11,
     done: true,
   };
   test('Should create a task', async () => {
@@ -70,7 +69,6 @@ describe('/POST /tasks', () => {
     expect(response.body.data.projectId).toEqual('62891944b389642a7f13ca51');
     expect(response.body.data.title).toEqual('Task 6 Cami');
     expect(response.body.data.description).toEqual('This is the task 6');
-    expect(response.body.data.date).not.toBeNull();
     expect(response.body.data.done).toBeTruthy();
   });
   test('Response should return a 400 status if the required fields are incorrect', async () => {
