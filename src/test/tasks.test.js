@@ -15,41 +15,25 @@ beforeAll(async () => {
 });
 
 describe('/GET /tasks', () => {
-  test('Return a 200 status if the get method worked ok', async () => {
+  test('Return a 200 status, a false error and a success msg if the get method worked ok', async () => {
     const response = await request(app).get('/tasks').send();
     expect(response.status).toBe(200);
-  });
-  test('Response should return false error', async () => {
-    const response = await request(app).get('/tasks').send();
     expect(response.error).toBeFalsy();
-  });
-  test('Response should return a correct successful message', async () => {
-    const response = await request(app).get('/tasks').send();
-    expect(response.body.message).toEqual('Request Successful. All tasks.');
-  });
-  test('Response should return at least one task', async () => {
-    const response = await request(app).get('/tasks').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
 });
 
 describe('/GET /tasks/:id', () => {
   const idTest = '6288fa66a52cdee44fee0144';
-  test('Return a 200 status if the getById method worked ok', async () => {
+  test('Return a 200 status, a false error and a success msg if the getById method worked ok', async () => {
     const response = await request(app).get(`/tasks/${idTest}`).send();
     expect(response.status).toBe(200);
-  });
-  test('Response should return false error', async () => {
-    const response = await request(app).get(`/tasks/${idTest}`).send();
     expect(response.error).toBeFalsy();
-  });
-  test('Response should return a correct successful message', async () => {
-    const response = await request(app).get(`/tasks/${idTest}`).send();
     expect(response.body.message).toEqual(`Request Successful. Task with Id: ${idTest} found.`);
   });
   test('Response should return only one task', async () => {
     const response = await request(app).get(`/tasks/${idTest}`).send();
-    expect([response.body.data]).toHaveLength(1);
+    expect(response.body.data).toHaveProperty('_id', idTest);
   });
   test('If ID is invalid then response should return a 404 status and a correct unsuccessful msg', async () => {
     const response = await request(app).get('/tasks/6288fa66a52cdee44fee0244').send();
