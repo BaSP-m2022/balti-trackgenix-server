@@ -10,7 +10,7 @@ beforeAll(async () => {
   await Projects.collection.insertMany(projectSeed);
 });
 
-describe('GET /employees', () => {
+describe('GET /employees/:id', () => {
   test('Valid employee ID should return status 200.', async () => {
     const response = await request(app).get('/employees/62891944b389642a7f13ca53').send();
     expect(response.status).toBe(200);
@@ -37,7 +37,7 @@ describe('GET /employees', () => {
   });
 });
 
-describe('PUT /employees', () => {
+describe('PUT /employees/:id', () => {
   test('Edit employee with all the parameters correct should return status 200.', async () => {
     const response = await request(app).put('/employees/62891944b389642a7f13ca53').send({
       firstName: 'Msssati',
@@ -100,7 +100,7 @@ describe('PUT /employees', () => {
   });
 });
 
-describe('DEL /employees', () => {
+describe('DEL /employees/:id', () => {
   test('Delete invalid employee ID should return error message.', async () => {
     const response = await request(app).delete('/employees/6288f73964ed6961bb7c275').send();
     expect(response.status).toBe(400);
