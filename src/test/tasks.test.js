@@ -14,7 +14,7 @@ beforeAll(async () => {
   await Employees.collection.insertMany(employeeSeed);
 });
 
-describe('GET all tasks', () => {
+describe('/GET /tasks', () => {
   test('Return a 200 status if the get method worked ok', async () => {
     const response = await request(app).get('/tasks').send();
     expect(response.status).toBe(200);
@@ -33,7 +33,7 @@ describe('GET all tasks', () => {
   });
 });
 
-describe('GET task by id', () => {
+describe('/GET /tasks/:id', () => {
   const idTest = '6288fa66a52cdee44fee0144';
   test('Return a 200 status if the getById method worked ok', async () => {
     const response = await request(app).get(`/tasks/${idTest}`).send();
@@ -62,7 +62,7 @@ describe('GET task by id', () => {
   });
 });
 
-describe('CREATE a task', () => {
+describe('/POST /tasks', () => {
   const testTask = {
     employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
@@ -113,7 +113,7 @@ describe('CREATE a task', () => {
   });
 });
 
-describe('PUT update task', () => {
+describe('/PUT /tasks/:id', () => {
   const idTest = '6288fa66a52cdee44fee0144';
   const testUpdateTask = {
     title: 'Task 6 Lucas',
@@ -155,7 +155,7 @@ describe('PUT update task', () => {
   });
 });
 
-describe('DELETE update task', () => {
+describe('/DELETE /tasks/:id', () => {
   const idTest = '6288fa66a52cdee44fee0144';
   test('Response should return a status 200', async () => {
     const response = await request(app).delete(`/tasks/${idTest}`).send();
