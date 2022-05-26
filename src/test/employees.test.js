@@ -22,33 +22,9 @@ describe('/GET /employees', () => {
     const response = await request(app).get('/employees').send();
     expect(response.body.data.length).toBeGreaterThan(0);
   });
-  test('check that each field is not null', async () => {
-    const response = await request(app).get('/employees').send();
-    const allEmployees = Object.values(response.body.data);
-    for (let i = 0; i < allEmployees.length; i += 1) {
-      const valuesFields = Object.values(allEmployees[i]);
-      expect(valuesFields.length).toBe(8);
-      for (let j = 0; j < 7; j += 1) {
-        expect(valuesFields[j]).not.toBe(null);
-      }
-    }
-  });
 });
 
 describe('/POST /employees', () => {
-  test('Should create an employee', async () => {
-    const response = await request(app).post('/employees').send({
-      firstName: 'Federico',
-      lastName: 'Troanes',
-      email: 'fedetroanes@gmail.com',
-      password: 'fedekun23w3',
-      assignedProjects: [mongoose.Types.ObjectId('62891944b389642a7f13ca56')],
-      isActive: true,
-    });
-    expect(response.status).toBe(201);
-    expect(response.body.error).toBeFalsy();
-    expect(response.body.message).toEqual('New Employee created');
-  });
   test('I verify that the employee has been created with the data sent through the body', async () => {
     const response = await request(app).post('/employees').send({
       firstName: 'Federico',
@@ -58,6 +34,9 @@ describe('/POST /employees', () => {
       assignedProjects: [mongoose.Types.ObjectId('62891944b389642a7f13ca58')],
       isActive: true,
     });
+    expect(response.status).toBe(201);
+    expect(response.body.error).toBeFalsy();
+    expect(response.body.message).toEqual('New Employee created');
     expect(response.body.data.firstName).toEqual('Federico');
     expect(response.body.data.lastName).toEqual('Troanes');
     expect(response.body.data.email).toEqual('fedetroanes@gmail.com');
