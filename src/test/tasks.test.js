@@ -48,7 +48,7 @@ describe('/GET /tasks/:id', () => {
 
 describe('/POST /tasks', () => {
   const testTask = {
-    employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
+    employeeId: mongoose.Types.ObjectId('628cf152c7dfd0c4fe2edb9e'),
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
     title: 'Task 6 Cami',
     description: 'This is the task 6',
@@ -66,7 +66,7 @@ describe('/POST /tasks', () => {
   });
   test('Verify that task has been created with same data that was submitted', async () => {
     const response = await request(app).post('/tasks').send(testTask);
-    expect(response.body.data.employeeId).toEqual('628cdc224fc0ef4f8c43b1b1');
+    expect(response.body.data.employeeId).toEqual('628cf152c7dfd0c4fe2edb9e');
     expect(response.body.data.projectId).toEqual('62891944b389642a7f13ca51');
     expect(response.body.data.title).toEqual('Task 6 Cami');
     expect(response.body.data.description).toEqual('This is the task 6');
@@ -84,7 +84,7 @@ describe('/POST /tasks', () => {
   });
   test('Response should return validation error joi', async () => {
     const response = await request(app).post('/tasks').send({
-      employeeId: mongoose.Types.ObjectId('628cdc224fc0ef4f8c43b1b1'),
+      employeeId: mongoose.Types.ObjectId('628cf152c7dfd0c4fe2edb9e'),
       projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
       title: 356426,
       description: 'This is the task 6',

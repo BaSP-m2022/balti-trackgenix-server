@@ -1,0 +1,35 @@
+import mongoose from 'mongoose';
+
+export default [{
+  _id: mongoose.Types.ObjectId('6285b864f52d378096258169'),
+  employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2075'),
+  project: mongoose.Types.ObjectId('6289110ececee60c913cb4fa'),
+  role: 'qa',
+  date: '6/21/2021',
+  rate: 10,
+  workedHours: 33,
+  description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+  task: mongoose.Types.ObjectId('6288fa66a52cdee44fee0144'),
+},
+{
+  _id: mongoose.Types.ObjectId('628cf1401d8ff11315b25fc0'),
+  employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+  project: mongoose.Types.ObjectId('6289110ececee60c913cb4fb'),
+  role: 'tl',
+  date: '6/21/2022',
+  rate: 10,
+  workedHours: 33,
+  description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+  task: mongoose.Types.ObjectId('6288fa66a52cdee44fee0145'),
+},
+{
+  _id: mongoose.Types.ObjectId('628cf14952e0edf6c45a6ce2'),
+  employee: mongoose.Types.ObjectId('6288f73964ed6961bb7c2076'),
+  project: mongoose.Types.ObjectId('6289110ececee60c913cb4fb'),
+  role: 'tl',
+  date: '6/21/2022',
+  rate: 10,
+  workedHours: 33,
+  description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
+  task: mongoose.Types.ObjectId('6288fa66a52cdee44fee0145'),
+}];

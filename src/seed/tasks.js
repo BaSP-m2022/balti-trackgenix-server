@@ -7,7 +7,7 @@ export default [
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca50'),
     title: 'Task 1 Nico',
     description: 'This is the task 1',
-    date: 2020 - 25 - 9,
+    date: '2020/25/9',
     done: true,
   },
   {
@@ -16,7 +16,7 @@ export default [
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca50'),
     title: 'Task 2 Nico',
     description: 'This is the task 2',
-    date: 2020 - 28 - 9,
+    date: '2020/28/9',
     done: true,
   },
   {
@@ -25,6 +25,6 @@ export default [
     projectId: mongoose.Types.ObjectId('62893107ea8586fcd9e96137'),
     title: 'Task 3',
     description: 'This is the task 3',
-    date: 2020 - 2 - 10,
+    date: '2020/2/10',
     done: true,
   }];
