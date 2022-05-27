@@ -21,8 +21,8 @@ export const validatePost = async (req, res, next) => {
 };
 export const validatePut = async (req, res, next) => {
   const schemaValidate = joi.object({
-    employee_id: joi.string(),
-    pm_id: joi.string(),
+    employeeId: joi.string(),
+    projectId: joi.string(),
     title: joi.string().max(30),
     description: joi.string().max(100),
     date: joi.date(),

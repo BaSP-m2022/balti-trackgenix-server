@@ -8,6 +8,10 @@ import employeesSeed from '../seed/employees';
 import Admins from '../models/Admins';
 import adminsSeed from '../seed/admins';
 
+const projectID = '62891944b389642a7f13ca53';
+const wrongPath = '62891944b389642a';
+const wrongID = '628cf237305204bf7d672d7c';
+
 beforeAll(async () => {
   await projectModel.collection.insertMany(projectSeed);
   await Employees.collection.insertMany(employeesSeed);
@@ -113,10 +117,6 @@ describe('/POST /projects', () => {
     expect(response.body.error).toBe(true);
   });
 });
-
-const projectID = '628cf237305204bf7d672d7b';
-const wrongPath = '62891944b389642a';
-const wrongID = '628cf237305204bf7d672d7c';
 
 describe('/GET /projects/:id', () => {
   test('Response should return one project', async () => {
