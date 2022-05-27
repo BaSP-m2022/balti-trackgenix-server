@@ -17,6 +17,7 @@ export default [{
       hoursInProject: 500,
     },
   ],
+  __v: 0,
 },
 {
   _id: mongoose.Types.ObjectId('628cf23dfb13310e147c4fdb'),
@@ -35,6 +36,7 @@ export default [{
       hoursInProject: 700,
     },
   ],
+  __v: 0,
 },
 {
   _id: mongoose.Types.ObjectId('628cf2442fed32f30b57dc75'),
@@ -53,5 +55,6 @@ export default [{
       hoursInProject: 200,
     },
   ],
+  __v: 0,
 },
 ];
