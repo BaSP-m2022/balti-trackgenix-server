@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .get('/', superAdminControllers.getSuperAdminByFilter)
   .get('/:id', superAdminControllers.findSuperAdminById)
-  .post('/', superAdminValidations.createSuperAdminValidation, superAdminControllers.crateSuperAdmin)
+  .post('/', superAdminValidations.createSuperAdminValidation, superAdminControllers.createSuperAdmin)
   .delete('/:id', superAdminControllers.deleteSuperAdmin)
   .put('/:id', superAdminValidations.updateSuperAdminValidation, superAdminControllers.updateSuperAdmin);
 

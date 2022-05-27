@@ -2,7 +2,7 @@ import Projects from '../models/Projects';
 
 export const getAllProjects = async (req, res) => {
   try {
-    const findAll = await Projects.find({});
+    const findAll = await Projects.find({}).populate('employees.employeeId').populate('admin');
     return res.status(200).json({
       msg: 'All the projects found',
       data: findAll,
@@ -32,7 +32,7 @@ export const deleteById = async (req, res) => {
     });
   } catch (err) {
     return res.status(400).json({
-      msg: 'there was an error',
+      msg: 'There was an error',
       data: undefined,
       error: true,
     });
@@ -65,10 +65,9 @@ export const updateProjectById = async (req, res) => {
       req.params.id,
       req.body,
       { new: true },
-    );
-
+    ).populate('employees.employeeId').populate('admin');
     if (!projectToUpdate) {
-      return res.status(400).json({
+      return res.status(404).json({
         msg: `Project not found for id: ${req.params.id}`,
         error: true,
       });
@@ -89,7 +88,9 @@ export const updateProjectById = async (req, res) => {
 
 export const getProjectsByStatus = async (req, res) => {
   try {
-    const activeProjects = await Projects.find({ isActive: req.params.status });
+    const activeProjects = await Projects.find({
+      isActive: req.params.status,
+    }).populate('employees.employeeId').populate('admin');
     if (activeProjects.length) {
       return res.status(200).json({
         msg: 'Obtained projects!',
@@ -112,8 +113,7 @@ export const getProjectsByStatus = async (req, res) => {
 
 export const getProjectById = async (req, res) => {
   try {
-    const wantedProject = await Projects.findById(req.params.id);
-
+    const wantedProject = await Projects.findById(req.params.id).populate('employees.employeeId').populate('admin');
     if (wantedProject) {
       return res.status(200).json({
         msg: 'Successful search!',
