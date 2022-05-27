@@ -52,7 +52,7 @@ export const addTask = async (req, res) => {
       projectId: req.body.projectId,
       title: req.body.title,
       description: req.body.description,
-      date: Date.now(),
+      date: req.body.date,
       done: req.body.done,
     });
     const saveTask = await taskNew.save();
