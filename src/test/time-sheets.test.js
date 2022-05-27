@@ -26,11 +26,6 @@ describe('/GET /timesheets', () => {
     expect(response.error).toBe(false);
     expect(response.body.message).toEqual('All timesheets');
   });
-  test('Response should return a status 400', async () => {
-    const response = await request(app).get('/timesheets/wrong-endpoint').send();
-    expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('There was an error');
-  });
   test('Response should return a non empty body content', async () => {
     const response = await request(app).get('/timesheets').send();
     expect(response.status).toBe(200);
