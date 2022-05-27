@@ -117,7 +117,7 @@ describe('PUT /timesheets/:id', () => {
   test('Edit response should return a status 200 and the same data', async () => {
     const timesheetTestSent = {
       employee: '62891944b389642a7f13ca53',
-      project: '628cf2442fed32f30b57dc75',
+      project: '62891944b389642a7f13ca53',
       role: 'tl',
       rate: 12,
       workedHours: 39,
