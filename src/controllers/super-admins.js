@@ -1,6 +1,6 @@
 import ModelSuperAdmin from '../models/Super-admins';
 
-const crateSuperAdmin = async (req, res) => {
+const createSuperAdmin = async (req, res) => {
   try {
     const superAdminCreate = new ModelSuperAdmin({
       firstName: req.body.firstName,
@@ -119,7 +119,7 @@ const getSuperAdminByFilter = async (req, res) => {
 };
 
 export default {
-  crateSuperAdmin,
+  createSuperAdmin,
   updateSuperAdmin,
   deleteSuperAdmin,
   findSuperAdminById,
