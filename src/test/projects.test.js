@@ -18,12 +18,14 @@ beforeAll(async () => {
   await Admins.collection.insertMany(adminsSeed);
 });
 
-describe('/GET /projects', () => {
+describe('/GET /projects/:id', () => {
   test('Response should return one project', async () => {
     const response = await request(app).get(`/projects/${projectID}`).send();
     expect(response.body.msg).toEqual('Successful search!');
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
+    // eslint-disable-next-line no-underscore-dangle
+    expect(response.body.data._id).toEqual(projectID);
   });
   test('Wrong path data, should return error', async () => {
     const response = await request(app).get(`/projects/${wrongPath}`).send();
