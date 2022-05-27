@@ -52,6 +52,7 @@ describe('/POST /tasks', () => {
     projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
     title: 'Task 6 Cami',
     description: 'This is the task 6',
+    date: '2020/12/11',
     done: true,
   };
   test('Should create a task', async () => {
@@ -69,6 +70,7 @@ describe('/POST /tasks', () => {
     expect(response.body.data.projectId).toEqual('62891944b389642a7f13ca51');
     expect(response.body.data.title).toEqual('Task 6 Cami');
     expect(response.body.data.description).toEqual('This is the task 6');
+    expect(response.body.data.date).toEqual('2020-12-11T03:00:00.000Z');
     expect(response.body.data.done).toBeTruthy();
   });
   test('Response should return a 400 status if the required fields are incorrect', async () => {
@@ -86,7 +88,7 @@ describe('/POST /tasks', () => {
       projectId: mongoose.Types.ObjectId('62891944b389642a7f13ca51'),
       title: 356426,
       description: 'This is the task 6',
-      date: 2020 - 12 - 11,
+      date: '2020/12/11',
       done: true,
     });
     expect(response.status).toBe(400);
@@ -100,6 +102,7 @@ describe('/PUT /tasks/:id', () => {
   const testUpdateTask = {
     title: 'Task 6 Lucas',
     description: 'This is the task 6.5',
+    date: '2021/10/8',
     done: false,
   };
   test('Should update a task', async () => {
@@ -116,6 +119,7 @@ describe('/PUT /tasks/:id', () => {
     expect(response.body.data.title).toEqual('Task 6 Lucas');
     expect(response.body.data.description).toEqual('This is the task 6.5');
     expect(response.body.data.done).not.toBeTruthy();
+    expect(response.body.data.date).toEqual('2021-10-08T03:00:00.000Z');
   });
   test('If ID is invalid then response should return a 400 status and a correct unsuccessful msg', async () => {
     const response = await request(app).put('/tasks/6288fa66a52cdee44fee0244').send();
