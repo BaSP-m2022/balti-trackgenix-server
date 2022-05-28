@@ -1,14 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import routes from './routes';
 import 'dotenv/config';
 
-const app = express();
 const port = process.env.PORT;
-
 const url = process.env.MONGO_URL;
-app.set('json spaces', 2);
 
+const app = express();
+app.set('json spaces', 2);
+app.use(cors());
 app.use(express.json());
 
 if (process.env.NODE_ENV !== 'test') {
