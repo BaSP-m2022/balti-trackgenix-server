@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export default [{
-  idEmployee: mongoose.Types.ObjectId('628cf218c545127e724c881c'),
+  _id: mongoose.Types.ObjectId('628cf218c545127e724c881c'),
   firstName: 'mortal',
   lastName: 'backflip',
   email: 'notuvo@yanoser.com',
@@ -9,7 +9,7 @@ export default [{
   isActive: true,
 },
 {
-  idEmployee: mongoose.Types.ObjectId('628cf22111b8397990200a06'),
+  _id: mongoose.Types.ObjectId('628cf22111b8397990200a06'),
   firstName: 'Monica',
   lastName: 'Geller',
   email: 'mgeller@friends.com',
@@ -17,7 +17,7 @@ export default [{
   isActive: true,
 },
 {
-  idEmployee: mongoose.Types.ObjectId('628cf2263d81b46d975f94ba'),
+  _id: mongoose.Types.ObjectId('628cf2263d81b46d975f94ba'),
   firstName: 'Chandler',
   lastName: 'Bing',
   email: 'cbing@friends.com',

@@ -3,7 +3,7 @@ import app from '../index';
 import Admins from '../models/Admins';
 import adminsSeed from '../seed/admins';
 
-// const adminId = '628cf22111b8397990200a06';
+const adminId = '628cf22111b8397990200a06';
 const wrongID = '628cf218c545127e724c882f';
 
 beforeAll(async () => {
@@ -14,10 +14,6 @@ describe('/GET /admins', () => {
   test('response should return a 200 status', async () => {
     const response = await request(app).get('/admins').send();
     expect(response.status).toBe(200);
-  });
-
-  test('response should return false error', async () => {
-    const response = await request(app).get('/admins').send();
     expect(response.error).toBeFalsy();
   });
 
@@ -26,10 +22,10 @@ describe('/GET /admins', () => {
     expect(response.body.data.length).toBeGreaterThan(0);
   });
 
-  // test('response should return an admin with the requested ID', async () => {
-  //   const response = await request(app).get(`/admins/${adminId}`).send();
-  //   expect(response.body.message).toBe('Admin collected');
-  // });
+  test('response should return an admin with the requested ID', async () => {
+    const response = await request(app).get(`/admins/${adminId}`).send();
+    expect(response.body.msg).toBe('Admin 628cf22111b8397990200a06 found');
+  });
 });
 
 describe('/POST /admins', () => {
@@ -42,6 +38,7 @@ describe('/POST /admins', () => {
       isActive: true,
     });
     expect(response.status).toBe(201);
+    expect(response).toEqual(response);
     expect(response.body.error).toBe(false);
     expect(response.body.msg).toEqual('Admin created successfully');
   });
@@ -64,6 +61,7 @@ describe('/PUT /admins', () => {
       isActive: true,
     });
     expect(response.status).toBe(400);
+    expect(response.body.msg).toEqual('There was an error');
   });
 });
 
