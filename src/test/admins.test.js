@@ -38,19 +38,23 @@ describe('/POST /admins', () => {
       isActive: true,
     });
     expect(response.status).toBe(201);
-    expect(response).toEqual(response);
     expect(response.body.error).toBe(false);
     expect(response.body.msg).toEqual('Admin created successfully');
+    expect(response.body.data.firstName).toEqual('Regina');
+    expect(response.body.data.lastName).toEqual('Phalange');
+    expect(response.body.data.email).toEqual('rphalange@friends.com');
+    expect(response.body.data.password).toEqual('0024121889');
+    expect(response.body.data.isActive).toEqual(true);
   });
 });
 
 describe('/PUT /admins', () => {
-  // test('Admin updated successfully, response should return status 200', async () => {
-  //   const response = await request(app).put(`/admins/${adminId}`).send({
-  //     firstName: 'Phoebe',
-  //   });
-  //   expect(response.status).toBe(200);
-  // });
+  test('Admin updated successfully, response should return status 200', async () => {
+    const response = await request(app).put(`/admins/${adminId}`).send({
+      firstName: 'Phoebe',
+    });
+    expect(response.status).toBe(200);
+  });
 
   test('Admin updated unsuccessfully, response should return status 400', async () => {
     const response = await request(app).put('/admins/628c2d1c83caa8c89645').send({
@@ -66,11 +70,11 @@ describe('/PUT /admins', () => {
 });
 
 describe('/DELETE /admins', () => {
-  // test('Delete admin should return status 200', async () => {
-  //   const response = await request(app).delete(`/admins/${adminId}`).send();
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.msg).toEqual(`Admin ${adminId} deleted successfully`);
-  // });
+  test('Delete admin should return status 200', async () => {
+    const response = await request(app).delete(`/admins/${adminId}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.msg).toEqual(`Admin ${adminId} deleted successfully`);
+  });
 
   test('Delete invalid Admin ID, should return Admin not found', async () => {
     const response = await request(app).delete(`/admins/${wrongID}`);
