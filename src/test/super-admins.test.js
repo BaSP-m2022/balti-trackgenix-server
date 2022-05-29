@@ -35,7 +35,6 @@ describe('POST /superAdmins', () => {
     expect(response.body.data.email).toEqual('putinvlad@proton.com');
     expect(response.body.data.password).toEqual('ZnKGy7jDOiQ');
     expect(response.body.data.isActive).toEqual(true);
-    // eslint-disable-next-line no-underscore-dangle
     superAdminId = response.body.data._id;
   });
 
@@ -96,7 +95,6 @@ describe('GET /superAdmins/:id', () => {
     expect(response.status).toBe(200);
     expect(response.body.msg).toEqual('Request Successful');
     expect(response.error).toBeFalsy();
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data._id).toEqual(superAdminId);
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');

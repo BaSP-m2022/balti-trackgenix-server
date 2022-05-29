@@ -39,7 +39,6 @@ describe('/GET /timesheets/:id', () => {
     const response = await request(app).get(idTest).send();
     expect(response.status).toBe(200);
     expect(response.error).toBe(false);
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data._id === '6285b864f52d378096258169').toBe(true);
   });
   test('Response should return a status 400', async () => {
@@ -127,15 +126,12 @@ describe('PUT /timesheets/:id', () => {
     const response = await request(app).put(idTest).send(timesheetTestSent);
     expect(response.status).toBe(200);
     expect(response.body.message).toEqual('Timesheet edited');
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data.employee._id === timesheetTestSent.employee).toBe(true);
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data.project._id === timesheetTestSent.project).toBe(true);
     expect(response.body.data.role === timesheetTestSent.role).toBe(true);
     expect(response.body.data.rate === timesheetTestSent.rate).toBe(true);
     expect(response.body.data.workedHours === timesheetTestSent.workedHours).toBe(true);
     expect(response.body.data.description === timesheetTestSent.description).toBe(true);
-    // eslint-disable-next-line no-underscore-dangle
     expect(response.body.data.task._id === timesheetTestSent.task).toBe(true);
   });
 
