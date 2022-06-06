@@ -23,7 +23,7 @@ describe('/GET /projects', () => {
     const response = await request(app).get('/projects').send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBe(false);
-    expect(response.body.msg).toEqual('All the projects found');
+    expect(response.body.message).toEqual('All the projects found');
   });
 
   test('Check that it is not null', async () => {
@@ -53,13 +53,13 @@ describe('/POST /projects', () => {
     });
     expect(response.status).toBe(201);
     expect(response.body.error).toBe(false);
-    expect(response.body.msg).toEqual('New Project successfully created');
+    expect(response.body.message).toEqual('New Project successfully created');
   });
 
   test('Check that have an error', async () => {
     const response = await request(app).post('/projects').send();
     expect(response.status).toBe(400);
-    expect(response.body.msg).toEqual('Error during validation, check all the parameters');
+    expect(response.body.message).toEqual('Error during validation, check all the parameters');
     expect(response.body.error).toBe(true);
   });
 
@@ -113,7 +113,7 @@ describe('/POST /projects', () => {
       ],
     });
     expect(response.status).toBe(400);
-    expect(response.body.msg).toEqual('Error during validation, check all the parameters');
+    expect(response.body.message).toEqual('Error during validation, check all the parameters');
     expect(response.body.error).toBe(true);
   });
 });
@@ -121,7 +121,7 @@ describe('/POST /projects', () => {
 describe('/GET /projects/:id', () => {
   test('Response should return one project', async () => {
     const response = await request(app).get(`/projects/${projectID}`).send();
-    expect(response.body.msg).toEqual('Successful search!');
+    expect(response.body.message).toEqual('Successful search!');
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
     expect(response.body.data._id).toEqual(projectID);
@@ -130,7 +130,7 @@ describe('/GET /projects/:id', () => {
     const response = await request(app).get(`/projects/${wrongPath}`).send();
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual('There was an error');
+    expect(response.body.message).toEqual('There was an error');
   });
 });
 
@@ -141,7 +141,7 @@ describe('/PUT /projects', () => {
       description: 'Description of project',
       isActive: true,
     });
-    expect(response.body.msg).toEqual(`Project with id ${projectID} has been successfully updated!`);
+    expect(response.body.message).toEqual(`Project with id ${projectID} has been successfully updated!`);
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
     expect(response.body.data.projectName).toEqual('Fourth Project');
@@ -156,7 +156,7 @@ describe('/PUT /projects', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual('Error during data validation!');
+    expect(response.body.message).toEqual('Error during data validation!');
   });
   test('Wrong input data should return error', async () => {
     const response = await request(app).put(`/projects/${wrongPath}`).send({
@@ -178,7 +178,7 @@ describe('/PUT /projects', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual('There was an error');
+    expect(response.body.message).toEqual('There was an error');
   });
   test('Wrong ID, should return not found', async () => {
     const response = await request(app).put(`/projects/${wrongID}`).send({
@@ -200,7 +200,7 @@ describe('/PUT /projects', () => {
     });
     expect(response.status).toBe(404);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual(`Project not found for id: ${wrongID}`);
+    expect(response.body.message).toEqual(`Project not found for id: ${wrongID}`);
   });
 });
 
@@ -209,18 +209,18 @@ describe('/DELETE /projects', () => {
     const response = await request(app).delete(`/projects/${projectID}`);
     expect(response.status).toBe(200);
     expect(response.body.error).toBe(false);
-    expect(response.body.msg).toEqual('Project deleted.');
+    expect(response.body.message).toEqual('Project deleted.');
   });
   test('Wrong path data, should return error', async () => {
     const response = await request(app).delete(`/projects/${wrongPath}`);
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual('There was an error');
+    expect(response.body.message).toEqual('There was an error');
   });
   test('Wrong ID, should return not found', async () => {
     const response = await request(app).delete(`/projects/${wrongID}`);
     expect(response.status).toBe(404);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual('Project not found.');
+    expect(response.body.message).toEqual('Project not found.');
   });
 });

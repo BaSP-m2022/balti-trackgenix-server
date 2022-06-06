@@ -187,7 +187,7 @@ describe('DELETE /timesheets/:id', () => {
   test('Response should return a status 200', async () => {
     const response = await request(app).delete(idTest).send();
     expect(response.status).toBe(200);
-    expect(response.body.msg).toEqual('Timesheet successfully deleted');
+    expect(response.body.message).toEqual('Timesheet successfully deleted');
   });
   test('Response should return a status 400', async () => {
     const response = await request(app).delete('/timesheets/wrong-endpoint').send();
