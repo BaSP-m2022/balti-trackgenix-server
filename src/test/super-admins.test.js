@@ -28,7 +28,7 @@ describe('POST /superAdmins', () => {
       isActive: true,
     });
     expect(response.status).toBe(201);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('New Super Admin created');
     expect(response.error).toBeFalsy();
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');
@@ -128,7 +128,7 @@ describe('PUT /superAdmins', () => {
       isActive: true,
     });
     expect(response.status).toBe(200);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('Super Admin  updated');
     expect(response.error).toBeFalsy();
     expect(response.body.data.firstName).toEqual('Valdemir');
     expect(response.body.data.lastName).toEqual('Rasputin');
@@ -142,7 +142,7 @@ describe('PUT /superAdmins', () => {
       firstName: 'segundo testeo',
     });
     expect(response.status).toBe(200);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('Super Admin  updated');
     expect(response.error).toBeFalsy();
     expect(response.body.data.firstName).toEqual('segundo testeo');
   });
@@ -152,7 +152,7 @@ describe('PUT /superAdmins', () => {
       lastName: 'apellido nuevo',
     });
     expect(response.status).toBe(200);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('Super Admin  updated');
     expect(response.error).toBeFalsy();
     expect(response.body.data.lastName).toEqual('apellido nuevo');
   });
@@ -182,7 +182,7 @@ describe('PUT /superAdmins', () => {
       firstName: '78948564968',
     });
     expect(response.status).toBe(200);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('Super Admin  updated');
     expect(response.error).toBeFalsy();
   });
 });
@@ -205,7 +205,7 @@ describe('DELETE /superAdmins/:id', () => {
   test('response should return a 200 status', async () => {
     const response = await request(app).delete(`/super-admin/${superAdminId}`).send();
     expect(response.status).toEqual(200);
-    expect(response.body.message).toEqual('Request Successful');
+    expect(response.body.message).toEqual('Super Admin  deleted');
     expect(response.error).toBeFalsy();
   });
 });
