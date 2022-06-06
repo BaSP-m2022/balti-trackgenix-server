@@ -24,7 +24,7 @@ describe('/GET /admins', () => {
 
   test('response should return an admin with the requested ID', async () => {
     const response = await request(app).get(`/admins/${adminId}`).send();
-    expect(response.body.msg).toBe('Admin 628cf22111b8397990200a06 found');
+    expect(response.body.message).toBe('Admin 628cf22111b8397990200a06 found');
   });
 });
 
@@ -39,7 +39,7 @@ describe('/POST /admins', () => {
     });
     expect(response.status).toBe(201);
     expect(response.body.error).toBe(false);
-    expect(response.body.msg).toEqual('Admin created successfully');
+    expect(response.body.message).toEqual('Admin created successfully');
     expect(response.body.data.firstName).toEqual('Regina');
     expect(response.body.data.lastName).toEqual('Phalange');
     expect(response.body.data.email).toEqual('rphalange@friends.com');
@@ -65,7 +65,7 @@ describe('/PUT /admins', () => {
       isActive: true,
     });
     expect(response.status).toBe(400);
-    expect(response.body.msg).toEqual('There was an error');
+    expect(response.body.message).toEqual('There was an error');
   });
 });
 
@@ -73,13 +73,13 @@ describe('/DELETE /admins', () => {
   test('Delete admin should return status 200', async () => {
     const response = await request(app).delete(`/admins/${adminId}`).send();
     expect(response.status).toBe(200);
-    expect(response.body.msg).toEqual(`Admin ${adminId} deleted successfully`);
+    expect(response.body.message).toEqual(`Admin ${adminId} deleted successfully`);
   });
 
   test('Delete invalid Admin ID, should return Admin not found', async () => {
     const response = await request(app).delete(`/admins/${wrongID}`);
     expect(response.status).toBe(404);
     expect(response.body.error).toBe(true);
-    expect(response.body.msg).toEqual(`Admin ${wrongID} not found`);
+    expect(response.body.message).toEqual(`Admin ${wrongID} not found`);
   });
 });

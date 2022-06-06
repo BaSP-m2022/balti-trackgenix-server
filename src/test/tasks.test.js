@@ -15,7 +15,7 @@ beforeAll(async () => {
 });
 
 describe('/GET /tasks', () => {
-  test('Return a 200 status, a false error and a success msg if the get method worked ok', async () => {
+  test('Return a 200 status, a false error and a success message if the get method worked ok', async () => {
     const response = await request(app).get('/tasks').send();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
@@ -25,7 +25,7 @@ describe('/GET /tasks', () => {
 
 describe('/GET /tasks/:id', () => {
   const idTest = '6288fa66a52cdee44fee0144';
-  test('Return a 200 status, a false error and a success msg if the getById method worked ok', async () => {
+  test('Return a 200 status, a false error and a success message if the getById method worked ok', async () => {
     const response = await request(app).get(`/tasks/${idTest}`).send();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
@@ -35,7 +35,7 @@ describe('/GET /tasks/:id', () => {
     const response = await request(app).get(`/tasks/${idTest}`).send();
     expect(response.body.data).toHaveProperty('_id', idTest);
   });
-  test('If ID is invalid then response should return a 404 status and a correct unsuccessful msg', async () => {
+  test('If ID is invalid then response should return a 404 status and a correct unsuccessful message', async () => {
     const response = await request(app).get('/tasks/6288fa66a52cdee44fee0244').send();
     expect(response.status).toBe(404);
     expect(response.body.message).toEqual("Id: 6288fa66a52cdee44fee0244 doesn't exist.");
@@ -121,7 +121,7 @@ describe('/PUT /tasks/:id', () => {
     expect(response.body.data.done).not.toBeTruthy();
     expect(response.body.data.date).toEqual('2021-10-08T03:00:00.000Z');
   });
-  test('If ID is invalid then response should return a 400 status and a correct unsuccessful msg', async () => {
+  test('If ID is invalid then response should return a 400 status and a correct unsuccessful message', async () => {
     const response = await request(app).put('/tasks/6288fa66a52cdee44fee0244').send();
     expect(response.status).toBe(400);
     expect(response.body.message).toEqual("Id: 6288fa66a52cdee44fee0244 doesn't exist.");
@@ -148,7 +148,7 @@ describe('/DELETE /tasks/:id', () => {
     expect(response.status).toBe(200);
     expect(response.body.message).toEqual('Task Deleted');
   });
-  test('If ID is invalid then response should return a 404 status and a correct unsuccessful msg', async () => {
+  test('If ID is invalid then response should return a 404 status and a correct unsuccessful message', async () => {
     const response = await request(app).delete('/tasks/6288fa66a52cdee44fee0244').send();
     expect(response.status).toBe(404);
     expect(response.body.message).toEqual('Task with id: 6288fa66a52cdee44fee0244 not found');

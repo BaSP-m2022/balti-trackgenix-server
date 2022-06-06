@@ -11,7 +11,7 @@ const createAdminValidation = (req, res, next) => {
   const valid = newAdmin.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: valid.error.details[0].message,
+      message: valid.error.details[0].message,
       data: undefined,
       error: true,
     });
@@ -30,7 +30,7 @@ const updateAdminValidation = (req, res, next) => {
   const valid = updateAdmin.validate(req.body);
   if (valid.error) {
     return res.status(400).json({
-      msg: valid.error.details[0].message,
+      message: valid.error.details[0].message,
       data: undefined,
       error: true,
     });

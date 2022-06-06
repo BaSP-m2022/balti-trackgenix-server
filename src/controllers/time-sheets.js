@@ -58,7 +58,7 @@ export const deleteTimeSheets = async (req, res) => {
       });
     }
     return res.status(200).json({
-      msg: 'Timesheet successfully deleted',
+      message: 'Timesheet successfully deleted',
       data: result,
       error: false,
     });
