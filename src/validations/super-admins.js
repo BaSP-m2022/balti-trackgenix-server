@@ -12,6 +12,7 @@ const createSuperAdminValidation = (req, res, next) => {
   if (valid.error) {
     return res.status(400).json({
       message: valid.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }
@@ -30,6 +31,7 @@ const updateSuperAdminValidation = (req, res, next) => {
   if (valid.error) {
     return res.status(400).json({
       message: valid.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }
