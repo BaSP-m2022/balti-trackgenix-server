@@ -14,8 +14,8 @@ export const validateTimeSheetCreation = (req, res, next) => {
   const validation = createTimeSheet.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      message: 'Missing data',
-      data: validation.error.details[0].message,
+      message: validation.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }
@@ -36,8 +36,8 @@ export const validateTimeSheetUpdate = (req, res, next) => {
   const validation = updateTimeSheet.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      message: 'Missing data',
-      data: validation.error.details[0].message,
+      message: validation.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }

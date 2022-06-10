@@ -22,8 +22,8 @@ const createProjectValidation = (req, res, next) => {
   const validation = projectValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      message: 'Error during validation, check all the parameters',
-      data: validation.error.details[0].message,
+      message: validation.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }
@@ -49,8 +49,8 @@ const updateProjectValidation = (req, res, next) => {
   const validation = projectValidation.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      message: 'Error during data validation!',
-      data: validation.error.details[0].message,
+      message: validation.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }

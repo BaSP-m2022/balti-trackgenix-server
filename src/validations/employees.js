@@ -12,8 +12,8 @@ const employeeValidation = (req, res, next) => {
   const validation = employeValidate.validate(req.body);
   if (validation.error) {
     return res.status(400).json({
-      message: 'Missing data',
-      data: validation.error.details[0].message,
+      message: validation.error.details[0].message,
+      data: undefined,
       error: true,
     });
   }
