@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import mongoose from 'mongoose';
 import request from 'supertest';
 import app from '../index';
@@ -47,7 +48,7 @@ describe('/POST /employees', () => {
   test('It should return error by not passing body', async () => {
     const response = await request(app).post('/employees').send();
     expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('Missing data');
+    expect(response.body.message).toEqual('\"firstName\" is required');
     expect(response.body.error).toBeTruthy();
   });
   test('Should return validation error joi', async () => {
@@ -61,7 +62,7 @@ describe('/POST /employees', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.message).toEqual('Missing data');
+    expect(response.body.message).toEqual('\"firstName\" must be a string');
   });
 });
 describe('GET /employees/:id', () => {
@@ -109,7 +110,7 @@ describe('PUT /employees/:id', () => {
       isActive: true,
     });
     expect(response.status).toBe(400);
-    expect(response.body.message).toBe('Missing data');
+    expect(response.body.message).toBe('\"lastName\" length must be at least 3 characters long');
   });
   test('Edit employee with an incorrect ID should return status 404.', async () => {
     const response = await request(app).put('/employees/6287c08beee9276577d53b2f').send({

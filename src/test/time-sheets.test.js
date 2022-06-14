@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../index';
@@ -57,7 +58,7 @@ describe('POST /timesheets', () => {
     const response = await request(app).post('/timesheets').send();
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
-    expect(response.body.message).toEqual('Missing data');
+    expect(response.body.message).toEqual('\"employee\" is required');
   });
   test('Create response should return a status 201 and response the same data', async () => {
     const timesheetTestSent = {
@@ -107,7 +108,7 @@ describe('POST /timesheets', () => {
         task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
       },
     );
-    expect(response.body.data).toEqual('"rate" must be a number');
+    expect(response.body.message).toEqual('\"rate\" must be a number');
     expect(response.status).toBe(400);
   });
 });
@@ -179,7 +180,7 @@ describe('PUT /timesheets/:id', () => {
     );
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
-    expect(response.body.message).toEqual('Missing data');
+    expect(response.body.message).toEqual('\"role\" must be a string');
   });
 });
 
