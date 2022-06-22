@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../index';
@@ -80,7 +81,7 @@ describe('/POST /tasks', () => {
   });
   test('Message should indicate the error in data', async () => {
     const response = await request(app).post('/tasks').send(testTask);
-    expect(response.body.message).toEqual('"title" is required');
+    expect(response.body.message).toEqual('\"Title\" is required');
   });
   test('Response should return validation error joi', async () => {
     const response = await request(app).post('/tasks').send({
@@ -93,7 +94,7 @@ describe('/POST /tasks', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.message).toEqual('"title" must be a string');
+    expect(response.body.message).toEqual('\"Title\" must be a string');
   });
 });
 
@@ -137,7 +138,7 @@ describe('/PUT /tasks/:id', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBeTruthy();
-    expect(response.body.message).toEqual('"title" must be a string');
+    expect(response.body.message).toEqual('\"Title\" must be a string');
   });
 });
 

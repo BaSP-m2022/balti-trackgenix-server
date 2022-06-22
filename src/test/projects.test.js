@@ -60,7 +60,7 @@ describe('/POST /projects', () => {
   test('Check that have an error', async () => {
     const response = await request(app).post('/projects').send();
     expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('\"projectName\" is required');
+    expect(response.body.message).toEqual('\"Project name\" is required');
     expect(response.body.error).toBe(true);
   });
 
@@ -114,7 +114,7 @@ describe('/POST /projects', () => {
       ],
     });
     expect(response.status).toBe(400);
-    expect(response.body.message).toEqual('\"projectName\" length must be less than or equal to 20 characters long');
+    expect(response.body.message).toEqual('\"Project name\" length must be less than or equal to 30 characters long');
     expect(response.body.error).toBe(true);
   });
 });
@@ -157,7 +157,7 @@ describe('/PUT /projects', () => {
     });
     expect(response.status).toBe(400);
     expect(response.body.error).toBe(true);
-    expect(response.body.message).toEqual('\"description\" length must be at least 10 characters long');
+    expect(response.body.message).toEqual('\"Description\" length must be at least 10 characters long');
   });
   test('Wrong input data should return error', async () => {
     const response = await request(app).put(`/projects/${wrongPath}`).send({
