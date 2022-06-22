@@ -108,7 +108,6 @@ describe('POST /timesheets', () => {
         task: mongoose.Types.ObjectId('6288f73964ed6961bb7c2077'),
       },
     );
-    console.log(response.body);
     expect(response.body.message).toEqual('"rate" must be a number');
     expect(response.status).toBe(400);
   });
