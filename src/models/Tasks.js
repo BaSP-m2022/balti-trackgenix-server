@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const tasksSchema = new Schema({
   employeeId: {
     type: Schema.Types.ObjectId,
-    required: true,
+    required: false,
     ref: 'Employee',
   },
   projectId: {
