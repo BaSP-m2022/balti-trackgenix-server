@@ -5,7 +5,6 @@ const employeeValidation = (req, res, next) => {
     firstName: Joi.string().min(3).max(10).required(),
     lastName: Joi.string().min(3).max(10).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).required(),
     assignedProjects: Joi.array(),
     isActive: Joi.boolean().required(),
   });

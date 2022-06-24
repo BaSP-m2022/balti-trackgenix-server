@@ -21,7 +21,6 @@ export const createEmployee = async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    password: req.body.password,
     assignedProjects: req.body.assignedProjects,
     isActive: req.body.isActive,
   };
@@ -95,7 +94,6 @@ export const updateEmployee = async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    password: req.body.password,
     assignedProjects: req.body.assignedProjects,
     isActive: req.body.isActive,
   };

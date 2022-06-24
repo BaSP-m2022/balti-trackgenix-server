@@ -15,10 +15,6 @@ const employeeSchema = new Schema({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   assignedProjects: [
     {
       type: Schema.Types.ObjectId,
@@ -29,6 +25,9 @@ const employeeSchema = new Schema({
   isActive: {
     type: Boolean,
     required: true,
+  },
+  firebaseUid: {
+    type: String, required: false,
   },
 });
 
