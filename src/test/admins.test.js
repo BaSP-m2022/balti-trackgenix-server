@@ -34,7 +34,6 @@ describe('/POST /admins', () => {
       firstName: 'Regina',
       lastName: 'Phalange',
       email: 'rphalange@friends.com',
-      password: '0024121889',
       isActive: true,
     });
     expect(response.status).toBe(201);
@@ -43,7 +42,6 @@ describe('/POST /admins', () => {
     expect(response.body.data.firstName).toEqual('Regina');
     expect(response.body.data.lastName).toEqual('Phalange');
     expect(response.body.data.email).toEqual('rphalange@friends.com');
-    expect(response.body.data.password).toEqual('0024121889');
     expect(response.body.data.isActive).toEqual(true);
   });
 });
@@ -61,7 +59,6 @@ describe('/PUT /admins', () => {
       firstName: 'Phoebe',
       lastName: 'Bananahammock',
       email: 'pbuffay@gmail.com',
-      password: '1211115675',
       isActive: true,
     });
     expect(response.status).toBe(400);

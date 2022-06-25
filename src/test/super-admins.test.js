@@ -24,7 +24,6 @@ describe('POST /superAdmins', () => {
       firstName: 'Vladimir',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(201);
@@ -33,7 +32,6 @@ describe('POST /superAdmins', () => {
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');
     expect(response.body.data.email).toEqual('putinvlad@proton.com');
-    expect(response.body.data.password).toEqual('ZnKGy7jDOiQ');
     expect(response.body.data.isActive).toEqual(true);
     superAdminId = response.body.data._id;
   });
@@ -54,7 +52,6 @@ describe('POST /superAdmins', () => {
     const response = await request(app).post('/super-admin').send({
       firstName: 'Vladimir',
       email: 'putinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(400);
@@ -67,7 +64,6 @@ describe('POST /superAdmins', () => {
       firstName: 'PastelDePapaPastelllDePapaaaaaaaa',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(400);
@@ -80,7 +76,6 @@ describe('POST /superAdmins', () => {
       firstName: 'a',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(400);
@@ -99,7 +94,6 @@ describe('GET /superAdmins/:id', () => {
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');
     expect(response.body.data.email).toEqual('putinvlad@proton.com');
-    expect(response.body.data.password).toEqual('ZnKGy7jDOiQ');
     expect(response.body.data.isActive).toEqual(true);
   });
 
@@ -124,7 +118,6 @@ describe('PUT /superAdmins', () => {
       firstName: 'Valdemir',
       lastName: 'Rasputin',
       email: 'rasputinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(200);
@@ -133,7 +126,6 @@ describe('PUT /superAdmins', () => {
     expect(response.body.data.firstName).toEqual('Valdemir');
     expect(response.body.data.lastName).toEqual('Rasputin');
     expect(response.body.data.email).toEqual('rasputinvlad@proton.com');
-    expect(response.body.data.password).toEqual('ZnKGy7jDOiQ');
     expect(response.body.data.isActive).toEqual(true);
   });
 
@@ -162,7 +154,6 @@ describe('PUT /superAdmins', () => {
       firstName: 'Valdemir',
       lastName: 'Rasputin',
       email: 'rasputinvlad@proton.com',
-      password: 'ZnKGy7jDOiQ',
       isActive: true,
     });
     expect(response.status).toBe(404);

@@ -6,7 +6,6 @@ export default [
     firstName: 'Caresse',
     lastName: 'Allington',
     email: 'callington0@baidu.com',
-    password: 'ZnKGy7jDOiQ',
     isActive: true,
   },
   {
@@ -15,7 +14,6 @@ export default [
     firstName: 'Jude',
     lastName: 'Red',
     email: 'jred1@livejournal.com',
-    password: 'ENvLCA',
     isActive: true,
   },
   {
@@ -23,7 +21,6 @@ export default [
     firstName: 'Sasha',
     lastName: 'Blueman',
     email: 'sblueman2@bluehost.com',
-    password: 'f313GdZ',
     isActive: true,
   },
   {
@@ -31,7 +28,6 @@ export default [
     firstName: 'Angie',
     lastName: 'Pollitt',
     email: 'apollitt3@irs.gov',
-    password: 'Go8C5IZ',
     isActive: true,
   },
   {
@@ -39,7 +35,6 @@ export default [
     firstName: 'Teresina',
     lastName: 'Schankelborg',
     email: 'tschankelborg4@printfriendly.com',
-    password: 'YCc4yF',
     isActive: false,
   },
   {
@@ -47,7 +42,6 @@ export default [
     firstName: 'Nerti',
     lastName: 'Jee',
     email: 'njee5@gov.uk',
-    password: 'VB7SjJwpz',
     isActive: true,
   },
   {
@@ -55,7 +49,6 @@ export default [
     firstName: 'Wilek',
     lastName: 'Awty',
     email: 'wawty6@census.gov',
-    password: 'fTK1uaDj',
     isActive: false,
   },
   {
@@ -63,7 +56,6 @@ export default [
     firstName: 'Stacey',
     lastName: 'Braund',
     email: 'sbraund7@cbsnews.com',
-    password: 'pTsd51mr',
     isActive: false,
   },
   {
@@ -71,7 +63,6 @@ export default [
     firstName: 'Rosalie',
     lastName: 'Castella',
     email: 'rcastella8@lulu.com',
-    password: '20VCfFk',
     isActive: false,
   },
   {
@@ -79,7 +70,6 @@ export default [
     firstName: 'Herman',
     lastName: 'Goodin',
     email: 'hgoodin9@fda.gov',
-    password: 'VBpGiRHjhU6',
     isActive: true,
   },
 ];

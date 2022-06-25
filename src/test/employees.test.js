@@ -31,7 +31,6 @@ describe('/POST /employees', () => {
       firstName: 'Federico',
       lastName: 'Troanes',
       email: 'fedetroanes@gmail.com',
-      password: 'fedekun23w3',
       assignedProjects: [mongoose.Types.ObjectId('628cf237305204bf7d672d7b')],
       isActive: true,
     });
@@ -41,7 +40,6 @@ describe('/POST /employees', () => {
     expect(response.body.data.firstName).toEqual('Federico');
     expect(response.body.data.lastName).toEqual('Troanes');
     expect(response.body.data.email).toEqual('fedetroanes@gmail.com');
-    expect(response.body.data.password).toEqual('fedekun23w3');
     expect(response.body.data.assignedProjects).toEqual(['628cf237305204bf7d672d7b']);
     expect(response.body.data.isActive).toBeTruthy();
   });
@@ -56,7 +54,6 @@ describe('/POST /employees', () => {
       firstName: 123,
       lastName: 213,
       email: 'fedetroanes@gmail.com',
-      password: 'fedekun23w3',
       assignedProjects: [mongoose.Types.ObjectId('6287f93beee9276577d60c1f')],
       isActive: true,
     });
@@ -89,7 +86,6 @@ describe('PUT /employees/:id', () => {
       firstName: 'Msssati',
       lastName: 'Weber',
       email: 'Max@gmail.com',
-      password: 'Max123456',
       isActive: true,
     });
     expect(response.status).toBe(200);
@@ -97,7 +93,6 @@ describe('PUT /employees/:id', () => {
     expect(response.body.data.firstName).toEqual('Msssati');
     expect(response.body.data.lastName).toEqual('Weber');
     expect(response.body.data.email).toEqual('Max@gmail.com');
-    expect(response.body.data.password).toEqual('Max123456');
     expect(response.body.data.isActive).toBe(true);
   });
 
@@ -106,7 +101,6 @@ describe('PUT /employees/:id', () => {
       firstName: 'Msssati',
       lastName: 'Fe',
       email: 'Max@gmail.com',
-      password: 'Max123456',
       isActive: true,
     });
     expect(response.status).toBe(400);
@@ -117,7 +111,6 @@ describe('PUT /employees/:id', () => {
       firstName: 'Msssati',
       lastName: 'Weber',
       email: 'Max@gmail.com',
-      password: 'Max123456',
       isActive: true,
     });
     expect(response.status).toBe(404);
