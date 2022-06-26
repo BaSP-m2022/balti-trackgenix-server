@@ -2,10 +2,19 @@ import firebase from '../helper/firebase';
 
 const authMiddleware = async (req, res, next) => {
   const { token } = req.headers;
+  const { claims: { role } } = await res.user.getIdTokenResult();
   if (!token) {
     return res.status(400)
       .json({
         message: 'Provide a token',
+        data: undefined,
+        error: true,
+      });
+  }
+  if (!role) {
+    return res.status(400)
+      .json({
+        message: 'You need the role to access this route',
         data: undefined,
         error: true,
       });
