@@ -1,6 +1,9 @@
-const express = import('express');
-const controller = import('../controllers/auth');
-const validations = import('../validations/auth');
+/* eslint-disable import/no-import-module-exports */
+import express from 'express';
+
+import controller from '../controllers/auth';
+
+import validations from '../validations/auth';
 
 const router = express.Router();
 

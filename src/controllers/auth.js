@@ -1,14 +1,16 @@
-const Employee = import('../models/Employees');
-const Firebase = import('../helper/firebase');
+/* eslint-disable import/no-import-module-exports */
+import Employees from '../models/Employees';
+
+import firebaseApp from '../helper/firebase';
 
 const register = async (req, res) => {
   try {
-    const newFirebaseEmployee = await Firebase.auth().createEmployee({
+    const newFirebaseEmployee = await firebaseApp.auth().createEmployee({
       email: req.body.email,
       password: req.body.password,
     });
 
-    const employeeCreated = new Employee({
+    const employeeCreated = new Employees({
       email: req.body.email,
       firebaseUid: newFirebaseEmployee.uid,
     });
