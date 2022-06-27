@@ -34,7 +34,6 @@ describe('/POST /employees', () => {
       assignedProjects: [mongoose.Types.ObjectId('628cf237305204bf7d672d7b')],
       isActive: true,
     });
-    console.log(response.body);
     expect(response.status).toBe(201);
     expect(response.body.error).toBeFalsy();
     expect(response.body.message).toEqual('New Employee created');
