@@ -1,5 +1,5 @@
-const Employee = require('../models/Employees');
-const Firebase = require('../helper/firebase');
+const Employee = import('../models/Employees');
+const Firebase = import('../helper/firebase');
 
 const register = async (req, res) => {
   try {

@@ -32,7 +32,6 @@ const employeeSchema = new Schema({
   },
   firebaseUid: {
     type: String,
-    required: false,
   },
 });
 
