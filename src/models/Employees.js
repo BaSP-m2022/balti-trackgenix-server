@@ -14,6 +14,7 @@ const employeeSchema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   assignedProjects: [
     {
@@ -26,8 +27,11 @@ const employeeSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  token: {
+    type: String,
+  },
   firebaseUid: {
-    type: String, required: false,
+    type: String,
   },
 });
 
