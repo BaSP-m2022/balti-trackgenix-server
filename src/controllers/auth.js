@@ -1,6 +1,4 @@
-/* eslint-disable import/no-import-module-exports */
 import Employees from '../models/Employees';
-
 import firebaseApp from '../helper/firebase';
 
 const register = async (req, res) => {
@@ -8,7 +6,7 @@ const register = async (req, res) => {
     const newFirebaseEmployee = await firebaseApp.auth().createEmployee({
       email: req.body.email,
       password: req.body.password,
-    });
+    }).setCustomUserClaims(firebaseApp.uid, { role: 'EMPLOYEE' });
 
     const employeeCreated = new Employees({
       email: req.body.email,
@@ -26,4 +24,4 @@ const register = async (req, res) => {
   }
 };
 
-module.export = { register };
+export default register;
