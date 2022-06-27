@@ -4,7 +4,7 @@ const authMiddleware = async (req, res, next) => {
   const { token } = req.headers;
   const { claims: { role } } = await res.user.getIdTokenResult();
   if (!token) {
-    return res.status(400)
+    return res.status(401)
       .json({
         message: 'Provide a token',
         data: undefined,
@@ -12,9 +12,9 @@ const authMiddleware = async (req, res, next) => {
       });
   }
   if (!role) {
-    return res.status(400)
+    return res.status(401)
       .json({
-        message: 'You need the role to access this route',
+        message: 'Your credentials are missing a role',
         data: undefined,
         error: true,
       });
