@@ -23,7 +23,7 @@ const superAdminsMiddleware = async (req, res, next) => {
   if (role !== 'SUPER ADMIN') {
     return res.status(401)
       .json({
-        message: 'Only super admins can access this routes',
+        message: 'Your role is not allowed to access this routes',
         data: undefined,
         error: true,
       });

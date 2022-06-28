@@ -23,7 +23,7 @@ const employeeMiddleware = async (req, res, next) => {
   if (role !== 'EMPLOYEE') {
     return res.status(401)
       .json({
-        message: 'Only admins can access this routes',
+        message: 'Your role is not allowed to access this routes',
         data: undefined,
         error: true,
       });
