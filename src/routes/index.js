@@ -5,6 +5,7 @@ import tasksRouter from './tasks';
 import employeeRoutes from './employees';
 import projectRoutes from './projects';
 import superAdminRoutes from './super-admins';
+import authRoutes from './auth';
 
 const router = express.Router();
 
@@ -14,6 +15,6 @@ router.use('/employees', employeeRoutes);
 router.use('/projects', projectRoutes);
 router.use('/super-admin', superAdminRoutes);
 router.use('/admins', adminRoutes);
-router.use('/projects', projectRoutes);
+router.use('/auth', authRoutes);
 
 export default router;
