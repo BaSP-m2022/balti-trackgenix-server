@@ -31,7 +31,7 @@ export default [{
   _id: mongoose.Types.ObjectId('628cf15a2ca8617119124234'),
   firstName: 'Federico',
   lastName: 'Troanes',
-  email: 'fedetroanes@gmail.com',
+  email: 'federicotroanes@gmail.com',
   password: 'fedekun23w3',
   assignedProjects: [mongoose.Types.ObjectId('628cf237305204bf7d672d7b')],
   isActive: true,
