@@ -1,8 +1,17 @@
 import ModelSuperAdmin from '../models/Super-admins';
+import Firebase from '../helper/firebase';
 
 const createSuperAdmin = async (req, res) => {
+  let firebaseUid;
   try {
+    const newFirebaseUser = await Firebase.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    firebaseUid = newFirebaseUser.uid;
+    await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'SUPER ADMIN' });
     const superAdminCreate = new ModelSuperAdmin({
+      firebaseUid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
@@ -14,10 +23,13 @@ const createSuperAdmin = async (req, res) => {
       data: result,
       error: false,
     });
-  } catch (err) {
+  } catch (error) {
+    if (firebaseUid) {
+      await Firebase.default.auth().deleteUser(firebaseUid);
+    }
     return res.status(400).json({
-      message: 'There was an error',
-      data: err,
+      message: error.message,
+      data: undefined,
       error: true,
     });
   }

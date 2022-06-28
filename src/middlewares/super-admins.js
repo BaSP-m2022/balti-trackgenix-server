@@ -1,6 +1,6 @@
 import firebase from '../helper/firebase';
 
-const authMiddleware = async (req, res, next) => {
+const superAdminsMiddleware = async (req, res, next) => {
   const { token } = req.headers;
   const { claims: { role } } = await res.user.getIdTokenResult();
   if (!token) {
@@ -19,6 +19,16 @@ const authMiddleware = async (req, res, next) => {
         error: true,
       });
   }
+
+  if (role !== 'SUPER ADMIN') {
+    return res.status(401)
+      .json({
+        message: 'Only super admins can access this routes',
+        data: undefined,
+        error: true,
+      });
+  }
+
   try {
     await firebase.auth().verifyIdToken(token);
     return next();
@@ -31,4 +41,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-export default authMiddleware;
+export default superAdminsMiddleware;
