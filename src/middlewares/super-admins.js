@@ -12,7 +12,7 @@ const superAdminsMiddleware = async (req, res, next) => {
       });
   }
   if (!role) {
-    return res.status(401)
+    return res.status(403)
       .json({
         message: 'Your credentials are missing a role',
         data: undefined,
@@ -21,7 +21,7 @@ const superAdminsMiddleware = async (req, res, next) => {
   }
 
   if (role !== 'SUPER ADMIN') {
-    return res.status(401)
+    return res.status(403)
       .json({
         message: 'Your role is not allowed to access this routes',
         data: undefined,
@@ -33,7 +33,7 @@ const superAdminsMiddleware = async (req, res, next) => {
     await firebase.auth().verifyIdToken(token);
     return next();
   } catch (error) {
-    return res.status(401).json({
+    return res.status(403).json({
       message: error.toString(),
       data: undefined,
       error: true,

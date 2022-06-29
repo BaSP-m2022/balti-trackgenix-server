@@ -18,7 +18,6 @@ const register = async (req, res) => {
       assignedProjects: [],
       isActive: req.body.isActive,
     });
-    await firebaseApp.auth().setCustomUserClaims(newFirebaseEmployee.uid, { role: 'EMPLOYEE' });
     const employeeSaved = await employeeCreated.save();
     return res.status(201).json({
       message: 'Employee successfully Registered',
