@@ -1,4 +1,5 @@
 import Admin from '../models/Admins';
+import Firebase from '../helper/firebase';
 
 const getAllAdmins = async (req, res) => {
   try {
@@ -25,8 +26,15 @@ const getAllAdmins = async (req, res) => {
 };
 
 const addAdmin = async (req, res) => {
+  let firebaseUid;
   try {
+    const newFirebaseUser = await Firebase.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+    await Firebase.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'ADMIN' });
     const newAdmin = new Admin({
+      firebaseUid: newFirebaseUser.uid,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
@@ -46,8 +54,11 @@ const addAdmin = async (req, res) => {
       error: true,
     });
   } catch (error) {
+    if (firebaseUid) {
+      await Firebase.default.auth().deleteUser(firebaseUid);
+    }
     return res.status(400).json({
-      message: 'There was an error',
+      message: error.message,
       data: undefined,
       error: true,
     });
