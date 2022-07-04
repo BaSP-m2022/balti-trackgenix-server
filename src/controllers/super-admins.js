@@ -14,7 +14,6 @@ const createSuperAdmin = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      isActive: req.body.isActive,
     });
     const result = await superAdminCreate.save();
     return res.status(201).json({

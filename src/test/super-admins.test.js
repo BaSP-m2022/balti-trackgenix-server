@@ -24,7 +24,6 @@ describe('POST /superAdmins', () => {
       firstName: 'Vladimir',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(201);
     expect(response.body.message).toEqual('New Super Admin created');
@@ -32,7 +31,6 @@ describe('POST /superAdmins', () => {
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');
     expect(response.body.data.email).toEqual('putinvlad@proton.com');
-    expect(response.body.data.isActive).toEqual(true);
     superAdminId = response.body.data._id;
   });
 
@@ -52,7 +50,6 @@ describe('POST /superAdmins', () => {
     const response = await request(app).post('/super-admin').send({
       firstName: 'Vladimir',
       email: 'putinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(400);
     expect(response.body.message).toEqual('"lastName" is required');
@@ -64,7 +61,6 @@ describe('POST /superAdmins', () => {
       firstName: 'PastelDePapaPastelllDePapaaaaaaaa',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(400);
     expect(response.body.message).toEqual('"firstName" length must be less than or equal to 30 characters long');
@@ -76,7 +72,6 @@ describe('POST /superAdmins', () => {
       firstName: 'a',
       lastName: 'Putin',
       email: 'putinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(400);
     expect(response.body.message).toEqual('"firstName" length must be at least 3 characters long');
@@ -94,7 +89,6 @@ describe('GET /superAdmins/:id', () => {
     expect(response.body.data.firstName).toEqual('Vladimir');
     expect(response.body.data.lastName).toEqual('Putin');
     expect(response.body.data.email).toEqual('putinvlad@proton.com');
-    expect(response.body.data.isActive).toEqual(true);
   });
 
   test('should not get a super admin, super admin does not exist', async () => {
@@ -118,7 +112,6 @@ describe('PUT /superAdmins', () => {
       firstName: 'Valdemir',
       lastName: 'Rasputin',
       email: 'rasputinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(200);
     expect(response.body.message).toEqual('Super Admin  updated');
@@ -126,7 +119,6 @@ describe('PUT /superAdmins', () => {
     expect(response.body.data.firstName).toEqual('Valdemir');
     expect(response.body.data.lastName).toEqual('Rasputin');
     expect(response.body.data.email).toEqual('rasputinvlad@proton.com');
-    expect(response.body.data.isActive).toEqual(true);
   });
 
   test('should update an super admin firstname', async () => {
@@ -154,7 +146,6 @@ describe('PUT /superAdmins', () => {
       firstName: 'Valdemir',
       lastName: 'Rasputin',
       email: 'rasputinvlad@proton.com',
-      isActive: true,
     });
     expect(response.status).toBe(404);
     expect(response.body.message).toEqual('The Super Admin has not been found');
