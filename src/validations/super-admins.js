@@ -5,7 +5,6 @@ const createSuperAdminValidation = (req, res, next) => {
     firstName: Joi.string().min(3).max(30).required(),
     lastName: Joi.string().min(3).max(30).required(),
     email: Joi.string().email().required(),
-    isActive: Joi.boolean().required(),
   });
   const valid = superAdminObj.validate(req.body);
   if (valid.error) {
@@ -23,7 +22,6 @@ const updateSuperAdminValidation = (req, res, next) => {
     firstName: Joi.string().min(3).max(30),
     lastName: Joi.string().min(3).max(30),
     email: Joi.string().email(),
-    isActive: Joi.boolean(),
   });
   const valid = superAdminObJ.validate(req.body);
   if (valid.error) {
