@@ -76,7 +76,7 @@ export const addTimeSheet = async (req, res) => {
     employee: req.body.employee,
     project: req.body.project,
     role: req.body.role,
-    date: Date.now(),
+    date: req.body.date,
     rate: req.body.rate,
     workedHours: req.body.workedHours,
     description: req.body.description,
