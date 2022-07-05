@@ -2,6 +2,7 @@ import express from 'express';
 import {
   addTimeSheet,
   editTimeSheet,
+  getAllTimeSheetsByEmployee,
 } from '../controllers/time-sheets';
 import {
   getAllProjects,
@@ -16,12 +17,13 @@ import { updateProjectValidation } from '../validations/projects';
 
 const router = express.Router();
 
-router.post('/', validateTimeSheetCreation, addTimeSheet);
-router.put('/:id', validateTimeSheetUpdate, editTimeSheet);
+router.post('/timesheet', validateTimeSheetCreation, addTimeSheet);
+router.put('/timesheet/:id', validateTimeSheetUpdate, editTimeSheet);
+router.get('timesheet/get-by-employee/:employee', getAllTimeSheetsByEmployee);
 router.put('/:id', employeeValidation, updateEmployee);
-router.get('/', getAllProjects);
-router.get('/:id', getProjectById);
-router.put('/:id', updateProjectValidation, updateProjectById);
+router.get('/projects', getAllProjects);
+router.get('/projects/:id', getProjectById);
+router.put('projects/:id', updateProjectValidation, updateProjectById);
 router.use('/tasks', tasksRouter);
 
 export default router;
