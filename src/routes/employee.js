@@ -23,7 +23,7 @@ router.get('timesheet/get-by-employee/:employee', getAllTimeSheetsByEmployee);
 router.put('/:id', employeeValidation, updateEmployee);
 router.get('/projects', getAllProjects);
 router.get('/projects/:id', getProjectById);
-router.put('projects/:id', updateProjectValidation, updateProjectById);
+router.put('/projects/:id', updateProjectValidation, updateProjectById);
 router.use('/tasks', tasksRouter);
 
 export default router;
