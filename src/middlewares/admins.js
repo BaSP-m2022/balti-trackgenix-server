@@ -1,6 +1,6 @@
 import firebase from '../helper/firebase';
 
-const adminsMiddleware = async (req, res, next) => {
+const adminMiddleware = async (req, res, next) => {
   const { token } = req.headers;
   const { claims: { role } } = await res.user.getIdTokenResult();
   if (!token) {
@@ -41,4 +41,4 @@ const adminsMiddleware = async (req, res, next) => {
   }
 };
 
-export default adminsMiddleware;
+export default adminMiddleware;
