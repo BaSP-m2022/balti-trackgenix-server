@@ -66,6 +66,7 @@ describe('POST /timesheets', () => {
       project: '6288f73964ed6961bb7c2076',
       role: 'qa',
       rate: 10,
+      date: '2022-06-16T00:00:00.000+00:00',
       workedHours: 33,
       description: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus.',
       task: '6288f73964ed6961bb7c2077',
