@@ -1,4 +1,5 @@
 import Employees from '../models/Employees';
+import firebaseApp from '../helper/firebase';
 
 export const getAllEmployees = async (req, res) => {
   try {
@@ -17,26 +18,32 @@ export const getAllEmployees = async (req, res) => {
   }
 };
 export const createEmployee = async (req, res) => {
-  const newEmployee = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    assignedProjects: req.body.assignedProjects,
-    isActive: req.body.isActive,
-  };
-
   try {
-    const employee = new Employees(newEmployee);
-    await employee.save();
+    const newFirebaseEmployee = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseEmployee.uid, { role: 'EMPLOYEE' });
+
+    const employeeCreated = new Employees({
+      firebaseUid: newFirebaseEmployee.uid,
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      assignedProjects: [],
+      isActive: req.body.isActive,
+    });
+    const employeeSaved = await employeeCreated.save();
     return res.status(201).json({
-      message: 'New Employee created',
-      data: employee,
+      message: 'Employee successfully Registered',
+      data: employeeSaved,
       error: false,
     });
   } catch (error) {
     return res.status(400).json({
-      message: 'Missing data. Check the fields',
-      data: error,
+      message: error.toString(),
+      data: undefined,
       error: true,
     });
   }

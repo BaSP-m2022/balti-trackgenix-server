@@ -6,6 +6,7 @@ const createAdminValidation = (req, res, next) => {
     lastName: Joi.string().min(4).max(15).required(),
     email: Joi.string().email().required(),
     isActive: Joi.boolean().required(),
+    password: Joi.string().min(8).required(),
   });
   const valid = newAdmin.validate(req.body);
   if (valid.error) {
@@ -24,6 +25,7 @@ const updateAdminValidation = (req, res, next) => {
     lastName: Joi.string().min(4).max(15),
     email: Joi.string().email(),
     isActive: Joi.boolean(),
+    password: Joi.string().min(8),
   });
   const valid = updateAdmin.validate(req.body);
   if (valid.error) {
