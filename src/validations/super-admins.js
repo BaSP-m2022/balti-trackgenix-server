@@ -22,7 +22,6 @@ const updateSuperAdminValidation = (req, res, next) => {
   const superAdminObJ = Joi.object({
     firstName: Joi.string().min(3).max(30),
     lastName: Joi.string().min(3).max(30),
-    email: Joi.string().email(),
     password: Joi.string().min(8),
   });
   const valid = superAdminObJ.validate(req.body);
