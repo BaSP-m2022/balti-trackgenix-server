@@ -7,6 +7,7 @@ const employeeValidation = (req, res, next) => {
     email: Joi.string().email().required(),
     assignedProjects: Joi.array(),
     isActive: Joi.boolean().required(),
+    password: Joi.string().min(8).required(),
   });
   const validation = employeValidate.validate(req.body);
   if (validation.error) {
