@@ -27,12 +27,11 @@ const employeeSchema = new Schema({
     type: Boolean,
     required: true,
   },
-  token: {
-    type: String,
-  },
-  firebaseUid: {
-    type: String,
-  },
+  token: String,
+  firebaseUid: String,
+  secretWord: String,
+  address: String,
+  birthDate: Date,
 });
 
 export default mongoose.model('Employee', employeeSchema);

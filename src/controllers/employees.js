@@ -97,16 +97,11 @@ export const getEmployeesById = async (req, res) => {
 };
 
 export const updateEmployee = async (req, res) => {
-  const updatedEmployee = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    assignedProjects: req.body.assignedProjects,
-    isActive: req.body.isActive,
-  };
-
+  const updatedEmployee = req.body;
   try {
-    const result = await Employees.findByIdAndUpdate(req.params.id, (updatedEmployee)).populate('assignedProjects');
+    const result = await Employees
+      .findByIdAndUpdate(req.params.id, (updatedEmployee), { new: true })
+      .populate('assignedProjects');
     if (!result) {
       return res.status(404).json({
         message: `Employee id: ${req.params.id} not found`,
