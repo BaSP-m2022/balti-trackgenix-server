@@ -10,7 +10,7 @@ import {
   getProjectById,
   updateProjectById,
 } from '../controllers/projects';
-import { getTasks } from '../controllers/tasks';
+import taskRouter from './tasks';
 import { updateEmployee, getEmployeesById } from '../controllers/employees';
 import {
   validateTimeSheetCreation,
@@ -22,7 +22,7 @@ import { updateProjectValidation } from '../validations/projects';
 const router = express.Router();
 
 router
-  .get('/tasks', getTasks)
+  .use('/tasks', taskRouter)
   .post('/timesheet', validateTimeSheetCreation, addTimeSheet)
   .put('/timesheet/:id', validateTimeSheetUpdate, editTimeSheet)
   .get('/timesheet/:id', getTimeSheet)
