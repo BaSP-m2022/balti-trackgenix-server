@@ -4,12 +4,12 @@ import {
 } from '../controllers/tasks';
 import { validatePost, validatePut } from '../validations/tasks';
 
-const router = express.Router();
+const taskRouter = express.Router();
 
-router.get('/', getTasks);
-router.get('/:id', findTask);
-router.post('/', validatePost, addTask);
-router.put('/:id', validatePut, editTask);
-router.delete('/:id', deleteTask);
+taskRouter.get('/', getTasks)
+  .get('/:id', findTask)
+  .post('/', validatePost, addTask)
+  .put('/:id', validatePut, editTask)
+  .delete('/:id', deleteTask);
 
-export default router;
+export default taskRouter;
