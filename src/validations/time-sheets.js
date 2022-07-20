@@ -8,7 +8,7 @@ export const validateTimeSheetCreation = (req, res, next) => {
     date: Joi.date().greater('1-1-2022').less('now'),
     rate: Joi.number().required(),
     workedHours: Joi.number().required(),
-    description: Joi.string().allow(),
+    description: Joi.string().allow(''),
     task: Joi.string(),
   });
   const validation = createTimeSheet.validate(req.body);
@@ -30,7 +30,7 @@ export const validateTimeSheetUpdate = (req, res, next) => {
     date: Joi.date().greater('1-1-2022').less('now'),
     rate: Joi.number(),
     workedHours: Joi.number(),
-    description: Joi.string().allow(),
+    description: Joi.string().allow(''),
     task: Joi.string(),
   });
   const validation = updateTimeSheet.validate(req.body);
