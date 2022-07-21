@@ -1,21 +1,21 @@
 import firebase from '../helper/firebase';
 
 const employeeMiddleware = async (req, res, next) => {
+  // look and verify token on the header
+  const { token } = req.headers;
+  if (!token) {
+    return res.status(401)
+      .json({
+        message: 'Provide a token',
+        data: undefined,
+        error: true,
+      });
+  }
   try {
-    // look and verify token on the header
-    const { token } = req.headers;
-    if (!token) {
-      return res.status(401)
-        .json({
-          message: 'Provide a token',
-          data: undefined,
-          error: true,
-        });
-    }
     // verify and extract information from token
-    const { role } = await firebase.auth().verifyIdToken(token);
+    const response = await firebase.auth().verifyIdToken(token);
     // check permissions
-    if (!role) {
+    if (!response.role) {
       return res.status(403)
         .json({
           message: 'No credentials found',
@@ -23,7 +23,7 @@ const employeeMiddleware = async (req, res, next) => {
           error: true,
         });
     }
-    if (role !== 'EMPLOYEE') {
+    if (response.role !== 'EMPLOYEE') {
       return res.status(403)
         .json({
           message: 'Credentials not authorized to access this information',
@@ -31,6 +31,7 @@ const employeeMiddleware = async (req, res, next) => {
           error: true,
         });
     }
+    req.headers.firebaseUid = response.uid;
     return next();
   } catch (error) {
     return res.status(403).json({

@@ -1,6 +1,31 @@
 import Employees from '../models/Employees';
 import firebaseApp from '../helper/firebase';
 
+export const getAuthEmployee = async (req, res) => {
+  try {
+    const employee = await Employees.findOne({ firebaseUid: req.headers.firebaseUid });
+    if (employee) {
+      return res.status(201).json({
+        message: 'Employee found',
+        data: employee,
+        error: false,
+      });
+    }
+
+    return res.status(404).json({
+      message: 'User not found',
+      data: undefined,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.toString(),
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
 export const getAllEmployees = async (req, res) => {
   try {
     const allEmployees = await Employees.find({}).populate('assignedProjects');
