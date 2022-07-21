@@ -1,6 +1,31 @@
 import Admin from '../models/Admins';
 import Firebase from '../helper/firebase';
 
+const getAuthAdmin = async (req, res) => {
+  try {
+    const admin = await Admin.findOne({ firebaseUid: req.headers.firebaseUid });
+    if (admin) {
+      return res.status(201).json({
+        message: 'Admin found',
+        data: admin,
+        error: false,
+      });
+    }
+
+    return res.status(404).json({
+      message: 'User not found',
+      data: undefined,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: error.toString(),
+      data: undefined,
+      error: true,
+    });
+  }
+};
+
 const getAllAdmins = async (req, res) => {
   try {
     const allAdmins = await Admin.find({});
@@ -147,4 +172,5 @@ export default {
   addAdmin,
   findAdminById,
   updateAdmin,
+  getAuthAdmin,
 };
