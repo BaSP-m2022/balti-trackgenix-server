@@ -45,6 +45,10 @@ export const createProject = async (req, res) => {
       ...req.body,
     });
     await newProjects.save();
+    const { employees } = newProjects;
+    employees.forEach((employee) => {
+      employee.assignedProject.push(newProjects._id);
+    });
     return res.status(201).json({
       message: 'New Project successfully created',
       data: newProjects,
