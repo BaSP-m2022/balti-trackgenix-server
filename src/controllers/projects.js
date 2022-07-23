@@ -65,12 +65,19 @@ export const createProject = async (req, res) => {
 
 export const updateProjectById = async (req, res) => {
   try {
-    const projectToUpdate = await Projects.findByIdAndUpdate(
+    const originalProject = await Projects.findById(req.params.id).populate('employees.employeeId').populate('admin');
+    const originalEmployees = originalProject.employees;
+    const updatedProject = await Projects.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true },
     ).populate('employees.employeeId').populate('admin');
-    if (!projectToUpdate) {
+    const updatedEmployees = updatedProject.employees;
+    const newEmployees = updatedEmployees.filter((employeeId) => !originalEmployees.includes(employeeId));
+    newEmployees.forEach((employee) => {
+      employee.assignedProject.push(updatedProject);
+    });
+    if (!updatedProject) {
       return res.status(404).json({
         message: `Project not found for id: ${req.params.id}`,
         error: true,
@@ -78,7 +85,7 @@ export const updateProjectById = async (req, res) => {
     }
     return res.status(200).json({
       message: `Project with id ${req.params.id} has been successfully updated!`,
-      data: projectToUpdate,
+      data: updatedProject,
       error: false,
     });
   } catch (error) {
