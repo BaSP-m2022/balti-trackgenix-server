@@ -23,6 +23,7 @@ const updateAdminValidation = (req, res, next) => {
   const updateAdmin = Joi.object({
     firstName: Joi.string().min(4).max(15),
     lastName: Joi.string().min(4).max(15),
+    email: Joi.string().email().required(),
     isActive: Joi.boolean(),
     password: Joi.string().min(8),
   });
