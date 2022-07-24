@@ -18,7 +18,12 @@ export const getAllProjects = async (req, res) => {
 
 export const deleteById = async (req, res) => {
   try {
+    const projectToDelete = await Projects.findById(req.params.id).populate('employees.employeeId').populate('admin');
+    const { employees } = projectToDelete;
     const deleted = await Projects.findByIdAndDelete(req.params.id);
+    employees.forEach((employee) => {
+      employee.assignedProject.filter((project) => project._id !== projectToDelete._id);
+    });
     if (!deleted) {
       return res.status(404).json({
         message: 'Project not found.',
@@ -75,7 +80,11 @@ export const updateProjectById = async (req, res) => {
     const updatedEmployees = updatedProject.employees;
     const newEmployees = updatedEmployees.filter((employeeId) => !originalEmployees.includes(employeeId));
     newEmployees.forEach((employee) => {
-      employee.assignedProject.push(updatedProject);
+      employee.assignedProject.push(updatedProject._id);
+    });
+    const deletedEmployees = originalEmployees.filter((employeeId) => !updatedEmployees.includes(employeeId));
+    deletedEmployees.forEach((employee) => {
+      employee.assignedProject.filter((project) => project._id !== updatedProject._id);
     });
     if (!updatedProject) {
       return res.status(404).json({
