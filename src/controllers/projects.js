@@ -1,4 +1,7 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 import Projects from '../models/Projects';
+import Employees from '../models/Employees';
 
 export const getAllProjects = async (req, res) => {
   try {
@@ -51,9 +54,11 @@ export const createProject = async (req, res) => {
     });
     await newProjects.save();
     const { employees } = newProjects;
-    employees.forEach((employee) => {
-      employee.assignedProject.push(newProjects._id);
-    });
+    Promise.all(employees.map(async (employee) => {
+      const currentEmployee = await Employees.findById(employee.employeeId);
+      currentEmployee.assignedProjects.push(newProjects._id);
+      await currentEmployee.save();
+    }));
     return res.status(201).json({
       message: 'New Project successfully created',
       data: newProjects,
