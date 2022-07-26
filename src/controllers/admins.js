@@ -99,7 +99,7 @@ const updateAdmin = async (req, res) => {
     );
     if (result) {
       return res.status(200).json({
-        message: `Admin ${req.params.id} successfully updated`,
+        message: `Admin ${req.body.firstName} ${req.body.lastName} successfully updated`,
         data: result,
         error: false,
       });

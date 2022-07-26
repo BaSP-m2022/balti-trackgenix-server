@@ -129,13 +129,13 @@ export const updateEmployee = async (req, res) => {
       .populate('assignedProjects');
     if (!result) {
       return res.status(404).json({
-        message: `Employee id: ${req.params.id} not found`,
+        message: `Employee ${req.body.firstName} ${req.body.lastName} not found`,
         data: undefined,
         error: true,
       });
     }
     return res.status(200).json({
-      message: `Employee id: ${req.params.id} updated.`,
+      message: `Employee ${req.body.firstName} ${req.body.lastName} updated.`,
       data: updatedEmployee,
       error: false,
     });

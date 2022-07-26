@@ -42,13 +42,13 @@ const updateSuperAdmin = async (req, res) => {
     );
     if (!result) {
       return res.status(404).json({
-        message: 'The Super Admin has not been found',
+        message: `The Super Admin ${req.body.firstName} ${req.body.lastName} has not been found`,
         data: result,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Super Admin  updated',
+      message: `Super Admin ${req.body.firstName} ${req.body.lastName} updated`,
       data: result,
       error: false,
     });
