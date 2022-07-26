@@ -21,15 +21,13 @@ export const deleteById = async (req, res) => {
   try {
     const projectToDelete = await Projects.findById(req.params.id).populate('employees.employeeId').populate('admin');
     const { employees } = projectToDelete;
-    const deleted = await Projects.findByIdAndDelete(req.params.id);
     Promise.all(employees.map(async (employee) => {
       const currentEmployee = await Employees.findById(employee.employeeId);
-      currentEmployee.assignedProjects.filter((project) => project._id !== projectToDelete._id);
+      const index = currentEmployee.assignedProjects.indexOf(projectToDelete._id);
+      currentEmployee.assignedProjects.splice(index, 1);
       await currentEmployee.save();
     }));
-    employees.forEach((employee) => {
-      employee.assignedProject.filter((project) => project._id !== projectToDelete._id);
-    });
+    const deleted = await Projects.findByIdAndDelete(req.params.id);
     if (!deleted) {
       return res.status(404).json({
         message: 'Project not found.',
@@ -86,7 +84,7 @@ export const updateProjectById = async (req, res) => {
       { new: true },
     ).populate('employees.employeeId').populate('admin');
     const updatedEmployees = updatedProject.employees;
-    const newEmployees = updatedEmployees.filter((employeeId) => !originalEmployees.includes(employeeId));
+    const newEmployees = updatedEmployees.filter((employee) => !originalEmployees.includes(employee));
     Promise.all(newEmployees.map(async (newEmployee) => {
       const currentEmployee = await Employees.findById(newEmployee.employeeId);
       currentEmployee.assignedProjects.push(updatedProject._id);
@@ -95,7 +93,8 @@ export const updateProjectById = async (req, res) => {
     const deletedEmployees = originalEmployees.filter((employeeId) => !updatedEmployees.includes(employeeId));
     Promise.all(deletedEmployees.map(async (deletedEmployee) => {
       const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
-      currentEmployee.assignedProjects.filter((project) => project._id !== updatedProject._id);
+      const index = currentEmployee.assignedProjects.indexOf(originalProject._id);
+      currentEmployee.assignedProjects.splice(index, 1);
       await currentEmployee.save();
     }));
     if (!updatedProject) {
