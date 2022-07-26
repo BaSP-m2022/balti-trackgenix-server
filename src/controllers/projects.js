@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
 import Projects from '../models/Projects';
 import Employees from '../models/Employees';
 
@@ -24,6 +22,11 @@ export const deleteById = async (req, res) => {
     const projectToDelete = await Projects.findById(req.params.id).populate('employees.employeeId').populate('admin');
     const { employees } = projectToDelete;
     const deleted = await Projects.findByIdAndDelete(req.params.id);
+    Promise.all(employees.map(async (employee) => {
+      const currentEmployee = await Employees.findById(employee.employeeId);
+      currentEmployee.assignedProjects.filter((project) => project._id !== projectToDelete._id);
+      await currentEmployee.save();
+    }));
     employees.forEach((employee) => {
       employee.assignedProject.filter((project) => project._id !== projectToDelete._id);
     });
@@ -84,13 +87,17 @@ export const updateProjectById = async (req, res) => {
     ).populate('employees.employeeId').populate('admin');
     const updatedEmployees = updatedProject.employees;
     const newEmployees = updatedEmployees.filter((employeeId) => !originalEmployees.includes(employeeId));
-    newEmployees.forEach((employee) => {
-      employee.assignedProject.push(updatedProject._id);
-    });
+    Promise.all(newEmployees.map(async (newEmployee) => {
+      const currentEmployee = await Employees.findById(newEmployee.employeeId);
+      currentEmployee.assignedProjects.push(updatedProject._id);
+      await currentEmployee.save();
+    }));
     const deletedEmployees = originalEmployees.filter((employeeId) => !updatedEmployees.includes(employeeId));
-    deletedEmployees.forEach((employee) => {
-      employee.assignedProject.filter((project) => project._id !== updatedProject._id);
-    });
+    Promise.all(deletedEmployees.map(async (deletedEmployee) => {
+      const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
+      currentEmployee.assignedProjects.filter((project) => project._id !== updatedProject._id);
+      await currentEmployee.save();
+    }));
     if (!updatedProject) {
       return res.status(404).json({
         message: `Project not found for id: ${req.params.id}`,
