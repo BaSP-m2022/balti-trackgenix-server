@@ -11,7 +11,7 @@ import {
   updateProjectById,
 } from '../controllers/projects';
 import taskRouter from './tasks';
-import { updateEmployee, getEmployeesById } from '../controllers/employees';
+import { updateEmployee, getEmployeesById, getAllEmployees } from '../controllers/employees';
 import {
   validateTimeSheetCreation,
   validateTimeSheetUpdate,
@@ -27,6 +27,7 @@ router
   .put('/timesheet/:id', validateTimeSheetUpdate, editTimeSheet)
   .get('/timesheet/:id', getTimeSheet)
   .get('/timesheet/get-by-employee/:employee', getAllTimeSheetsByEmployee)
+  .get('/employees', getAllEmployees)
   .get('/:id', getEmployeesById)
   .put('/:id', updateValidation, updateEmployee)
   .get('/projects', getAllProjects)
