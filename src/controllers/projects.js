@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable semi */
+/* eslint-disable no-await-in-loop */
 import Projects from '../models/Projects';
 import Employees from '../models/Employees';
 
@@ -84,19 +87,28 @@ export const updateProjectById = async (req, res) => {
       { new: true },
     ).populate('employees.employeeId').populate('admin');
     const updatedEmployees = updatedProject.employees;
-    const newEmployees = updatedEmployees.filter((employee) => !originalEmployees.includes(employee));
-    Promise.all(newEmployees.map(async (newEmployee) => {
-      const currentEmployee = await Employees.findById(newEmployee.employeeId);
-      currentEmployee.assignedProjects.push(updatedProject._id);
-      await currentEmployee.save();
-    }));
-    const deletedEmployees = originalEmployees.filter((employeeId) => !updatedEmployees.includes(employeeId));
-    Promise.all(deletedEmployees.map(async (deletedEmployee) => {
-      const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
-      const index = currentEmployee.assignedProjects.indexOf(originalProject._id);
-      currentEmployee.assignedProjects.splice(index, 1);
-      await currentEmployee.save();
-    }));
+    const employeeToAdd = updatedEmployees.filter((employee) => !(originalEmployees.includes(employee)));
+    const employeeToRemove = originalEmployees.filter((employee) => !(updatedEmployees.includes(employee)));
+    const promiseArray = []
+    if (employeeToAdd.length > 0) {
+      // for (const employee of employeeToAdd) {
+      //   promiseArray.push(await Employees.findById(employee.employeeId))
+      // }
+      Promise.all(employeeToAdd.map(async (newEmployee) => {
+        const currentEmployee = await Employees.findById(newEmployee.employeeId);
+        currentEmployee.assignedProjects.push(updatedProject._id);
+        await currentEmployee.save();
+      }))
+    }
+    if (employeeToRemove.length > 0) {
+      Promise.all(employeeToRemove.map(async (deletedEmployee) => {
+        const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
+        const index = currentEmployee.assignedProjects.indexOf(originalProject._id);
+        currentEmployee.assignedProjects.splice(index, 1);
+        await currentEmployee.save()
+      }));
+    }
+
     if (!updatedProject) {
       return res.status(404).json({
         message: `Project not found for id: ${req.params.id}`,
