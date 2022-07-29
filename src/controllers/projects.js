@@ -84,19 +84,19 @@ export const updateProjectById = async (req, res) => {
       { new: true },
     ).populate('employees.employeeId').populate('admin');
     const updatedEmployees = updatedProject.employees;
-    const newEmployees = updatedEmployees.filter((employee) => !originalEmployees.includes(employee));
-    Promise.all(newEmployees.map(async (newEmployee) => {
+    Promise.all(updatedEmployees.map(async (newEmployee) => {
       const currentEmployee = await Employees.findById(newEmployee.employeeId);
-      currentEmployee.assignedProjects.push(updatedProject._id);
-      await currentEmployee.save();
+      if (!(currentEmployee.assignedProjects.includes(req.params.id))) {
+        currentEmployee.assignedProjects.push(updatedProject._id);
+        await currentEmployee.save();
+      }
     }));
-    const deletedEmployees = originalEmployees.filter((employeeId) => !updatedEmployees.includes(employeeId));
-    Promise.all(deletedEmployees.map(async (deletedEmployee) => {
-      const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
-      const index = currentEmployee.assignedProjects.indexOf(originalProject._id);
-      currentEmployee.assignedProjects.splice(index, 1);
-      await currentEmployee.save();
-    }));
+    // Promise.all(originalEmployees.map(async (deletedEmployee) => {
+    //   const currentEmployee = await Employees.findById(deletedEmployee.employeeId);
+    //   const index = currentEmployee.assignedProjects.indexOf(originalProject._id);
+    //   currentEmployee.assignedProjects.splice(index, 1);
+    //   await currentEmployee.save();
+    // }));
     if (!updatedProject) {
       return res.status(404).json({
         message: `Project not found for id: ${req.params.id}`,
